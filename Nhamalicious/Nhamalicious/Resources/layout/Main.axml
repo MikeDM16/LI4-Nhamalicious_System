@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/background_light"
+    android:weightSum="100"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="Página de Registo"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_weight="20"
+        android:layout_height="0dp"
+        android:textColor="#006400"
+        android:id="@+id/txtRegisto"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+    <Button
+        android:text="Crie a sua conta aqui!"
+        android:layout_width="match_parent"
+        android:layout_weight="15"
+        android:layout_height="0dp"
+        android:id="@+id/botaoSignUp"
+        android:background="@drawable/SignUpStyle"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <TextView
+        android:text="ou"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#006400"
+        android:id="@+id/textOR"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_weight="15"
+        android:layout_height="0dp" />
+    <Button
+        android:text="Faça Login!"
+        android:layout_width="match_parent"
+        android:layout_weight="15"
+        android:layout_height="0dp"
+        android:id="@+id/botaoLogin"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
+        android:textSize="15sp"
+        android:background="@drawable/LogInStyle"
+        android:textStyle="bold"
+        android:clickable="true" />
+    <TextView
+        android:text="Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="35"
+        android:minWidth="25px"
+        android:minHeight="25px">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar1"
+            android:background="@drawable/ProgressBarStyle"
+            android:indeterminate="true"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+</LinearLayout>
