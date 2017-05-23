@@ -33,14 +33,13 @@
             this.l_myPort = new System.Windows.Forms.Label();
             this.l_displayIP = new System.Windows.Forms.Label();
             this.tf_portChoice = new System.Windows.Forms.TextBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.tb_activity = new System.Windows.Forms.TextBox();
+            this.b_Stop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // b_start
             // 
-            this.b_start.Location = new System.Drawing.Point(185, 110);
+            this.b_start.Location = new System.Drawing.Point(139, 127);
             this.b_start.Name = "b_start";
             this.b_start.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.b_start.Size = new System.Drawing.Size(75, 23);
@@ -83,14 +82,6 @@
             this.tf_portChoice.Size = new System.Drawing.Size(100, 20);
             this.tf_portChoice.TabIndex = 6;
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
-            // 
-            // backgroundWorker2
-            // 
-            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker2_DoWork);
-            // 
             // tb_activity
             // 
             this.tb_activity.Location = new System.Drawing.Point(12, 156);
@@ -100,11 +91,21 @@
             this.tb_activity.Size = new System.Drawing.Size(434, 68);
             this.tb_activity.TabIndex = 8;
             // 
+            // b_Stop
+            // 
+            this.b_Stop.Location = new System.Drawing.Point(242, 127);
+            this.b_Stop.Name = "b_Stop";
+            this.b_Stop.Size = new System.Drawing.Size(75, 23);
+            this.b_Stop.TabIndex = 9;
+            this.b_Stop.Text = "Stop";
+            this.b_Stop.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(458, 236);
+            this.Controls.Add(this.b_Stop);
             this.Controls.Add(this.tb_activity);
             this.Controls.Add(this.tf_portChoice);
             this.Controls.Add(this.l_displayIP);
@@ -125,9 +126,8 @@
         private System.Windows.Forms.Label l_myPort;
         private System.Windows.Forms.Label l_displayIP;
         private System.Windows.Forms.TextBox tf_portChoice;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.Windows.Forms.TextBox tb_activity;
+        private System.Windows.Forms.Button b_Stop;
     }
 }
 
