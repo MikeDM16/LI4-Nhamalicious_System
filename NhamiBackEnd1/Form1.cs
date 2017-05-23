@@ -10,12 +10,6 @@ namespace NhamiBackEnd1
 {
     public partial class Form1 : Form
     {
-        private TcpClient tpc;
-        
-        private StreamReader st;
-        private StreamWriter sw;
-        private string send;
-        private string receive;
 
         public Form1()
         {
@@ -86,5 +80,9 @@ namespace NhamiBackEnd1
             backgroundWorker2.CancelAsync();
         }
 
+        private void b_Stop_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

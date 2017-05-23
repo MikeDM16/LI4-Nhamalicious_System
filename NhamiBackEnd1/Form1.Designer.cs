@@ -99,6 +99,7 @@
             this.b_Stop.TabIndex = 9;
             this.b_Stop.Text = "Stop";
             this.b_Stop.UseVisualStyleBackColor = true;
+            this.b_Stop.Click += new System.EventHandler(this.b_Stop_Click);
             // 
             // Form1
             // 

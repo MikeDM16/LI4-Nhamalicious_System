@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\Pacote.cs" />
+    <Compile Include="Code\Server.cs" />
+    <Compile Include="Code\Client.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
