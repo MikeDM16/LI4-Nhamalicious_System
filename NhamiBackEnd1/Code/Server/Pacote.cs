@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace NhamiBackEnd1.Code
 {
-    class Client
+    class Pacote
     {
+
+
     }
 }
