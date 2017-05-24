@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dialog_Login.cs" />
+    <Compile Include="DialogLoginClass.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Code\cliente.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

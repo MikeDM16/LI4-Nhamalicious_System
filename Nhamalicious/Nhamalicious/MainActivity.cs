@@ -9,7 +9,7 @@ using System.Net.Sockets;
 
 namespace Nhamalicious
 {
-    [Activity(Label = "Nhamilicious", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Nhamalicious", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private Button mBtnLogin;
@@ -17,21 +17,29 @@ namespace Nhamalicious
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            //tpc.Connect(IPAddress.Parse("192.168.1.92"), 80);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
             mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);
 
-            mBtnLogin.Click += MBtnLogin_Click;
+            mBtnLogin.Click += (object sender, EventArgs args) => 
+            {
+                //Pulls up the Dialog Window
+                FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                DialogLoginClass d1 = new DialogLoginClass();
+                d1.Show(transaction, "dialog fragment");
+                d1.LoginEfetuado += D1_LoginEfetuado;
+            };
 
         }
 
-        private void MBtnLogin_Click(object sender, EventArgs e)
+        private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
         {
-            FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            Dialog_Login loginD = new Dialog_Login();
-            loginD.Show(transaction, "dialog fragment");
-            throw new NotImplementedException();
+            TcpClient tcp = new TcpClient();
+            tcp.Connect(IPAddress.Parse("192.168.1.92"), 80);
+            // e.Username já é o que o cliente escreve, falta fazer a ligação com o servidor e com os métodos correspondentes
+            // e.Password igual ao username
         }
     }
 }

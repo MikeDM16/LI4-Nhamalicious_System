@@ -10,30 +10,34 @@ namespace NhamiBackEnd1.Code.AcessoBD
 {
     class DAOGestaoUtilizadores
     {
-        public Boolean loginProprietário(string username, string password)
+        public Boolean LoginUtilizador(string username, string password)
         {
             Boolean r = false;
-            //Eventualmente passar a coneção como variavel global do DAO
             SqlConnection myConnection = new SqlConnection("user id=username;" +
-                                       "password=password;server=localhost;" +
-                                       "Trusted_Connection=yes;" +
-                                       "database=Nhamalicious; " +
-                                       "connection timeout=30");
+                                                           "password=password;server=localhost;" +
+                                                           "Trusted_Connection=yes;" +
+                                                           "database=Nhamalicious; " +
+                                                           "connection timeout=30");
             try
             {
                 myConnection.Open();
                 SqlDataReader myReader = null;
-                SqlCommand myCommand = new SqlCommand("SELECT * FROM Proprietario " +
-                                                          "WHERE Proprietario.Username = '" + username + "' " +
-                                                          "AND Proprietario.Password = '" + password + "'; ",
+                SqlCommand myCommand = new SqlCommand("SELECT * FROM Cliente " +
+                                                          "WHERE Cliente.Username = '" + username + "' " +
+                                                          "AND Cliente.Password = '" + password + "'; ",
                                                        myConnection);
 
                 myReader = myCommand.ExecuteReader();
-                if (myReader.Read())
-                    //Se devolveu resultados é porque os parametros estão corretos
-                    r = true;
-                else r = false;
-
+                if (myReader.Read()){ r = true; } //Se encontrou na table cliente
+                else{
+                    myReader.Close();
+                    myCommand = new SqlCommand("SELECT * FROM Proprietario " +
+                                                         "WHERE Proprietario.Username = '" + username + "' " +
+                                                         "AND Proprietario.Password = '" + password + "'; ",
+                                                      myConnection);
+                    myReader = myCommand.ExecuteReader();
+                    if (myReader.Read()){   r = true; } //Se encontrou na table Propriatario; 
+                }
                 myConnection.Close();
             }
             catch (Exception e) { Console.WriteLine(e); }

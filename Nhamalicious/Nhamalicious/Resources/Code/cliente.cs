@@ -9,20 +9,17 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using System.Net.Sockets;
-using System.Net;
 
 namespace Nhamalicious.Resources.Code
 {
-    class Cliente
+    class cliente
     {
-        static Socket sending = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+       // private String nome;
+       // private String password;
 
-        public static void Run()
+        public void LoginHi()
         {
 
-            sending.Connect(new IPEndPoint(IPAddress.Parse("193.137.92.87"), 80));
         }
-
     }
 }

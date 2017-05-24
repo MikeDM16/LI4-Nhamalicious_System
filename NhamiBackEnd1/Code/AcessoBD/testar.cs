@@ -15,11 +15,11 @@ namespace NhamiBackEnd1.Code.AcessoBD
             DAORestaurante restaurantes = new DAORestaurante();
             StringBuilder s = new StringBuilder();
 
-            string username = "joe", password = "cunha1234";
-            Boolean r = gestUtil.loginProprietário(username, password);
-            s.Append("Existe utilizador: " + r + "\n");
+            string username = "luce", password = "cunha1234";
+            //Boolean r = gestUtil.loginUtilizador(username, password);
+            //s.Append("Existe utilizador: " + r + "\n");
 
-            restaurantes.pesquisaRestaurante(1);
+            restaurantes.pesquisaTipoCozinha(1);
 
             return s.ToString() ;
         }
