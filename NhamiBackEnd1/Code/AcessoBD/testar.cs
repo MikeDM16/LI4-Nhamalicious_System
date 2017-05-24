@@ -4,20 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+
+namespace NhamiBackEnd1.Code.AcessoBD
 {
-    class testar
+    class Testar
     {
-        static void Main(string[] args)
+        public static string testarBD()
         {
             DAOGestaoUtilizadores gestUtil = new DAOGestaoUtilizadores();
             DAORestaurante restaurantes = new DAORestaurante();
+            StringBuilder s = new StringBuilder();
 
-            string username = "mm", password = "cunha1234";
+            string username = "joe", password = "cunha1234";
             Boolean r = gestUtil.loginProprietário(username, password);
-            Console.WriteLine("Existe utilizador: " + r);
+            s.Append("Existe utilizador: " + r + "\n");
 
             restaurantes.pesquisaRestaurante(1);
+
+            return s.ToString() ;
         }
     }
 }
