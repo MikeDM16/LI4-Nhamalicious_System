@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\AcessoBD\DAOGestaoUtilizadores.cs" />
+    <Compile Include="Code\AcessoBD\DAORestaurante.cs" />
+    <Compile Include="Code\AcessoBD\testar.cs" />
     <Compile Include="Code\Server\Pacote.cs" />
     <Compile Include="Code\Server\Server.cs" />
     <Compile Include="Form1.cs">
