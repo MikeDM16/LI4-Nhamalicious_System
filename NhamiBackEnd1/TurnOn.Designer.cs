@@ -1,6 +1,6 @@
 ﻿namespace NhamiBackEnd1
 {
-    partial class Form1
+    partial class TurnOn
     {
         /// <summary>
         /// Variável de designer necessária.
