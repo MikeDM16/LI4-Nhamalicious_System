@@ -14,8 +14,8 @@ namespace Nhamalicious.Resources.Code
 {
     class cliente
     {
-        private String nome;
-        private String password;
+       // private String nome;
+       // private String password;
 
         public void LoginHi()
         {
