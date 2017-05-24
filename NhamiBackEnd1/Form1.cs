@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using NhamiBackEnd1.Code;
+using NhamiBackEnd1.Code.AcessoBD;
 
 namespace NhamiBackEnd1
 {
@@ -22,7 +23,7 @@ namespace NhamiBackEnd1
 
                 l_displayIP.Text = ipa.ToString();
             }
-
+            tb_activity.Text = Testar.testarBD();
         }
 
 
@@ -36,6 +37,11 @@ namespace NhamiBackEnd1
         }
 
         private void b_Stop_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_activity_TextChanged(object sender, EventArgs e)
         {
 
         }
