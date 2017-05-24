@@ -50,7 +50,7 @@
     <Compile Include="Code\AcessoBD\DAOGestaoUtilizadores.cs" />
     <Compile Include="Code\AcessoBD\DAORestaurante.cs" />
     <Compile Include="Code\AcessoBD\Testar.cs" />
-    <Compile Include="Code\Server\Pacote.cs" />
+    <Compile Include="Code\Server\Pacotes.cs" />
     <Compile Include="Code\Server\Server.cs" />
     <Compile Include="TurnOn.cs">
       <SubType>Form</SubType>

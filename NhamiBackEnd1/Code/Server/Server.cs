@@ -7,89 +7,135 @@ using System.Threading.Tasks;
 using System.Net;
 using System.IO;
 using System.Net.Sockets;
+using System.Windows.Forms;
 
 namespace NhamiBackEnd1.Code
 {
     class Server
     {
-        static Socket accepting_connections;
+        static Socket serverSocket;
         static List<ClientData> clients_connected;
         Thread listeningThread;
         bool on_off = true;
+        public static readonly int port = 3333;
 
-        public void Run(int port)
+
+        public static void ShowErrorDialog(string message)
         {
-            accepting_connections = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            clients_connected = new List<ClientData>();
+            MessageBox.Show(message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
-            IPEndPoint iep = new IPEndPoint(IPAddress.Any, port);
 
-            accepting_connections.Bind(iep);
-            while (on_off)
+        /// <summary>
+        /// Construct server socket and bind socket to all local network interfaces, then listen for connections
+        /// with a backlog of 10. Which means there can only be 10 pending connections lined up in the TCP stack
+        /// at a time. This does not mean the server can handle only 10 connections. The we begin accepting connections.
+        /// Meaning if there are connections queued, then we should process them.
+        /// </summary>
+        public void Run()
+        {
+            try
             {
-                listeningThread = new Thread(ListenThread);
-                listeningThread.Start();
-
+                serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
+                serverSocket.Listen(10);
+                serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+            }
+            catch (SocketException ex)
+            {
+                ShowErrorDialog(ex.Message);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                ShowErrorDialog(ex.Message);
             }
 
         }
+        
 
         public void Stop()
         {
-            on_off = false;
-            listeningThread.Join();
-        }
-
-        static void ListenThread()
-        {
-            while (true)
+            foreach(ClientData cd in clients_connected)
             {
-                accepting_connections.Listen(0);
-                clients_connected.Add(new ClientData(accepting_connections.Accept()));
+                cd.StopConnection();
             }
         }
+
+        private void AcceptCallback(IAsyncResult AR)
+        {
+            try
+            {
+                ClientData client = new ClientData(serverSocket.EndAccept(AR));
+                clients_connected.Add(client);
+
+                // Continue listening for clients.
+                serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+            }
+            catch (SocketException ex)
+            {
+                ShowErrorDialog(ex.Message);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                ShowErrorDialog(ex.Message);
+            }
+        }
+
 
         public static void Data_IN(object cSocket) //recebe os dados
         {
             Socket s = (Socket)cSocket;
-
-            byte[] buffer;
-            int nBytes;
-
-            while (true)
+            try
             {
-                buffer = new byte[s.SendBufferSize];
-
-                nBytes = s.Receive(buffer);
-
-                if ( nBytes > 0)
-                {
-
-                }
-
-
+                byte[] bufferA = new byte[s.SendBufferSize];
+                s.BeginReceive(bufferA, 0, bufferA.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
+            }
+            catch (SocketException ex)
+            {
+                Server.ShowErrorDialog(ex.Message);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Server.ShowErrorDialog(ex.Message);
             }
         }
-        
-        public static void DataManager(Pacote p)
-        {
 
-        }
-
-        public string getIPV4()
+        private static void ReceiveCallback(IAsyncResult AR)
         {
-            IPAddress[] ips = Dns.GetHostAddresses(Dns.GetHostName());
-            foreach(IPAddress i in ips)
+            try
             {
-                if (i.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return i.ToString();
-                }
-            }
 
-            return "127.0.0.1";
+                // Socket exception will raise here when client closes, as this sample does not
+                // demonstrate graceful disconnects for the sake of simplicity.
+                Socket s = (Socket)AR.AsyncState;
+                int received = s.EndReceive(AR);
+
+                if (received == 0)
+                {
+                    return;
+                }
+
+                // The received data is deserialized in the PersonPackage ctor.
+                Pacote p = new Pacote();
+
+                // Start receiving data again.
+                //clientSocket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReceiveCallback, null);
+            }
+            // Avoid Pokemon exception handling in cases like these.
+            catch (SocketException ex)
+            {
+                Server.ShowErrorDialog(ex.Message);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Server.ShowErrorDialog(ex.Message);
+            }
         }
+
+
     }
+
+  
 
     class ClientData
     {
@@ -108,7 +154,7 @@ namespace NhamiBackEnd1.Code
             //Colocar utilizador como convidado, pq não foi feito o login
             clientSocket = s;
             clientThread = new Thread(Server.Data_IN);
-            clientThread.Start(clientSocket);
+            clientThread.Start(this);
         }
         //public void setUtilizador(Utilizador u)
         //{
@@ -117,5 +163,10 @@ namespace NhamiBackEnd1.Code
         //    if (u is Convidado) { }
         //}
 
+        public void StopConnection()
+        {
+            clientSocket.Shutdown(SocketShutdown.Both);
+        }
+        
     }
 }

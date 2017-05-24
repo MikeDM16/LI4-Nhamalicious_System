@@ -11,6 +11,13 @@ namespace NhamiBackEnd1.Code.AcessoBD
         int idUtilizador, idade;
         string nome, username, password, email;
 
+        public Utilizador() { }
+        public Utilizador(Utilizador u)
+        {
+            this.idUtilizador = u.GetIdUtilizador(); this.idade = u.GetIdade();
+            this.nome = u.GetNome(); this.username = u.GetNome();
+            this.password = u.GetPassword(); this.email = u.GetEmail();
+        }
 
         public Utilizador(int idUtilizador, string nome, int idade, string username, string password, string email)
         {
@@ -19,19 +26,54 @@ namespace NhamiBackEnd1.Code.AcessoBD
             this.password = password;                       this.email = email;
         }
 
-        public int GetIdUtilizador(){ return idUtilizador;  }
+        private int GetIdUtilizador(){ return idUtilizador;  }
         public int GetIdade(){  return idade;   }
         public string GetNome(){    return nome;    }
         public string GetUsername(){    return username;    }
-        public string GetPassword(){    return password;    }
+        private string GetPassword(){    return password;    }
+
         public string GetEmail(){       return email;       }
 
-        public void SetIdUtilizador(int idUtilizador){  this.idUtilizador = idUtilizador;   }
+        private void SetIdUtilizador(int idUtilizador){  this.idUtilizador = idUtilizador;   }
         public void SetIdade(int idade){    this.idade = idade; }
         public void SetNome(string nome){   this.nome = nome;   }
-        public void SetUsername(string username) {  this.username = username; }
+        private void SetUsername(string username) {  this.username = username; }
         public void SetPassword(string password){   this.password = password;   }
         public void SetEmail(string email){         this.email = email; }
 
+
+        public byte[] ToByteArray()
+        {
+            List<byte> byteList = new List<byte>();
+            byteList.AddRange(BitConverter.GetBytes(idade));
+            byteList.AddRange(BitConverter.GetBytes(idUtilizador));
+            byteList.AddRange(BitConverter.GetBytes(nome.Length));
+            byteList.AddRange(Encoding.ASCII.GetBytes(nome));
+            byteList.AddRange(BitConverter.GetBytes(password.Length));
+            byteList.AddRange(Encoding.ASCII.GetBytes(password));
+            byteList.AddRange(BitConverter.GetBytes(username.Length));
+            byteList.AddRange(Encoding.ASCII.GetBytes(username));
+            byteList.AddRange(BitConverter.GetBytes(email.Length));
+            byteList.AddRange(Encoding.ASCII.GetBytes(email));
+
+            return byteList.ToArray();
+        }
+
+        public int Deserialize(byte[] b)
+        {
+            
+            this.idade = BitConverter.ToInt32(b, 0);
+            this.idUtilizador = BitConverter.ToInt32(b, 4);
+            int nomeL = BitConverter.ToInt32(b, 8);
+            this.nome = (Encoding.ASCII.GetString(b, 12, nomeL));
+            int passL = BitConverter.ToInt32(b, 12 + nomeL);
+            this.password = (Encoding.ASCII.GetString(b, 16 + nomeL, passL));
+            int usernameL = BitConverter.ToInt32(b, 16 + nomeL + passL);
+            this.username = (Encoding.ASCII.GetString(b, 20 + nomeL + passL, usernameL));
+            int emailL = BitConverter.ToInt32(b, 20 + nomeL + passL + usernameL);
+            this.email = (Encoding.ASCII.GetString(b, 24 + nomeL + passL + usernameL, emailL));
+
+            return b.Length;
+        }
     }
 }
