@@ -31,7 +31,7 @@ namespace Nhamalicious
         private void MBtnLogin_Click(object sender, EventArgs e)
         {
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            Dialog_Login loginD = new Dialog_Login();
+            DialogLoginClass loginD = new DialogLoginClass();
             loginD.Show(transaction, "dialog fragment");
             throw new NotImplementedException();
         }
