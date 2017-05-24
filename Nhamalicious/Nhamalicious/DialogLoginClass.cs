@@ -19,6 +19,7 @@ namespace Nhamalicious
             base.OnCreateView(inflater, container, savedInstanceState);
 
             var view = inflater.Inflate(Resource.Layout.DialogLogIn, container, false);
+
             return view;
         }
         public override void OnActivityCreated(Bundle savedInstanceState)

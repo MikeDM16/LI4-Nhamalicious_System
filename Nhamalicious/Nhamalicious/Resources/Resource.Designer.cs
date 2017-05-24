@@ -103,14 +103,8 @@ namespace Nhamalicious
 			// aapt resource value: 0x7f070002
 			public const int btnLognInReal = 2131165186;
 			
-			// aapt resource value: 0x7f070008
-			public const int progressBar1 = 2131165192;
-			
 			// aapt resource value: 0x7f070005
 			public const int textOR = 2131165189;
-			
-			// aapt resource value: 0x7f070007
-			public const int textView1 = 2131165191;
 			
 			// aapt resource value: 0x7f070001
 			public const int txtPassword = 2131165185;
