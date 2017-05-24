@@ -11,19 +11,10 @@ namespace NhamiBackEnd1
 {
     public partial class TurnOn : Form
     {
-        Server s;
+        Server s = new Server();
         public TurnOn()
         {
             InitializeComponent();
-            IPAddress[] ips = Dns.GetHostAddresses(Dns.GetHostName());
-
-            foreach(IPAddress ipa in ips)
-            {
-                if (ipa.AddressFamily == AddressFamily.InterNetwork)
-
-                l_displayIP.Text = ipa.ToString();
-            }
-            tb_activity.Text = Testar.testarBD();
         }
 
 
@@ -31,7 +22,7 @@ namespace NhamiBackEnd1
         {
 
             int port = int.Parse(tf_portChoice.Text);
-            s.Run(l_displayIP.Text, port);
+            s.Run(port);
             Console.WriteLine("Starting server ...");
             
         }

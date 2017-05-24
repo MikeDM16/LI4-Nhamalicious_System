@@ -13,12 +13,10 @@ namespace Nhamalicious
     public class MainActivity : Activity
     {
         private Button mBtnLogin;
-        private TcpClient tpc = new TcpClient();
         
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            tpc.Connect(IPAddress.Parse("192.168.1.92"), 80);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
