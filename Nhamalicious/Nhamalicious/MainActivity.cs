@@ -13,7 +13,6 @@ namespace Nhamalicious
     public class MainActivity : Activity
     {
         private Button mBtnLogin;
-        //private TcpClient tpc = new TcpClient();
         
         protected override void OnCreate(Bundle bundle)
         {
@@ -30,8 +29,17 @@ namespace Nhamalicious
                 FragmentTransaction transaction = FragmentManager.BeginTransaction();
                 DialogLoginClass d1 = new DialogLoginClass();
                 d1.Show(transaction, "dialog fragment");
+                d1.LoginEfetuado += D1_LoginEfetuado;
             };
 
+        }
+
+        private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
+        {
+            TcpClient tcp = new TcpClient();
+            tcp.Connect(IPAddress.Parse("192.168.1.92"), 80);
+            // e.Username já é o que o cliente escreve, falta fazer a ligação com o servidor e com os métodos correspondentes
+            // e.Password igual ao username
         }
     }
 }

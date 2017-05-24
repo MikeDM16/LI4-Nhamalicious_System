@@ -101,7 +101,7 @@ namespace Nhamalicious
 			public const int botaoSignUp = 2131165188;
 			
 			// aapt resource value: 0x7f070002
-			public const int btnLognInReal = 2131165186;
+			public const int btnLogInReal = 2131165186;
 			
 			// aapt resource value: 0x7f070005
 			public const int textOR = 2131165189;
