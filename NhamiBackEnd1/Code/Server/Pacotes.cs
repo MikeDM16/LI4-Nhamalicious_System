@@ -10,8 +10,22 @@ namespace NhamiBackEnd1.Code
     class Pacote
     {
         //PackageType 
-        public static PacoteType PackageType;
+        public PacoteType PackageType;
+        public Pacote p;
 
+        //public void buildPacote(Pacote p, PacoteType t)
+        //{
+        //    int tipo = (int)t;
+        //    byteTransformer(p, t);
+        //    List<byte> byteList = new List<byte>();
+        //    byteList.AddRange(BitConverter.GetBytes(tipo));
+        //    byteList.AddRange(Encoding.ASCII.GetBytes(response));
+        //}
+
+        private void byteTransformer(Pacote p, PacoteType t)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     enum PacoteType
