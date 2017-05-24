@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
@@ -11,7 +12,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
     class DAORestaurante
     {
 
-        public void pesquisaRestaurante(int tipo)
+        public void pesquisaTipoCozinha(int tipo)
         {
             // Realiza pesquisa por tipo de cozinha ´pré definido
             //   1 - Chinesa; 2 - Indiana; 3 - Japonesa; 4 - Vegetariana
@@ -32,12 +33,13 @@ namespace NhamiBackEnd1.Code.AcessoBD
                                                         myConnection);
                 myReader = myCommand.ExecuteReader();
                 int i = 0;
+                List<int> idsRestaurantes = new List<int>();
                 while (myReader.Read())
                 {
-                    Console.WriteLine("Prato " + i++ + ": " + myReader["Designacao"].ToString());
-                    // Agora é pegar em todas as colunas e construir classes
+                    int id = Convert.ToInt32( myReader["idRestaurante"].ToString() );
+                    idsRestaurantes.Add( id );
                 }
-
+                myReader.Close();
                 myConnection.Close();
             }
             catch (Exception e) { Console.WriteLine(e); }

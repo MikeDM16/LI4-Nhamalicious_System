@@ -9,10 +9,10 @@ using NhamiBackEnd1.Code.AcessoBD;
 
 namespace NhamiBackEnd1
 {
-    public partial class Form1 : Form
+    public partial class TurnOn : Form
     {
         Server s;
-        public Form1()
+        public TurnOn()
         {
             InitializeComponent();
             IPAddress[] ips = Dns.GetHostAddresses(Dns.GetHostName());
