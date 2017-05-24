@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NhamiBackEnd1", "NhamiBackEnd1\NhamiBackEnd1.csproj", "{B98215DB-0172-4BFE-81FF-1D100AE85F62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NhamaliciousFrontEnd", "..\Nhamalicious\Nhamalicious\NhamaliciousFrontEnd.csproj", "{17B70426-BF16-45BA-A659-B67FC74AE7EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NhamaliciousFrontEnd", "Nhamalicious\Nhamalicious\NhamaliciousFrontEnd.csproj", "{17B70426-BF16-45BA-A659-B67FC74AE7EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,6 +14,7 @@ namespace NhamiBackEnd1.Code
     {
         static Socket accepting_connections;
         static List<ClientData> clients_connected;
+        Thread listeningThread;
         bool on_off = true;
 
         public void Run(String ip, int port)
@@ -24,19 +25,21 @@ namespace NhamiBackEnd1.Code
             IPEndPoint iep = new IPEndPoint(IPAddress.Parse(ip), port);
 
             accepting_connections.Bind(iep);
-
             while (on_off)
             {
-                Thread listeningThread = new Thread(ListenThread);
+                listeningThread = new Thread(ListenThread);
                 listeningThread.Start();
 
             }
 
         }
+
         public void Stop()
         {
             on_off = false;
+            listeningThread.Join();
         }
+
         static void ListenThread()
         {
             while (true)

@@ -8,7 +8,7 @@ namespace NhamiBackEnd1.Code
 {
     class Pacote
     {
-
+           //PackageType 
 
     }
 }
