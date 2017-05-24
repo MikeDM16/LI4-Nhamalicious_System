@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using NhamiBackEnd1.Code;
+using System.Text;
 
 namespace NhamiBackEnd1
 {
@@ -17,6 +18,7 @@ namespace NhamiBackEnd1
             InitializeComponent();
             l_displayPort.Text = Server.port.ToString();
             l_displayIP.Text = getMyExternalIP();
+
         }
 
         private string getMyExternalIP()
@@ -26,15 +28,14 @@ namespace NhamiBackEnd1
 
         private void b_start_Click(object sender, EventArgs e) //start server
         {
-
+           
             s.Run();
-            tb_activity.Text += "Starting server ...\n";
-            tb_activity.Text += "Beijo\n";
+            tb_activity.AppendText("Starting server ...");
         }
 
         private void b_Stop_Click(object sender, EventArgs e)
         {
-            tb_activity.Text += "Closing connections";
+            tb_activity.AppendText("Closing connections");
             s.Stop();
             Environment.Exit(Environment.ExitCode);
         }
