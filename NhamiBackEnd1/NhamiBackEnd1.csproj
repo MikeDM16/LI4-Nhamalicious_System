@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\AcessoBD\Class1.cs" />
+    <Compile Include="Code\AcessoBD\Restaurante.cs" />
     <Compile Include="Code\AcessoBD\DAOGestaoUtilizadores.cs" />
     <Compile Include="Code\AcessoBD\DAORestaurante.cs" />
     <Compile Include="Code\AcessoBD\Testar.cs" />
@@ -83,6 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Code\AcessoBD\testarpedidos.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
