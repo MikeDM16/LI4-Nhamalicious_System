@@ -21,7 +21,7 @@ namespace NhamiBackEnd1
             l_displayPort.Text = Server.port.ToString();
             l_displayIP.Text = getMyExternalIP();
             
-            tb_activity.AppendText(Testar.testarBD());
+            tb_activity.AppendText(Testar.TestarBD());
         }
 
         private string getMyExternalIP()
