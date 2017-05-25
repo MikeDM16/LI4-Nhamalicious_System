@@ -11,14 +11,18 @@ namespace NhamiBackEnd1.Code.AcessoBD
         String designacao, localizacao;
         int idRestaurante, idProprietario, idTipoCozinha, contacto;
         double pontuacao;
+        List<Prato> menu;
 
         public Restaurante(int idRestaurante, String designacao, double pontuacao, string localizacao, int idProprietario, int idTipoCozinha, int contacto)
         {
             this.designacao = designacao;                   this.localizacao = localizacao;
             this.idRestaurante = idRestaurante;             this.idProprietario = idProprietario;
             this.idTipoCozinha = idTipoCozinha;             this.contacto = contacto;
-            this.pontuacao = pontuacao;
+            this.pontuacao = pontuacao;                     this.menu = new List<Prato>();
         }
+
+        public void AddPrato(Prato p) { this.menu.Add(p); }
+        public List<Prato> GetPratos() { return this.menu;  }
 
         public void SetDesignacao(String designacao){   this.designacao = designacao;   }
         public void SetLocalizacao(String localizacao){ this.localizacao = localizacao; }

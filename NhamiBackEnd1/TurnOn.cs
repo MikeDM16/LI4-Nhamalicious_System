@@ -7,21 +7,20 @@ using System.Windows.Forms;
 using NhamiBackEnd1.Code;
 using NhamiBackEnd1.Code.AcessoBD;
 using System.Text;
-using NhamiBackEnd1.Code.Server;
 
 namespace NhamiBackEnd1
 {
     public partial class TurnOn : Form
     {
-        Server s;
+        Server s = new Server();
         public TurnOn()
         {
-            s = new Server();
+            
             InitializeComponent();
             l_displayPort.Text = Server.port.ToString();
             l_displayIP.Text = getMyExternalIP();
-            Testar.testarBD();
-
+            
+            tb_activity.AppendText(Testar.testarBD());
         }
 
         private string getMyExternalIP()
@@ -34,7 +33,6 @@ namespace NhamiBackEnd1
            
             s.Run();
             tb_activity.AppendText("Starting server ...");
-            
         }
 
         private void b_Stop_Click(object sender, EventArgs e)
