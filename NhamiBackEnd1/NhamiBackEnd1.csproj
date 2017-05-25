@@ -45,9 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\AcessoBD\Prato.cs" />
-    <Compile Include="Code\AcessoBD\Utilizador.cs" />
-    <Compile Include="Code\AcessoBD\Restaurante.cs" />
+    <Compile Include="Code\SharedClasses\Prato.cs" />
+    <Compile Include="Code\SharedClasses\Utilizador.cs" />
+    <Compile Include="Code\SharedClasses\Restaurante.cs" />
     <Compile Include="Code\AcessoBD\DAOGestaoUtilizadores.cs" />
     <Compile Include="Code\AcessoBD\DAORestaurante.cs" />
     <Compile Include="Code\AcessoBD\Testar.cs" />

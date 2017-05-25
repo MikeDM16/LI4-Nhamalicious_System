@@ -32,12 +32,12 @@ namespace NhamiBackEnd1
         {
            
             s.Run();
-            tb_activity.AppendText("Starting server ...");
+            tb_activity.AppendText("\nStarting server ...");
         }
 
         private void b_Stop_Click(object sender, EventArgs e)
         {
-            tb_activity.AppendText("Closing connections");
+            tb_activity.AppendText("\nClosing connections");
             s.Stop();
             Environment.Exit(Environment.ExitCode);
         }

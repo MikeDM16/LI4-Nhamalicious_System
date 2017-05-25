@@ -9,17 +9,15 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.Net.Sockets;
 
 namespace Nhamalicious.Resources.Code
 {
-    class cliente
+    class Cliente
     {
-       // private String nome;
-       // private String password;
+        Socket clientSocket;
+        byte[] buffer;
 
-        public void LoginHi()
-        {
 
-        }
     }
 }
