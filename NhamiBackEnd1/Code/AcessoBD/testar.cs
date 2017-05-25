@@ -20,7 +20,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
             int r = gestUtil.LoginUtilizador(username, password);
             s.Append("Existe utilizador: " + r + ". ");
 
-            List<Restaurante> rests =  restaurantes.pesquisaTipoCozinha(1);
+            List<Restaurante> rests =  restaurantes.PesquisaTipoCozinha(1);
             if (rests != null)
                 s.Append("Nr de Restaurantes = " + rests.Count);
             else

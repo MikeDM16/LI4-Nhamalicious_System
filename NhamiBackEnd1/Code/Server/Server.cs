@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Windows.Forms;
 using NhamiBackEnd1.Code;
 using NhamiBackEnd1.Code.AcessoBD;
+using NhamiBackEnd1.Code.SharedClasses;
 
 namespace NhamiBackEnd1
 {
