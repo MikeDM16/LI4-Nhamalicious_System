@@ -14,9 +14,9 @@ namespace NhamiBackEnd1.Code.AcessoBD
         /*Método que determina se a credências de login de um utilizador 
          (cliente ou proprietário) são válidas 
          return true - login confirmado; return false - login não aceite */
-        public int LoginUtilizador(string username, string password)
+        public Utilizador LoginUtilizador(string username, string password)
         {
-            int r = 0;
+            Utilizador utilizador = null;
             SqlConnection myConnection = new SqlConnection("user id=username;" +
                                                            "password=password;server=localhost;" +
                                                            "Trusted_Connection=yes;" +
@@ -32,7 +32,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                                                        myConnection);
 
                 myReader = myCommand.ExecuteReader();
-                if (myReader.Read()){ r = 1; } //Se encontrou na table cliente
+                if (myReader.Read()){ utilizador = GetDadosCliente(); } //Se encontrou na table cliente
                 else{
                     myReader.Close();
                     myCommand = new SqlCommand("SELECT * FROM Proprietario " +
@@ -40,12 +40,26 @@ namespace NhamiBackEnd1.Code.AcessoBD
                                                          "AND Proprietario.Password = '" + password + "'; ",
                                                       myConnection);
                     myReader = myCommand.ExecuteReader();
-                    if (myReader.Read()){   r = 2; } //Se encontrou na table Propriatario; 
+                    if (myReader.Read()){ utilizador = GetDadosProprietario(); } //Se encontrou na table Propriatario; 
                 }
                 myConnection.Close();
             }
             catch (Exception e) { Console.WriteLine(e); }
-            return r;
+            return utilizador;
         }
+
+        private Utilizador GetDadosCliente()
+        {
+            Utilizador cliente = new Cliente();
+            
+            return cliente;
+        }
+
+        private Utilizador GetDadosProprietario()
+        {
+            Utilizador proprietario = new Proprietario();
+            return proprietario;
+        }
+
     }
 }

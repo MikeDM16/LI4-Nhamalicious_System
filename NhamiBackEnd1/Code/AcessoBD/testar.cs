@@ -16,16 +16,18 @@ namespace NhamiBackEnd1.Code.AcessoBD
             DAORestaurante restaurantes = new DAORestaurante();
             StringBuilder s = new StringBuilder();
 
-            string username = "luce", password = "cunha1234";
-            int r = gestUtil.LoginUtilizador(username, password);
-            s.Append("Existe utilizador: " + r + ". ");
-
+            //---------------------------------------------------------------//
+            string username = "jose", password = "cunha1234";
+            Utilizador r = gestUtil.LoginUtilizador(username, password);
+            s.Append("Existe utilizador: " + r.Marshalling() + ". ");
+            //---------------------------------------------------------------//
             List<Restaurante> rests =  restaurantes.PesquisaTipoCozinha(1);
             if (rests != null)
                 s.Append("Nr de Restaurantes = " + rests.Count);
             else
                 s.Append("Está a null");
             return s.ToString() ;
+            //---------------------------------------------------------------//
         }
     }
 }

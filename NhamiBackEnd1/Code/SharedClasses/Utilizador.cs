@@ -60,10 +60,13 @@ namespace NhamiBackEnd1.Code.SharedClasses
 
             return byteList.ToArray();
         }
+        public virtual string Marshalling()
+        {
+            return "sou utilizador";
+        }
 
         public int Deserialize(byte[] b, int a)
-        {
-
+        {            
             this.idade = BitConverter.ToInt32(b, a);
             this.idUtilizador = BitConverter.ToInt32(b, 4 + a);
             int nomeL = BitConverter.ToInt32(b, 8 + a);

@@ -10,12 +10,25 @@ namespace NhamiBackEnd1.Code.SharedClasses
 {
     public class Proprietario : Utilizador
     {
-        List<Restaurante> restaurantes; 
+        List<Restaurante> restaurantes;
+
+        public Proprietario() { }
+        public Proprietario(int idUtilizador, string nome, int idade, string username, string password, string email, List<Restaurante> res)
+            :base(idUtilizador, nome, idade, username, password, email)
+        {
+            this.restaurantes = new List<Restaurante>();
+            this.restaurantes = res;
+        }
 
         public Proprietario(List<Restaurante> restaurantes)
         {
             this.restaurantes = new List<Restaurante>();
             this.restaurantes = restaurantes;
+        }
+
+        public override string Marshalling()
+        {
+            return "Sou proprietário";
         }
 
         public List<Restaurante> GetRestaurantesProprietario()

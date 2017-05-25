@@ -133,7 +133,8 @@ namespace NhamiBackEnd1
                             TurnOn.SetActivityText("Login Attempt...");
                             PacoteLogin pl = new PacoteLogin();
                             pl.Deserialize(buf, 4);
-                            int answer = dao_gestUtil.LoginUtilizador(pl.GetUsername(), pl.GetPassword());
+                            int answer = 0;
+                            //int answer = dao_gestUtil.LoginUtilizador(pl.GetUsername(), pl.GetPassword());
                             //Utilizador u = dao_gestUtil.LoginUtilizador(pl.GetUsername(), pl.GetPassword());
                             /*
                              * if (u == null){
