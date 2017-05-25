@@ -73,7 +73,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
             int emailL = BitConverter.ToInt32(b, a+20 + nomeL + passL + usernameL);
             this.email = (Encoding.ASCII.GetString(b, a+24 + nomeL + passL + usernameL, emailL));
 
-            return b.Length;
+            return (4 + 4 + 4 + nomeL + 4 + passL + 4 + usernameL + 4 +emailL);
         }
     }
 }

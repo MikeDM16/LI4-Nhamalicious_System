@@ -31,7 +31,7 @@ namespace NhamiBackEnd1.Code
             int responseL = BitConverter.ToInt32(b, size+a);
             this.response = (Encoding.ASCII.GetString(b, a+size + 4, responseL));
 
-            return b.Length;
+            return (size + 4 + responseL);
         }
         public string GetResponse()
         {
@@ -45,6 +45,7 @@ namespace NhamiBackEnd1.Code
         {
             List<byte> byteList = new List<byte>();
             byteList.AddRange(u.ToByteArray());
+            byteList.AddRange(BitConverter.GetBytes(response.Length));
             byteList.AddRange(Encoding.ASCII.GetBytes(response));
 
             return byteList.ToArray();
@@ -84,7 +85,7 @@ namespace NhamiBackEnd1.Code
             int responseL = BitConverter.ToInt32(b, a + size);
             this.response = (Encoding.ASCII.GetString(b, a + size + 4, responseL));
 
-            return b.Length;
+            return (size + 4 + responseL);
         }
     }
 }

@@ -13,26 +13,14 @@ namespace NhamiBackEnd1
 {
     public partial class TurnOn : Form
     {
-        Server s = new Server();
+        Server s;
         public TurnOn()
         {
-            
+            s = new Server();
             InitializeComponent();
             l_displayPort.Text = Server.port.ToString();
             l_displayIP.Text = getMyExternalIP();
-            //tb_activity.AppendText(Testar.testarBD());
-
-            //PacoteLogin p = new PacoteLogin(new Utilizador(), "Okay");
-            //Envelope e = new Envelope(PacoteType.Login, p);
-            //int a = (int)e.GetPacoteType();
-            //PacoteType pt = (PacoteType)a;
-            //if (pt == PacoteType.Login)
-            //{
-            //    tb_activity.AppendText("Pacote Login");
-            //    byte[] b = p.ToByteArray();
-            //    p.Deserialize(b, 0);
-            //    tb_activity.AppendText(p.GetResponse());
-            //}
+            Testar.testarBD();
 
         }
 
@@ -46,6 +34,7 @@ namespace NhamiBackEnd1
            
             s.Run();
             tb_activity.AppendText("Starting server ...");
+            
         }
 
         private void b_Stop_Click(object sender, EventArgs e)

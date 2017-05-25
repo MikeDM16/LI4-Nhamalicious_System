@@ -15,7 +15,7 @@ namespace NhamiBackEnd1
     public class Server
     {
         static Socket serverSocket;
-        static List<ClientData> clients_connected;
+        static List<ClientData> clients_connected = new List<ClientData>();
         public static readonly int port = 3333;
 
         public Server() { }
@@ -54,10 +54,12 @@ namespace NhamiBackEnd1
 
         public void Stop()
         {
-            foreach(ClientData cd in clients_connected)
-            {
-                cd.StopConnection();
-            }
+            //foreach(ClientData cd in clients_connected)
+            //{
+            //    cd.StopConnection();
+            //}
+            serverSocket.Close();
+            serverSocket.Dispose();
         }
 
         private void AcceptCallback(IAsyncResult AR)
