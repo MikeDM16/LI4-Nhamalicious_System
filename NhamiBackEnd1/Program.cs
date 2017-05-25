@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NhamiBackEnd1.Code.AcessoBD;
-
+using NhamiBackEnd1.Code.SharedClasses;
 namespace NhamiBackEnd1
 {
     static class Program
@@ -14,7 +14,7 @@ namespace NhamiBackEnd1
         /// </summary>
         [STAThread]
         static void Main()
-        {
+        {      
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TurnOn());

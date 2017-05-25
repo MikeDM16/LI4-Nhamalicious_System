@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NhamiBackEnd1.Code.AcessoBD;
+using NhamiBackEnd1.Code.SharedClasses;
 
 namespace NhamiBackEnd1.Code.AcessoBD
 {
-    class Restaurante
+    public class Restaurante
     {
         String designacao, localizacao;
         int idRestaurante, idProprietario, idTipoCozinha, contacto;
