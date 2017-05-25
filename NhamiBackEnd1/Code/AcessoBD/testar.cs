@@ -19,6 +19,17 @@ namespace NhamiBackEnd1.Code.AcessoBD
             //---------------------------------------------------------------//
             string username = "jose", password = "cunha1234";
             Utilizador r = gestUtil.LoginUtilizador(username, password);
+            if (r is Proprietario)
+            {
+                // usar a funca de marshalling override do priprietario
+                //  r.funcaoToByte();
+            }
+            else
+                if (r is Cliente)
+                // usar a funca de marshalling override do priprietario
+                // r.funcaoToByte();
+
+
             s.Append("Existe utilizador: " + r.Marshalling() + ". ");
             //---------------------------------------------------------------//
             List<Restaurante> rests =  restaurantes.PesquisaTipoCozinha(1);
