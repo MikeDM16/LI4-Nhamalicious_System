@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using NhamiBackEnd1.Code;
 using NhamiBackEnd1.Code.AcessoBD;
 using System.Text;
+using NhamiBackEnd1.Code.Server;
 
 namespace NhamiBackEnd1
 {
@@ -19,7 +20,19 @@ namespace NhamiBackEnd1
             InitializeComponent();
             l_displayPort.Text = Server.port.ToString();
             l_displayIP.Text = getMyExternalIP();
-            tb_activity.AppendText(Testar.testarBD());
+            //tb_activity.AppendText(Testar.testarBD());
+
+            //PacoteLogin p = new PacoteLogin(new Utilizador(), "Okay");
+            //Envelope e = new Envelope(PacoteType.Login, p);
+            //int a = (int)e.GetPacoteType();
+            //PacoteType pt = (PacoteType)a;
+            //if (pt == PacoteType.Login)
+            //{
+            //    tb_activity.AppendText("Pacote Login");
+            //    byte[] b = p.ToByteArray();
+            //    p.Deserialize(b, 0);
+            //    tb_activity.AppendText(p.GetResponse());
+            //}
 
         }
 

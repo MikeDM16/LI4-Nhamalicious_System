@@ -19,7 +19,7 @@ namespace NhamiBackEnd1
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TurnOn());
 
-            Testar.testarBD();
+            //Testar.testarBD();
         }
     }
 }

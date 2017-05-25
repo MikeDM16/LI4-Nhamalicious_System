@@ -8,18 +8,17 @@ using System.Net;
 using System.IO;
 using System.Net.Sockets;
 using System.Windows.Forms;
+using NhamiBackEnd1.Code;
 
-namespace NhamiBackEnd1.Code
+namespace NhamiBackEnd1
 {
-    class Server
+    public class Server
     {
         static Socket serverSocket;
         static List<ClientData> clients_connected;
-        Thread listeningThread;
-        bool on_off = true;
         public static readonly int port = 3333;
 
-
+        public Server() { }
         public static void ShowErrorDialog(string message)
         {
             MessageBox.Show(message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -116,7 +115,20 @@ namespace NhamiBackEnd1.Code
                 }
 
                 // The received data is deserialized in the PersonPackage ctor.
-                //Pacote p = new Pacote(cd.GetBuffer());
+                byte[] buf = new byte[cd.GetBuffer().Length];
+                Array.Copy(cd.GetBuffer(), buf, cd.GetBuffer().Length);
+                int p = BitConverter.ToInt32(buf, 0);
+                PacoteType pt = (PacoteType)p;
+                switch (pt)
+                {
+                    case PacoteType.Login:
+                        {
+                            PacoteLogin pl = new PacoteLogin();
+                            pl.Deserialize(buf, 4);
+                            //Faz as operações para verificar o login
+                        }
+                        break;
+                }
 
                 //Start receiving data again.
                 //cd.GetSocket().BeginReceive(cd.GetBuffer(), 0, cd.GetBuffer().Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), cd);
@@ -134,8 +146,6 @@ namespace NhamiBackEnd1.Code
 
 
     }
-
-  
 
     class ClientData
     {

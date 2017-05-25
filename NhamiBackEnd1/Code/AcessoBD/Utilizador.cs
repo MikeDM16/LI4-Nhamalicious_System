@@ -59,19 +59,19 @@ namespace NhamiBackEnd1.Code.AcessoBD
             return byteList.ToArray();
         }
 
-        public int Deserialize(byte[] b)
+        public int Deserialize(byte[] b, int a)
         {
             
-            this.idade = BitConverter.ToInt32(b, 0);
-            this.idUtilizador = BitConverter.ToInt32(b, 4);
-            int nomeL = BitConverter.ToInt32(b, 8);
-            this.nome = (Encoding.ASCII.GetString(b, 12, nomeL));
-            int passL = BitConverter.ToInt32(b, 12 + nomeL);
-            this.password = (Encoding.ASCII.GetString(b, 16 + nomeL, passL));
-            int usernameL = BitConverter.ToInt32(b, 16 + nomeL + passL);
-            this.username = (Encoding.ASCII.GetString(b, 20 + nomeL + passL, usernameL));
-            int emailL = BitConverter.ToInt32(b, 20 + nomeL + passL + usernameL);
-            this.email = (Encoding.ASCII.GetString(b, 24 + nomeL + passL + usernameL, emailL));
+            this.idade = BitConverter.ToInt32(b, a);
+            this.idUtilizador = BitConverter.ToInt32(b, 4 + a);
+            int nomeL = BitConverter.ToInt32(b, 8 + a);
+            this.nome = (Encoding.ASCII.GetString(b, 12 + a, nomeL));
+            int passL = BitConverter.ToInt32(b, a + 12 + nomeL);
+            this.password = (Encoding.ASCII.GetString(b, a+16 + nomeL, passL));
+            int usernameL = BitConverter.ToInt32(b, a+16 + nomeL + passL);
+            this.username = (Encoding.ASCII.GetString(b, a+20 + nomeL + passL, usernameL));
+            int emailL = BitConverter.ToInt32(b, a+20 + nomeL + passL + usernameL);
+            this.email = (Encoding.ASCII.GetString(b, a+24 + nomeL + passL + usernameL, emailL));
 
             return b.Length;
         }
