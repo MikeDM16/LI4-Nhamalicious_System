@@ -32,7 +32,7 @@
             this.l_myIP = new System.Windows.Forms.Label();
             this.l_myPort = new System.Windows.Forms.Label();
             this.l_displayIP = new System.Windows.Forms.Label();
-            this.tb_activity = new System.Windows.Forms.TextBox();
+            tb_activity = new System.Windows.Forms.TextBox();
             this.b_Stop = new System.Windows.Forms.Button();
             this.l_displayPort = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -76,13 +76,13 @@
             // 
             // tb_activity
             // 
-            this.tb_activity.Location = new System.Drawing.Point(12, 156);
-            this.tb_activity.Multiline = true;
-            this.tb_activity.Name = "tb_activity";
-            this.tb_activity.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_activity.Size = new System.Drawing.Size(434, 68);
-            this.tb_activity.TabIndex = 8;
-            this.tb_activity.TextChanged += new System.EventHandler(this.tb_activity_TextChanged);
+            tb_activity.Location = new System.Drawing.Point(12, 156);
+            tb_activity.Multiline = true;
+            tb_activity.Name = "tb_activity";
+            tb_activity.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            tb_activity.Size = new System.Drawing.Size(434, 68);
+            tb_activity.TabIndex = 8;
+            tb_activity.TextChanged += new System.EventHandler(this.tb_activity_TextChanged);
             // 
             // b_Stop
             // 
@@ -109,7 +109,7 @@
             this.ClientSize = new System.Drawing.Size(458, 236);
             this.Controls.Add(this.l_displayPort);
             this.Controls.Add(this.b_Stop);
-            this.Controls.Add(this.tb_activity);
+            this.Controls.Add(tb_activity);
             this.Controls.Add(this.l_displayIP);
             this.Controls.Add(this.l_myPort);
             this.Controls.Add(this.l_myIP);
@@ -127,7 +127,7 @@
         private System.Windows.Forms.Label l_myIP;
         private System.Windows.Forms.Label l_myPort;
         private System.Windows.Forms.Label l_displayIP;
-        private System.Windows.Forms.TextBox tb_activity;
+        private static System.Windows.Forms.TextBox tb_activity;
         private System.Windows.Forms.Button b_Stop;
         private System.Windows.Forms.Label l_displayPort;
     }

@@ -16,7 +16,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
             StringBuilder s = new StringBuilder();
 
             string username = "luce", password = "cunha1234";
-            Boolean r = gestUtil.LoginUtilizador(username, password);
+            int r = gestUtil.LoginUtilizador(username, password);
             s.Append("Existe utilizador: " + r + ". ");
 
             List<Restaurante> rests =  restaurantes.pesquisaTipoCozinha(1);

@@ -46,5 +46,10 @@ namespace NhamiBackEnd1
         {
 
         }
+
+        public static void SetActivityText(string msg)
+        {
+            tb_activity.AppendText("\n" + msg);
+        }
     }
 }

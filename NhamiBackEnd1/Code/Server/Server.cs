@@ -9,6 +9,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using NhamiBackEnd1.Code;
+using NhamiBackEnd1.Code.AcessoBD;
 
 namespace NhamiBackEnd1
 {
@@ -17,6 +18,8 @@ namespace NhamiBackEnd1
         static Socket serverSocket;
         static List<ClientData> clients_connected = new List<ClientData>();
         public static readonly int port = 3333;
+        static DAOGestaoUtilizadores dao_gestUtil = new DAOGestaoUtilizadores();
+        
 
         public Server() { }
         public static void ShowErrorDialog(string message)
@@ -109,7 +112,8 @@ namespace NhamiBackEnd1
                 // Socket exception will raise here when client closes, as this sample does not
                 // demonstrate graceful disconnects for the sake of simplicity.
                 ClientData cd = (ClientData)AR.AsyncState;
-                int received = cd.GetSocket().EndReceive(AR);
+                Socket client_socket = cd.GetSocket();
+                int received = client_socket.EndReceive(AR);
 
                 if (received == 0)
                 {
@@ -125,15 +129,54 @@ namespace NhamiBackEnd1
                 {
                     case PacoteType.Login:
                         {
+                            TurnOn.SetActivityText("Login Attempt...");
                             PacoteLogin pl = new PacoteLogin();
                             pl.Deserialize(buf, 4);
+                            int answer = dao_gestUtil.LoginUtilizador(pl.GetUsername(), pl.GetPassword());
+                            //Utilizador u = dao_gestUtil.LoginUtilizador(pl.GetUsername(), pl.GetPassword());
+                            /*
+                             * if (u == null){
+                             *      PacoteLogin pl_send = new PacoteLogin(null, "Login Failed!");
+                                    client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
+                             * }
+                             * else{
+                             *      if (u is Cliente){
+                             *          Cliente c = (Cliente) u; 
+                             *          //PacoteLogin pl_send = new PacoteLogin(c, "CSucesso");
+                             *          cd.SetUtilizador(c);
+                                        //client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
+                             *      }
+                             *      else{
+                             *          Proprietario p = (Proprietario)u;
+                             *          cd.SetUtilizador(c);
+                             *          //PacoteLogin pl_send = new PacoteLogin(p, "PSucesso");
+                                        //client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
+                             *     
+                             *      }  
+                             * }
+                             * */
+                            switch (answer)
+                            {
+                                case 0:
+                                    {
+                                        PacoteLogin pl_send = new PacoteLogin(null, "Login Failed!");
+                                        client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
+                                    }
+                                    break;
+                                case 1:
+                                    {
+                                        //Cliente c =
+                                        //PacoteLogin pl_send = new PacoteLogin(c, "Cliente Sucesso");
+                                        //client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
+                                    }
+                                    break;
+                            }
                             //Faz as operações para verificar o login
                         }
                         break;
                 }
-
-                //Start receiving data again.
-                //cd.GetSocket().BeginReceive(cd.GetBuffer(), 0, cd.GetBuffer().Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), cd);
+                
+                cd.GetSocket().BeginReceive(cd.GetBuffer(), 0, cd.GetBuffer().Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), cd);
             }
             // Avoid Pokemon exception handling in cases like these.
             catch (SocketException ex)
@@ -146,20 +189,35 @@ namespace NhamiBackEnd1
             }
         }
 
-
+        private static void SendCallback(IAsyncResult ar)
+        {
+            try
+            {
+                ClientData cd = (ClientData)ar.AsyncState;
+                cd.GetSocket().EndSend(ar);
+            }
+            catch (SocketException ex)
+            {
+                Server.ShowErrorDialog(ex.Message);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Server.ShowErrorDialog(ex.Message);
+            }
+        }
     }
 
     class ClientData
     {
         Socket clientSocket;
-        Thread clientThread;
         byte[] buffeR;
-        //Utilizador u ;-> aqui vamos guardar se está login, ou convidado 
+        Utilizador u ; //-> aqui vamos guardar se está login, ou convidado 
         //Classe abstracta Utilizador que possamos depois dividir por Cliente, Convidado e Dono
 
         public ClientData()
         {
             //Colocar utilizador como convidado, pq não foi feito o login
+            
         }
 
         public void Setbuffer(int a)
@@ -180,12 +238,14 @@ namespace NhamiBackEnd1
         {
             //Colocar utilizador como convidado, pq não foi feito o login
             clientSocket = s;
-            clientThread = new Thread(Server.Data_IN);
-            clientThread.Start(this);
+            Server.Data_IN(this);
         }
+
         //public void setUtilizador(Utilizador u)
         //{
-        //    if (u is Cliente) { /*set Utilizador to the Client, deve ser usado depois do login*/}
+        //    if (u is Cliente)
+        //    { /*set Utilizador to the Client, deve ser usado depois do login*/
+        //    }
         //    if (u is Dono) { }
         //    if (u is Convidado) { }
         //}
