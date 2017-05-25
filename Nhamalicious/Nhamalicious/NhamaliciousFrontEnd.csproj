@@ -64,7 +64,11 @@
     <Compile Include="Resources\Code\Cliente.cs" />
     <Compile Include="Resources\Code\Envelope.cs" />
     <Compile Include="Resources\Code\Pacotes.cs" />
+    <Compile Include="Resources\Code\SharedClasses\Cliente.cs" />
+    <Compile Include="Resources\Code\SharedClasses\Ingrediente.cs" />
     <Compile Include="Resources\Code\SharedClasses\Prato.cs" />
+    <Compile Include="Resources\Code\SharedClasses\Preferencia.cs" />
+    <Compile Include="Resources\Code\SharedClasses\Proprietário.cs" />
     <Compile Include="Resources\Code\SharedClasses\Restaurante.cs" />
     <Compile Include="Resources\Code\SharedClasses\Utilizador.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
