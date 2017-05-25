@@ -10,6 +10,9 @@ namespace NhamiBackEnd1.Code.AcessoBD
 {
     class DAOGestaoUtilizadores
     {
+        /*Método que determina se a credências de login de um utilizador 
+         (cliente ou proprietário) são válidas 
+         return true - login confirmado; return false - login não aceite */
         public Boolean LoginUtilizador(string username, string password)
         {
             Boolean r = false;

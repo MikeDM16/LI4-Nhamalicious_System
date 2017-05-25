@@ -17,10 +17,13 @@ namespace NhamiBackEnd1.Code.AcessoBD
 
             string username = "luce", password = "cunha1234";
             Boolean r = gestUtil.LoginUtilizador(username, password);
-            s.Append("Existe utilizador: " + r + "\n");
+            s.Append("Existe utilizador: " + r + ". ");
 
-            restaurantes.pesquisaTipoCozinha(1);
-
+            List<Restaurante> rests =  restaurantes.pesquisaTipoCozinha(1);
+            if (rests != null)
+                s.Append("Nr de Restaurantes: " + rests.Count);
+            else
+                s.Append("Está a null");
             return s.ToString() ;
         }
     }
