@@ -39,7 +39,7 @@ namespace NhamiBackEnd1.Code
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
                 serverSocket.Listen(10);
-                serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+                serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), serverSocket);
             }
             catch (SocketException ex)
             {
@@ -84,11 +84,11 @@ namespace NhamiBackEnd1.Code
 
         public static void Data_IN(object cSocket) //recebe os dados
         {
-            Socket s = (Socket)cSocket;
+            ClientData cd = (ClientData)cSocket;
             try
             {
-                byte[] bufferA = new byte[s.SendBufferSize];
-                s.BeginReceive(bufferA, 0, bufferA.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
+                cd.Setbuffer(cd.GetSocket().SendBufferSize);
+                cd.GetSocket().BeginReceive(cd.GetBuffer(), 0, cd.GetBuffer().Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), cd);
             }
             catch (SocketException ex)
             {
@@ -107,8 +107,8 @@ namespace NhamiBackEnd1.Code
 
                 // Socket exception will raise here when client closes, as this sample does not
                 // demonstrate graceful disconnects for the sake of simplicity.
-                Socket s = (Socket)AR.AsyncState;
-                int received = s.EndReceive(AR);
+                ClientData cd = (ClientData)AR.AsyncState;
+                int received = cd.GetSocket().EndReceive(AR);
 
                 if (received == 0)
                 {
@@ -116,10 +116,10 @@ namespace NhamiBackEnd1.Code
                 }
 
                 // The received data is deserialized in the PersonPackage ctor.
-                Pacote p = new Pacote();
+                //Pacote p = new Pacote(cd.GetBuffer());
 
-                // Start receiving data again.
-                //clientSocket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReceiveCallback, null);
+                //Start receiving data again.
+                //cd.GetSocket().BeginReceive(cd.GetBuffer(), 0, cd.GetBuffer().Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), cd);
             }
             // Avoid Pokemon exception handling in cases like these.
             catch (SocketException ex)
@@ -141,6 +141,7 @@ namespace NhamiBackEnd1.Code
     {
         Socket clientSocket;
         Thread clientThread;
+        byte[] buffeR;
         //Utilizador u ;-> aqui vamos guardar se está login, ou convidado 
         //Classe abstracta Utilizador que possamos depois dividir por Cliente, Convidado e Dono
 
@@ -149,6 +150,20 @@ namespace NhamiBackEnd1.Code
             //Colocar utilizador como convidado, pq não foi feito o login
         }
 
+        public void Setbuffer(int a)
+        {
+            this.buffeR = new byte[a];
+        }
+
+        public Socket GetSocket()
+        {
+            return clientSocket;
+        }
+
+        public byte[] GetBuffer()
+        {
+            return buffeR;
+        }
         public ClientData(Socket s)
         {
             //Colocar utilizador como convidado, pq não foi feito o login

@@ -21,6 +21,7 @@ namespace NhamiBackEnd1
             l_displayIP.Text = getMyExternalIP();
             tb_activity.AppendText(Testar.testarBD());
 
+            tb_activity.AppendText(Testar.testarBD());
         }
 
         private string getMyExternalIP()
