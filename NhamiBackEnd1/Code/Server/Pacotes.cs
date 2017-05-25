@@ -50,6 +50,21 @@ namespace NhamiBackEnd1.Code
 
             return byteList.ToArray();
         }
+
+        internal string GetUsername()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string GetPassword()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void SetResponse(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class PacoteRegisto : Pacote
