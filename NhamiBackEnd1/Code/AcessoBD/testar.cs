@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using NhamiBackEnd1.Code.AcessoBD;
+using NhamiBackEnd1.Code.SharedClasses;
 
 namespace NhamiBackEnd1.Code.AcessoBD
 {
-    class Testar
+    public class Testar
     {
         public static string testarBD()
         {
@@ -21,7 +22,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
 
             List<Restaurante> rests =  restaurantes.pesquisaTipoCozinha(1);
             if (rests != null)
-                s.Append("Nr de Restaurantes: " + rests.Count);
+                s.Append("Nr de Restaurantes = " + rests.Count);
             else
                 s.Append("Está a null");
             return s.ToString() ;

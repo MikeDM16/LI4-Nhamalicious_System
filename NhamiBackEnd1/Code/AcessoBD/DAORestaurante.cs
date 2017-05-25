@@ -5,16 +5,17 @@ using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-
+using NhamiBackEnd1.Code.AcessoBD;
+using NhamiBackEnd1.Code.SharedClasses;
 
 namespace NhamiBackEnd1.Code.AcessoBD
 {
-    class DAORestaurante
+    public class DAORestaurante
     {
         /* Método para determinar o conjunto de pratos associados 
          a um tipo de cozinha especifico pré definido. 
          arg tipo: 1 - Chinesa; 2 - Indiana; 3 - Japonesa; 4 - Vegetariana*/
-        public List<Restaurante> pesquisaTipoCozinha(int tipo)
+        public List<Restaurante> PesquisaTipoCozinha(int tipo)
         {
             List<Restaurante> ListRest = null;
             SqlConnection myConnection = new SqlConnection("user id=username; password=password;server=localhost;" +

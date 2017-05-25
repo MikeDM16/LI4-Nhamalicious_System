@@ -1,4 +1,5 @@
 ﻿using NhamiBackEnd1.Code.AcessoBD;
+using NhamiBackEnd1.Code.SharedClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;

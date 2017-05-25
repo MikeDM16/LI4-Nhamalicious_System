@@ -49,7 +49,7 @@
     <Compile Include="Code\SharedClasses\Ingrediente.cs" />
     <Compile Include="Code\SharedClasses\Prato.cs" />
     <Compile Include="Code\SharedClasses\Preferencia.cs" />
-    <Compile Include="Code\SharedClasses\Proprietário.cs" />
+    <Compile Include="Code\SharedClasses\Proprietario.cs" />
     <Compile Include="Code\SharedClasses\Utilizador.cs" />
     <Compile Include="Code\SharedClasses\Restaurante.cs" />
     <Compile Include="Code\AcessoBD\DAOGestaoUtilizadores.cs" />

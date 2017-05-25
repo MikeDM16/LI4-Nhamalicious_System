@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-
+using NhamiBackEnd1.Code.AcessoBD;
+using NhamiBackEnd1.Code.SharedClasses;
 
 namespace NhamiBackEnd1.Code.AcessoBD
 {
-    class DAOGestaoUtilizadores
+    public class DAOGestaoUtilizadores
     {
         /*Método que determina se a credências de login de um utilizador 
          (cliente ou proprietário) são válidas 
