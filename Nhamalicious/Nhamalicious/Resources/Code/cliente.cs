@@ -25,24 +25,24 @@ namespace Nhamalicious.Resources.Code
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
-        //public PacoteLogin LoginAtempt(string username, string password)
-        //{
-        //    PacoteLogin ret;
+        public PacoteLogin LoginAtempt(string username, string password)
+        {
+            PacoteLogin ret = new PacoteLogin();
 
-        //    try
-        //    {
-        //        clientSocket.Connect(IPAddress.Parse("188.37.222.50"), 3333);
-        //    }
-        //    catch (SocketException ex)
-        //    {
-                    
-        //    }
-        //    catch (ObjectDisposedException ex)
-        //    {
-                
-        //    }
+            try
+            {
+                clientSocket.Connect(IPAddress.Parse("188.37.222.50"), 3333);
+            }
+            catch (SocketException ex)
+            {
 
-        //    r/*eturn ret;*/
-        //}
+            }
+            catch (ObjectDisposedException ex)
+            {
+
+            }
+
+            return ret;
+        }
     }
 }

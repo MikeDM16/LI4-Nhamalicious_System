@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Widget;
+using Nhamalicious.Resources.Code;
 using System;
 using System.IO;
 using System.Net;
@@ -13,12 +14,12 @@ namespace Nhamalicious
     public class MainActivity : Activity
     {
         private Button mBtnLogin;
+        Cliente c = new Cliente();
         
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            //tpc.Connect(IPAddress.Parse("192.168.1.92"), 80);
-            // Set our view from the "main" layout resource
+            c.LoginAtempt("John", "123");
             SetContentView(Resource.Layout.Main);
 
             mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);
