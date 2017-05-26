@@ -51,7 +51,6 @@ namespace NhamiBackEnd1.Code.AcessoBD
         private Utilizador GetDadosCliente()
         {
             Utilizador cliente = new Cliente();
-            
             return cliente;
         }
 

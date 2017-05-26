@@ -32,6 +32,20 @@ namespace NhamiBackEnd1.Code.SharedClasses
             return "Sou cliente";
         }
 
+        public override byte[] ToByteArray()
+        {
+            List<byte> byteList = new List<byte>();
+            byteList.AddRange(BitConverter.GetBytes(this.GetIdade()));
+            byteList.AddRange(BitConverter.GetBytes(this.GetIdUtilizador()));
+            byteList.AddRange(BitConverter.GetBytes(this.GetNome().Length));
+            byteList.AddRange(Encoding.ASCII.GetBytes(this.GetNome()));
+            byteList.AddRange(BitConverter.GetBytes(this.GetUsername().Length));
+            byteList.AddRange(Encoding.ASCII.GetBytes(this.GetUsername()));
+            byteList.AddRange(BitConverter.GetBytes(this.GetEmail().Length));
+            byteList.AddRange(Encoding.ASCII.GetBytes(this.GetEmail()));
+            return byteList.ToArray();
+        }
+
         public void SetPreferencias(Preferencia p) { this.preferencias = p; }
         public void SetFavoritos(List<Restaurante> fa) { this.favoritos = fa; }
         public void SetVisitados(List<Restaurante> v){ this.visitados = v;  }
