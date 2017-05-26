@@ -17,17 +17,26 @@ namespace NhamiBackEnd1.Code
     class PacoteLogin : Pacote
     {
         Utilizador u;
+        short tipo;
         string response;
 
         public PacoteLogin(Utilizador u, string response)
         {
             this.u = u;
+            if (u is Cliente) { tipo = 1; }
+            else
+            {
+                if (u is Proprietario) { tipo = 0; }
+                else { tipo = (-1); }
+            }
+
             this.response = response;
         }
         public PacoteLogin() { }
         public int Deserialize(byte [] b, int a)
         {
             this.u = new Utilizador();
+            this.tipo = BitConverter.ToInt16(b, a);
             int size = u.Deserialize(b,a);
             int responseL = BitConverter.ToInt32(b, size+a);
             this.response = (Encoding.ASCII.GetString(b, a+size + 4, responseL));
@@ -45,6 +54,7 @@ namespace NhamiBackEnd1.Code
         public byte[] ToByteArray()
         {
             List<byte> byteList = new List<byte>();
+            byteList.AddRange(BitConverter.GetBytes(tipo));
             byteList.AddRange(u.ToByteArray());
             byteList.AddRange(BitConverter.GetBytes(response.Length));
             byteList.AddRange(Encoding.ASCII.GetBytes(response));

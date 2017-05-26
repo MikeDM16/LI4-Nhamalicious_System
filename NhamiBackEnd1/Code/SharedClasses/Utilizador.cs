@@ -28,7 +28,7 @@ namespace NhamiBackEnd1.Code.SharedClasses
             this.password = password; this.email = email;
         }
 
-        private int GetIdUtilizador() { return idUtilizador; }
+        public  int GetIdUtilizador() { return idUtilizador; }
         public int GetIdade() { return idade; }
         public string GetNome() { return nome; }
         public string GetUsername() { return username; }
@@ -44,7 +44,7 @@ namespace NhamiBackEnd1.Code.SharedClasses
         public void SetEmail(string email) { this.email = email; }
 
 
-        public byte[] ToByteArray()
+        public virtual byte[] ToByteArray()
         {
             List<byte> byteList = new List<byte>();
             byteList.AddRange(BitConverter.GetBytes(idade));
