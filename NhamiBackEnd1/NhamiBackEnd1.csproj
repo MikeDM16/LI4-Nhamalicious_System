@@ -45,18 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\SharedClasses\Cliente.cs" />
-    <Compile Include="Code\SharedClasses\Ingrediente.cs" />
-    <Compile Include="Code\SharedClasses\Prato.cs" />
-    <Compile Include="Code\SharedClasses\Preferencia.cs" />
-    <Compile Include="Code\SharedClasses\Proprietario.cs" />
-    <Compile Include="Code\SharedClasses\Utilizador.cs" />
-    <Compile Include="Code\SharedClasses\Restaurante.cs" />
     <Compile Include="Code\AcessoBD\DAOGestaoUtilizadores.cs" />
     <Compile Include="Code\AcessoBD\DAORestaurante.cs" />
     <Compile Include="Code\AcessoBD\Testar.cs" />
-    <Compile Include="Code\Server\Envelope.cs" />
-    <Compile Include="Code\Server\Pacotes.cs" />
     <Compile Include="Code\Server\Server.cs" />
     <Compile Include="TurnOn.cs">
       <SubType>Form</SubType>
@@ -93,6 +84,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Code\AcessoBD\testarpedidos.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassesPartilhadas\ClassesPartilhadas.csproj">
+      <Project>{a1e77695-9d11-4f66-9396-cc55ef6dba79}</Project>
+      <Name>ClassesPartilhadas</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

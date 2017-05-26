@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassesPartilhadas;
 
-namespace NhamiBackEnd1.Code.SharedClasses
+namespace ClassesPartilhadas
 {
-    class Ingrediente
+    public class Ingrediente
     {
         string designacao;
 

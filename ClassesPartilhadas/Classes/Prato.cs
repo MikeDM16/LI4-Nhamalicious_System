@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NhamiBackEnd1.Code.AcessoBD;
-using NhamiBackEnd1.Code.SharedClasses;
+using ClassesPartilhadas;
 
-namespace NhamiBackEnd1.Code.AcessoBD
+namespace ClassesPartilhadas
 {
     public class Prato
     {

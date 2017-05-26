@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NhamiBackEnd1.Code.AcessoBD;
-using NhamiBackEnd1.Code.SharedClasses;
+using ClassesPartilhadas;
 
 namespace NhamiBackEnd1.Code.AcessoBD
 {
@@ -23,6 +23,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
             {
                 // usar a funca de marshalling override do priprietario
                 //  r.funcaoToByte();
+                s.Append("Sou o prop ");
             }
             else
                 if (r is Cliente)

@@ -1,12 +1,12 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Widget;
-using Nhamalicious.Resources.Code;
 using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-
+using Nhamalicious.Resources.Code;
+using ClassesPartilhadas;
 
 namespace Nhamalicious
 {
@@ -14,13 +14,14 @@ namespace Nhamalicious
     public class MainActivity : Activity
     {
         private Button mBtnLogin;
-        Cliente c = new Cliente();
+        PedidoCli c = new PedidoCli();
         
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            c.LoginAtempt("John", "123");
             SetContentView(Resource.Layout.Main);
+
+            c.LoginAtempt("John", "123");
 
             mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);
 

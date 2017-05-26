@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Windows.Forms;
 using NhamiBackEnd1.Code;
 using NhamiBackEnd1.Code.AcessoBD;
-using NhamiBackEnd1.Code.SharedClasses;
+using ClassesPartilhadas;
 using System.Text;
 
 namespace NhamiBackEnd1

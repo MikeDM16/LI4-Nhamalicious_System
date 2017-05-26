@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassesPartilhadas;
 
-namespace NhamiBackEnd1.Code.Server
+namespace ClassesPartilhadas
 {
-    class Envelope
+    public class Envelope
     {
         PacoteType pt;
         Pacote p;

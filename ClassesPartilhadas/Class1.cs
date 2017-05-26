@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace NhamiBackEnd1.Code.SharedClasses
+namespace ClassesPartilhadas
 {
-    class Proprietário
+    public class Class1
     {
     }
 }

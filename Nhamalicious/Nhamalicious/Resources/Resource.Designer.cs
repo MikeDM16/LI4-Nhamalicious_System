@@ -26,6 +26,8 @@ namespace Nhamalicious
 		
 		public static void UpdateIdValues()
 		{
+			global::ClassesPartilhadas.Resource.String.ApplicationName = global::Nhamalicious.Resource.String.ApplicationName;
+			global::ClassesPartilhadas.Resource.String.Hello = global::Nhamalicious.Resource.String.Hello;
 		}
 		
 		public partial class Animation

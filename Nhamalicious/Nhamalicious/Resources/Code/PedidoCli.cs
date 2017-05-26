@@ -11,27 +11,35 @@ using Android.Views;
 using Android.Widget;
 using Xamarin.Android;
 using System.Net.Sockets;
-using NhamiBackEnd1.Code;
 using System.Net;
+using ClassesPartilhadas;
 
 namespace Nhamalicious.Resources.Code
 {
-    class Cliente
+    class PedidoCli
     {
         static Socket clientSocket;
 
-        public Cliente()
+        public PedidoCli()
         {
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
         public PacoteLogin LoginAtempt(string username, string password)
         {
-            PacoteLogin ret = new PacoteLogin();
+            PacoteLogin ret = null;
 
             try
             {
-                clientSocket.Connect(IPAddress.Parse("188.37.222.50"), 3333);
+                clientSocket.Connect(IPAddress.Parse("94.61.37.44"), 3333);
+                if (clientSocket.Connected)
+                {
+                    Utilizador u = new Utilizador(username, password);
+                    ret = new PacoteLogin(u, "login");
+                    Envelope env = new Envelope(PacoteType.Login, ret);
+                    byte[] enviar = env.ToByteArray();
+                    clientSocket.Send(enviar);
+                }
             }
             catch (SocketException ex)
             {

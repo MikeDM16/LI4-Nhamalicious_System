@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using NhamiBackEnd1.Code.AcessoBD;
-using NhamiBackEnd1.Code.SharedClasses;
+using ClassesPartilhadas;
 
 namespace NhamiBackEnd1.Code.AcessoBD
 {

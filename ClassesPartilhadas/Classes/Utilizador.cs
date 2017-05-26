@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NhamiBackEnd1.Code.AcessoBD;
-using NhamiBackEnd1.Code.SharedClasses;
+using ClassesPartilhadas;
 
-namespace NhamiBackEnd1.Code.SharedClasses
+namespace ClassesPartilhadas
 {
     public class Utilizador
     {
@@ -14,6 +13,10 @@ namespace NhamiBackEnd1.Code.SharedClasses
         string nome, username, password, email;
 
         public Utilizador() { }
+        public Utilizador(string usrname, string pass)
+        {
+            this.password = pass;       this.username = usrname;
+        }
         public Utilizador(Utilizador u)
         {
             this.idUtilizador = u.GetIdUtilizador(); this.idade = u.GetIdade();
@@ -32,7 +35,7 @@ namespace NhamiBackEnd1.Code.SharedClasses
         public int GetIdade() { return idade; }
         public string GetNome() { return nome; }
         public string GetUsername() { return username; }
-        private string GetPassword() { return password; }
+        public string GetPassword() { return password; }
 
         public string GetEmail() { return email; }
 

@@ -1,20 +1,19 @@
-﻿using NhamiBackEnd1.Code.AcessoBD;
-using NhamiBackEnd1.Code.SharedClasses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassesPartilhadas;
 
-namespace NhamiBackEnd1.Code
+namespace ClassesPartilhadas
 {
-    class Pacote { }
-    enum PacoteType
+    public class Pacote { }
+    public enum PacoteType
     {
         Login,Registo, AltPref, InserirRestaurante, InserirPrato,
     }
 
-    class PacoteLogin : Pacote
+    public class PacoteLogin : Pacote
     {
         Utilizador u;
         short tipo;
@@ -61,24 +60,16 @@ namespace NhamiBackEnd1.Code
 
             return byteList.ToArray();
         }
-
-        internal string GetUsername()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal string GetPassword()
-        {
-            throw new NotImplementedException();
-        }
+        
+        public Utilizador GetUtilizador() { return this.u;  }
 
         internal void SetResponse(string v)
         {
-            throw new NotImplementedException();
+            this.response = v;
         }
     }
 
-    class PacoteRegisto : Pacote
+    public class PacoteRegisto : Pacote
     {
         Utilizador u;
         string response;

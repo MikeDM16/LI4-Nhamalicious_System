@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NhamiBackEnd1.Code.AcessoBD;
-using NhamiBackEnd1.Code.SharedClasses;
+using ClassesPartilhadas;
 
-namespace NhamiBackEnd1.Code.SharedClasses
+namespace ClassesPartilhadas
 {
     public class Proprietario : Utilizador
     {
@@ -37,6 +36,7 @@ namespace NhamiBackEnd1.Code.SharedClasses
             byteList.AddRange(Encoding.ASCII.GetBytes(this.GetUsername()));
             byteList.AddRange(BitConverter.GetBytes(this.GetEmail().Length));
             byteList.AddRange(Encoding.ASCII.GetBytes(this.GetEmail()));
+            // ...
             return byteList.ToArray();
         }
 

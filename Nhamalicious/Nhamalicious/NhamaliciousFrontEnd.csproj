@@ -61,16 +61,7 @@
   <ItemGroup>
     <Compile Include="DialogLoginClass.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Resources\Code\Cliente.cs" />
-    <Compile Include="Resources\Code\Envelope.cs" />
-    <Compile Include="Resources\Code\Pacotes.cs" />
-    <Compile Include="Resources\Code\SharedClasses\Cliente.cs" />
-    <Compile Include="Resources\Code\SharedClasses\Ingrediente.cs" />
-    <Compile Include="Resources\Code\SharedClasses\Prato.cs" />
-    <Compile Include="Resources\Code\SharedClasses\Preferencia.cs" />
-    <Compile Include="Resources\Code\SharedClasses\Proprietário.cs" />
-    <Compile Include="Resources\Code\SharedClasses\Restaurante.cs" />
-    <Compile Include="Resources\Code\SharedClasses\Utilizador.cs" />
+    <Compile Include="Resources\Code\PedidoCli.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -121,6 +112,12 @@
     <AndroidResource Include="Resources\values\styles.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ClassesPartilhadas\ClassesPartilhadas.csproj">
+      <Project>{a1e77695-9d11-4f66-9396-cc55ef6dba79}</Project>
+      <Name>ClassesPartilhadas</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
