@@ -20,7 +20,7 @@ namespace Nhamalicious
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-
+            c.ConnectToServer();
             c.LoginAtempt("John", "123");
 
             mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);

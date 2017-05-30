@@ -7,6 +7,7 @@ using ClassesPartilhadas;
 
 namespace ClassesPartilhadas
 {
+    [SerializableAttribute]
     public class Proprietario : Utilizador
     {
         List<Restaurante> restaurantes;

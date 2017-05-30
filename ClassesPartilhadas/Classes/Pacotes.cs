@@ -7,12 +7,14 @@ using ClassesPartilhadas;
 
 namespace ClassesPartilhadas
 {
+    [SerializableAttribute]
     public class Pacote { }
+    [SerializableAttribute]
     public enum PacoteType
     {
         Login,Registo, AltPref, InserirRestaurante, InserirPrato,
     }
-
+    [SerializableAttribute]
     public class PacoteLogin : Pacote
     {
         Utilizador u;
@@ -32,16 +34,16 @@ namespace ClassesPartilhadas
             this.response = response;
         }
         public PacoteLogin() { }
-        public int Deserialize(byte [] b, int a)
-        {
-            this.u = new Utilizador();
-            this.tipo = BitConverter.ToInt16(b, a);
-            int size = u.Deserialize(b,a);
-            int responseL = BitConverter.ToInt32(b, size+a);
-            this.response = (Encoding.ASCII.GetString(b, a+size + 4, responseL));
+        //public int Deserialize(byte [] b, int a)
+        //{
+        //    this.u = new Utilizador();
+        //    this.tipo = BitConverter.ToInt16(b, a);
+        //    int size = u.Deserialize(b,a);
+        //    int responseL = BitConverter.ToInt32(b, size+a);
+        //    this.response = (Encoding.ASCII.GetString(b, a+size + 4, responseL));
 
-            return (size + 4 + responseL);
-        }
+        //    return (size + 4 + responseL);
+        //}
         public string GetResponse()
         {
             return response;
@@ -50,16 +52,16 @@ namespace ClassesPartilhadas
         /// <summary>
         ///  Serializes this package to a byte array.
         /// </summary>
-        public byte[] ToByteArray()
-        {
-            List<byte> byteList = new List<byte>();
-            byteList.AddRange(BitConverter.GetBytes(tipo));
-            byteList.AddRange(u.ToByteArray());
-            byteList.AddRange(BitConverter.GetBytes(response.Length));
-            byteList.AddRange(Encoding.ASCII.GetBytes(response));
+        //public byte[] ToByteArray()
+        //{
+        //    List<byte> byteList = new List<byte>();
+        //    byteList.AddRange(BitConverter.GetBytes(tipo));
+        //    byteList.AddRange(u.ToByteArray());
+        //    byteList.AddRange(BitConverter.GetBytes(response.Length));
+        //    byteList.AddRange(Encoding.ASCII.GetBytes(response));
 
-            return byteList.ToArray();
-        }
+        //    return byteList.ToArray();
+        //}
         
         public Utilizador GetUtilizador() { return this.u;  }
 
@@ -67,8 +69,9 @@ namespace ClassesPartilhadas
         {
             this.response = v;
         }
+        
     }
-
+    [SerializableAttribute]
     public class PacoteRegisto : Pacote
     {
         Utilizador u;
