@@ -12,21 +12,32 @@ namespace NhamiBackEnd1.Code.AcessoBD
 {
     public class DAORestaurante
     {
-        /* Método para determinar o conjunto de pratos associados 
-         a um tipo de cozinha especifico pré definido. 
-         arg tipo: 1 - Chinesa; 2 - Indiana; 3 - Japonesa; 4 - Vegetariana*/
+        private SqlConnection myConnection;
+
+        public DAORestaurante()
+        {
+            this.myConnection = new SqlConnection("user id=username; " +
+                                                  "password=password;server=localhost;" +
+                                                  "Trusted_Connection=yes; " +
+                                                  "database=Nhamalicious; " +
+                                                  "connection timeout=30");
+        }
+        /*---------------------------------------------------------------------
+         * Método para determinar o conjunto de pratos associados 
+         * a um tipo de cozinha especifico pré definido.
+         * arg tipo: 1 - Chinesa; 2 - Indiana; 3 - Japonesa; 4 - Vegetariana
+         ----------------------------------------------------------------------*/
         public List<Restaurante> PesquisaTipoCozinha(int tipo)
         {
             List<Restaurante> ListRest = null;
-            SqlConnection myConnection = new SqlConnection("user id=username; password=password;server=localhost;" +
-                                                           "Trusted_Connection=yes; database=Nhamalicious; connection timeout=30");
+            
             try
             {
-                myConnection.Open();
+                this.myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand("SELECT * FROM Prato " +
                                                         "JOIN Restaurante ON Restaurante.idRestaurante = Prato.idRestaurante " +
-                                                        "WHERE  Restaurante.idTipoCozinha = " + tipo, myConnection);
+                                                        "WHERE  Restaurante.idTipoCozinha = " + tipo, this.myConnection);
                 
                 List<Prato> Pratos = new List<Prato>();
                 int idP, idRest; double p;  string desig, desc;
@@ -46,7 +57,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 myReader.Close();
                 myCommand = new SqlCommand("SELECT * FROM Restaurante " +
                                                   "WHERE  Restaurante.idTipoCozinha = " + tipo,
-                                                   myConnection);
+                                                   this.myConnection);
                 
                 Dictionary<int, Restaurante> Restaurantes = new Dictionary<int, Restaurante>();
                 int idProp, idTipoCozinha, contacto; string local;
@@ -57,14 +68,14 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     desig = myReader["Designacao"].ToString();
                     p = Convert.ToDouble(myReader["Pontuacao"].ToString());
                     local = myReader["Localizacao"].ToString();
-                    idProp = Convert.ToInt32(myReader["idProprietário"].ToString());
+                    idProp = Convert.ToInt32(myReader["idProprietario"].ToString());
                     idTipoCozinha = Convert.ToInt32(myReader["idTipoCozinha"].ToString());
                     contacto = Convert.ToInt32(myReader["Contacto"].ToString());
 
                     Restaurante Rest = new Restaurante(idRest, desig, p, local, idProp, idTipoCozinha, contacto);
                     Restaurantes.Add(idRest, Rest);
                 }
-                myConnection.Close();
+                this.myConnection.Close();
 
                 foreach(Prato Prato in Pratos)
                 {

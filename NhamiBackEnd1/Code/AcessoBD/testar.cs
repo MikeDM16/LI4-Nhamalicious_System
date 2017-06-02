@@ -24,22 +24,19 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 // usar a funca de marshalling override do priprietario
                 //  r.funcaoToByte();
                 s.Append("Sou o prop ");
-            }
-            else
+            }else
                 if (r is Cliente)
+                    s.Append("sou  o cli");
                 // usar a funca de marshalling override do priprietario
                 // r.funcaoToByte();
-
-
-            s.Append("Existe utilizador: " + r.Marshalling() + ". ");
+                                    
             //---------------------------------------------------------------//
-            List<Restaurante> rests =  restaurantes.PesquisaTipoCozinha(1);
-            if (rests != null)
-                s.Append("Nr de Restaurantes = " + rests.Count);
-            else
-                s.Append("Está a null");
-            return s.ToString() ;
-            //---------------------------------------------------------------//
+            List<Restaurante> rests =  restaurantes.PesquisaTipoCozinha(2);
+            if (rests != null){ s.Append("Nr de Restaurantes = " + rests.Count); }
+                else { s.Append("Sem restaurantes"); }
+            //---------------------------------------------------------------/
+
+            return s.ToString();
         }
     }
 }

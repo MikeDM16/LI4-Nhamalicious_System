@@ -13,6 +13,8 @@ namespace ClassesPartilhadas
         List<int> preferenciaTiposCozinha;
         List<Ingrediente> preferenciaIngrediente;
         
+        public Preferencia() { }
+
         public Preferencia(int ordemPreferencia, List<int> TiposCozinha, List<Ingrediente> ingrs)
         {
             this.ordemPreferencia = ordemPreferencia;

@@ -54,6 +54,7 @@
     <Compile Include="Classes\Proprietario.cs" />
     <Compile Include="Classes\Restaurante.cs" />
     <Compile Include="Classes\Utilizador.cs" />
+    <Compile Include="Classes\Visita.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
