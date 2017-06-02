@@ -30,7 +30,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
          ---------------------------------------------------------------------*/
         public Utilizador LoginUtilizador(string username, string password)
         {
-            Utilizador utilizador = GetDadosCliente( username, password);
+            Utilizador utilizador = GetDadosCliente( username, password );
             if(utilizador == null){ utilizador = GetDadosProprietario( username, password); }
 
             return utilizador;
@@ -45,15 +45,15 @@ namespace NhamiBackEnd1.Code.AcessoBD
         {
             Utilizador cliente = null;
             int idCli, idade;            string nome, usr, psw, email;
-
+            StringBuilder s = new StringBuilder();
             try
             {
-                this.myConnection.Open();
+                myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand("SELECT * FROM Cliente " +
                                                       "WHERE Cliente.Username = '" + username + "' " +
                                                       "AND Cliente.Password = '" + password + "'; ",
-                                                       this.myConnection);
+                                                       myConnection);
 
                 myReader = myCommand.ExecuteReader();                
                 if (myReader.Read()) //Se encontrou na table cliente
@@ -64,7 +64,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     usr = myReader["Username"].ToString();
                     psw = myReader["Password"].ToString();
                     email = myReader["Email"].ToString();
-                    this.myConnection.Close();  //Evitar conflitos com proximas conexões 
+                    myConnection.Close();  //Evitar conflitos com proximas conexões 
                     Preferencia p = GetDadosPreferencia(username);                    
                     List<Restaurante> fav = GetDadosFavoritos(username);
                     List<Visita> vis = GetDadosVisitados(username);
@@ -72,9 +72,9 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     cliente = new Cliente(idCli, nome, idade, usr, psw, email, p, fav, vis);
                 }
                 myReader.Close();
-
+                myConnection.Close();  //Evitar conflitos com proximas conexões 
             }
-            catch (Exception e) { Console.WriteLine(e); }
+            catch (Exception e) { s.Append(e); }
             return cliente;
         }
 
@@ -88,14 +88,16 @@ namespace NhamiBackEnd1.Code.AcessoBD
             Utilizador proprietario = null;
             int idProp, idade;
             string nome, usr, psw, email;
+            
             try
             {
-                this.myConnection.Open();
+                myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand("SELECT * FROM Proprietario " +
                                                       "WHERE Proprietario.Username = '" + username + "' " +
                                                       "AND Proprietario.Password = '" + password + "'; ",
-                                                      this.myConnection);
+                                                      myConnection);
+                
                 myReader = myCommand.ExecuteReader();
                 if (myReader.Read())//Se encontrou na table Propriatario; 
                 {
@@ -105,12 +107,13 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     usr = myReader["Username"].ToString();
                     psw = myReader["Password"].ToString();
                     email = myReader["Email"].ToString();
-                    this.myConnection.Close();  //Evitar conflitos com proximas conexões                                     
+                    myConnection.Close();  //Evitar conflitos com proximas conexões                                     
                     List<Restaurante> props = GetRestaurantesProp(username);
 
                     proprietario = new Proprietario(idProp, nome, idade, usr, psw, email, props);
                 }
                 myReader.Close();
+                myConnection.Close();  //Evitar conflitos com proximas conexões 
             }
             catch (Exception e) { Console.WriteLine(e); }
             return proprietario;
@@ -127,10 +130,10 @@ namespace NhamiBackEnd1.Code.AcessoBD
             List<int> prefsCozinha = GetDadosTipoCozinha(usernameCli);
             try
             {
-                this.myConnection.Open();
+                myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand("SELECT Cliente.OrdemPreferencia FROM Cliente" +
-                                                      "WHERE Cliente.Username = '" + usernameCli + "';", this.myConnection);
+                                                      "WHERE Cliente.Username = '" + usernameCli + "';", myConnection);
 
                 int ordem = (-1);
                 myReader = myCommand.ExecuteReader();
@@ -139,7 +142,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     ordem = Convert.ToInt16(myReader["OrdemPreferencia"].ToString());
                 }
                 myReader.Close();
-                this.myConnection.Close();
+                myConnection.Close();
 
                 p = new Preferencia(ordem, prefsCozinha, ingrs);
             }
@@ -158,13 +161,13 @@ namespace NhamiBackEnd1.Code.AcessoBD
             List<string> nomes = null;
             try
             {
-                this.myConnection.Open();
+                myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand(
                     "SELECT Cozinha.Designacao, Cozinha.idCozinha FROM Cliente AS C" +
                     "JOIN Cliente_Preferencia_Cozinha AS PrefsC ON PrefsC.idClientePref = C.idCliente" +
                     "JOIN Cozinha ON Cozinha.idCozinha = PrefsC.idCozinhaPref" +
-                    "WHERE C.Username = '" + usernameCli + "';", this.myConnection);
+                    "WHERE C.Username = '" + usernameCli + "';", myConnection);
 
                 int valor; string designacao;
                 myReader = myCommand.ExecuteReader();
@@ -177,7 +180,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     nomes.Add(designacao);
                 }
                 myReader.Close();
-                this.myConnection.Close();                
+                myConnection.Close();                
             }
             catch (Exception e) { Console.WriteLine(e); }
             return lista;
@@ -192,13 +195,13 @@ namespace NhamiBackEnd1.Code.AcessoBD
             List<Ingrediente> lista = null;
             try
             {
-                this.myConnection.Open();
+                myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand(
                     "SELECT Ingrediente.Designação FROM Cliente " +
                     "JOIN Cliente_Preferencia_Ingredientes AS Ingrs ON Ingrs.idCliente = Cliente.idCliente" +
                     "JOIN Ingrediente ON Ingrediente.idIngrediente = Ingrs.idIngrediente " +
-                    "WHERE Cliente.Username = '" + usernameCli + "';", this.myConnection);
+                    "WHERE Cliente.Username = '" + usernameCli + "';", myConnection);
 
                 string designacao;
                 myReader = myCommand.ExecuteReader();
@@ -209,7 +212,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     lista.Add(i);
                 }
                 myReader.Close();
-                this.myConnection.Close();
+                myConnection.Close();
             }
             catch (Exception e) { Console.WriteLine(e); }
 
@@ -219,6 +222,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
         /*----------------------------------------------------------------
          * Metodo que devolve a lista de Restaurantes Favoritos de um 
          * determinado Cliente
+         * TESTADO E FUNCIONAL!
          * ---------------------------------------------------------------*/
         public List<Restaurante> GetDadosFavoritos(string usernameCli)
         {
@@ -228,11 +232,11 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 this.myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand(
-                    "SELECT R.idRestaurante, R.Designacao, R.Pontuacao, R.Localizacao, R.idproprietario," +
-                                                      "R.idTipoCozinha, R.Contacto FROM Restaurante AS R" +
-                    "JOIN Cliente_Prefere_Restaurante AS PrefR ON PrefR.idRestaurante = R.idRestaurante"  +
-                    "JOIN Cliente AS C ON C.idCliente = PrefR.idCliente" +
-                    "WHERE C.Username = '" + usernameCli + "';", this.myConnection);
+                    "SELECT R.idRestaurante, R.Designacao, R.Pontuacao, R.Localizacao, " +
+                    " R.idproprietario, R.idTipoCozinha, R.Contacto FROM Restaurante AS R " +
+                    "JOIN Cliente_Prefere_Restaurante ON Cliente_Prefere_Restaurante.idRestaurante = R.idRestaurante " +
+                    "JOIN Cliente AS C ON C.idCliente = Cliente_Prefere_Restaurante.idCliente " +
+                    "WHERE C.Username = '" + usernameCli + "';", myConnection);
 
                 myReader = myCommand.ExecuteReader();
                 int idRest, idProp, idTipoCozinha, contacto;
@@ -251,7 +255,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     fav.Add(Rest);
                 }
                 myReader.Close();
-                this.myConnection.Close();
+                myConnection.Close();
             }
             catch (Exception e) { Console.WriteLine(e); }
 
@@ -261,20 +265,21 @@ namespace NhamiBackEnd1.Code.AcessoBD
         /*----------------------------------------------------------------
          * Metodo que devolve a lista de Restaurantes visitados de um 
          * determinado Cliente, numa determinada data
+         * TESTADO E FUNCIONAL!
          * ---------------------------------------------------------------*/
         public List<Visita> GetDadosVisitados(string usernameCli)
         {
             List<Visita> vis = null;
             try
             {
-                this.myConnection.Open();
+                myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand(
-                    "SELECT R.idRestaurante, R.Designacao, R.Pontuacao, R.Localizacao," +
-                    "R.idproprietario, R.idTipoCozinha, R.Contacto, VisR.Data FROM Restaurante AS R" +
-                    "JOIN Cliente_Visita_Restaurante AS VisR ON VisR.Restaurante_idRestaurante = R.idRestaurante" +
-                    "JOIN Cliente AS C ON C.idCliente = VisR.Cliente_idCliente" +
-                    "WHERE C.Username = '" + usernameCli + "';", this.myConnection);
+                    "SELECT R.idRestaurante, R.Designacao, R.Pontuacao, R.Localizacao, " +
+                    " R.idproprietario, R.idTipoCozinha, R.Contacto FROM Restaurante AS R " +
+                    "JOIN Cliente_Visita_Restaurante AS VisR ON VisR.Restaurante_idRestaurante = R.idRestaurante " +
+                    "JOIN Cliente AS C ON C.idCliente = VisR.Cliente_idCliente " +
+                    "WHERE C.Username = '" + usernameCli + "';", myConnection);
 
                 myReader = myCommand.ExecuteReader();
                 int idRest, idProp, idTipoCozinha, contacto;
@@ -296,7 +301,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     vis.Add(v);
                 }
                 myReader.Close();
-                this.myConnection.Close();
+                myConnection.Close();
             }
             catch (Exception e) { Console.WriteLine(e); }
 
@@ -306,10 +311,43 @@ namespace NhamiBackEnd1.Code.AcessoBD
 
         /* ---------------------------------------------------------------------
          * Metodo que devolve os Restaurantes de um determinado Proprietário
+         * TESTADO E FUNCIONAL!
          * --------------------------------------------------------------------- */
         public List<Restaurante> GetRestaurantesProp(string proprietario)
         {
+            List<Restaurante> rests = new List<Restaurante>();
+            try
+            {
+                myConnection.Open();
+                SqlDataReader myReader = null;
+                SqlCommand myCommand = new SqlCommand(
+                    "SELECT R.idRestaurante, R.Designacao, R.Pontuacao, R.Localizacao, " +
+                    "R.idproprietario, R.idTipoCozinha, R.Contacto FROM Proprietario AS P " +
+                    "JOIN Restaurante AS R ON R.idproprietario = P.idProprietario " + 
+                    "WHERE P.Username = '" + proprietario + "';", myConnection);
 
+                myReader = myCommand.ExecuteReader();
+                int idRest, idProp, idTipoCozinha, contacto;
+                string desig, local; double p;
+                while (myReader.Read())
+                {
+                    idRest = Convert.ToInt32(myReader["idRestaurante"].ToString());
+                    desig = myReader["Designacao"].ToString();
+                    p = Convert.ToDouble(myReader["Pontuacao"].ToString());
+                    local = myReader["Localizacao"].ToString();
+                    idProp = Convert.ToInt32(myReader["idProprietario"].ToString());
+                    idTipoCozinha = Convert.ToInt32(myReader["idTipoCozinha"].ToString());
+                    contacto = Convert.ToInt32(myReader["Contacto"].ToString());                    
+
+                    Restaurante restaurante = new Restaurante(idRest, desig, p, local, idProp, idTipoCozinha, contacto);
+                    rests.Add(restaurante);
+                }
+                myReader.Close();
+                myConnection.Close();
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+            
+            return rests;
 
         }
 

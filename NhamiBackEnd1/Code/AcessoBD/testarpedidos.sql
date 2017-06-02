@@ -33,3 +33,19 @@ SELECT Cozinha.Designacao, Cozinha.idCozinha FROM Cliente AS C
 JOIN Cliente_Preferencia_Cozinha AS PrefsC ON PrefsC.idClientePref = C.idCliente
 JOIN Cozinha ON Cozinha.idCozinha = PrefsC.idCozinhaPref
 WHERE C.Username = 'jose'
+
+SELECT R.idRestaurante, R.Designacao, R.Pontuacao, R.Localizacao,
+R.Contacto, R.idProprietario, R.idTipoCozinha FROM Restaurante AS R
+JOIN Proprietario ON Proprietario.idProprietario = R.idproprietario
+WHERE P.Username = 'jose';
+
+SELECT R.idRestaurante, R.Designacao, R.Pontuacao, R.Localizacao,
+R.idproprietario, R.idTipoCozinha, R.Contacto FROM Proprietario
+JOIN Restaurante AS R ON (R.idproprietario = 1)
+WHERE Proprietario.Username = 'jose';
+
+SELECT R.idRestaurante, R.Designacao, R.Pontuacao, R.Localizacao,
+R.idproprietario, R.idTipoCozinha, R.Contacto, VisR.Data FROM Restaurante AS R
+JOIN Cliente_Visita_Restaurante AS VisR ON VisR.Restaurante_idRestaurante = R.idRestaurante
+JOIN Cliente AS C ON C.idCliente = VisR.Cliente_idCliente
+WHERE C.Username = 'jose';
