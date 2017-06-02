@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using NhamiBackEnd1.Code;
 using NhamiBackEnd1.Code.AcessoBD;
 using ClassesPartilhadas;
+using ClassesPartilhadas.Classes;
 
 namespace NhamiBackEnd1
 {
@@ -23,6 +24,7 @@ namespace NhamiBackEnd1
         
 
         public Server() { }
+
         public static void ShowErrorDialog(string message)
         {
             MessageBox.Show(message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -72,7 +74,7 @@ namespace NhamiBackEnd1
             {
                 ClientData client = new ClientData(serverSocket.EndAccept(AR));
                 clients_connected.Add(client);
-
+                TurnOn.SetActivityText("New Client...\n");
                 // Continue listening for clients.
                 serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
             }
@@ -122,64 +124,20 @@ namespace NhamiBackEnd1
                 }
 
                 // The received data is deserialized in the PersonPackage ctor.
-                byte[] buf = new byte[cd.GetBuffer().Length];
-                Array.Copy(cd.GetBuffer(), buf, cd.GetBuffer().Length);
-                int p = BitConverter.ToInt32(buf, 0);
-                PacoteType pt = (PacoteType)p;
-                switch (pt)
+                AMessage aMessage = new AMessage();
+                aMessage.Data = new byte[cd.GetBuffer().Length];
+                Array.Copy(cd.GetBuffer(), aMessage.Data, cd.GetBuffer().Length);
+                object obj = Serializer.Deserialize(aMessage);
+                if (obj is PacoteLogin)
                 {
-                    case PacoteType.Login:
-                        {
-                            TurnOn.SetActivityText("Login Attempt...");
-                            PacoteLogin pl = new PacoteLogin();
-                            pl.Deserialize(buf, 4);
-                            int answer = 0;
-                            //int answer = dao_gestUtil.LoginUtilizador(pl.GetUsername(), pl.GetPassword());
-                            //Utilizador u = dao_gestUtil.LoginUtilizador(pl.GetUsername(), pl.GetPassword());
-                            /*
-                             * if (u == null){
-                             *      PacoteLogin pl_send = new PacoteLogin(null, "Login Failed!");
-                                    client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
-                             * }
-                             * else{
-                             *      if (u is Cliente){
-                             *          Cliente c = (Cliente) u; 
-                             *          //PacoteLogin pl_send = new PacoteLogin(c, "CSucesso");
-                             *          cd.SetUtilizador(c);
-                                        //client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
-                             *      }
-                             *      else{
-                             *          Proprietario p = (Proprietario)u;
-                             *          cd.SetUtilizador(c);
-                             *          //PacoteLogin pl_send = new PacoteLogin(p, "PSucesso");
-                                        //client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
-                             *     
-                             *      }  
-                             * }
-                             * */
-                            switch (answer)
-                            {
-                                case 0:
-                                    {
-                                        PacoteLogin pl_send = new PacoteLogin(null, "Login Failed!");
-                                        client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
-                                    }
-                                    break;
-                                case 1:
-                                    {
-                                        //Cliente c =
-                                        //PacoteLogin pl_send = new PacoteLogin(c, "Cliente Sucesso");
-                                        //client_socket.BeginSend(pl_send.ToByteArray(), 0, pl_send.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
-                                    }
-                                    break;
-                            }
-                            //Faz as operações para verificar o login
-                        }
-                        break;
+                    TurnOn.SetActivityText("Login Attempt...");
+                    processLogin(obj as PacoteLogin, cd);
                 }
-                
                 cd.GetSocket().BeginReceive(cd.GetBuffer(), 0, cd.GetBuffer().Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), cd);
             }
+            
+
+
             // Avoid Pokemon exception handling in cases like these.
             catch (SocketException ex)
             {
@@ -188,6 +146,42 @@ namespace NhamiBackEnd1
             catch (ObjectDisposedException ex)
             {
                 Server.ShowErrorDialog(ex.Message);
+            }
+        }
+
+        private static void processLogin(PacoteLogin pacoteLogin, ClientData cd)
+        {
+            Utilizador u_pacote = pacoteLogin.GetUtilizador();
+            Utilizador u = dao_gestUtil.LoginUtilizador(u_pacote.GetUsername(), u_pacote.GetPassword());
+            Socket client_socket = cd.GetSocket();
+            if (u == null)
+            {
+                PacoteLogin pl_send = new PacoteLogin(null, "Login Failed!");
+                AMessage sending = Serializer.Serialize(pl_send);
+
+                client_socket.BeginSend(sending.Data, 0, sending.Data.Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
+            }
+            else
+            {
+                if (u is Cliente)
+                {
+                    Cliente c = (Cliente)u;
+                    PacoteLogin pl_send = new PacoteLogin(c, "CSucesso");
+                    AMessage sending = Serializer.Serialize(pl_send);
+                    cd.SetUtilizador(c);
+                    TurnOn.SetActivityText(c.GetUsername()+" "+c.GetPassword()+"\n");
+                    client_socket.BeginSend(sending.Data, 0, sending.Data.Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
+                    
+                }
+                else
+                {
+                    Proprietario p = (Proprietario)u;
+                    cd.SetUtilizador(p);
+                    PacoteLogin pl_send = new PacoteLogin(p, "PSucesso");
+                    AMessage sending = Serializer.Serialize(pl_send);
+                    client_socket.BeginSend(sending.Data, 0, sending.Data.Length, SocketFlags.None, new AsyncCallback(SendCallback), cd);
+
+                }
             }
         }
 
@@ -236,6 +230,7 @@ namespace NhamiBackEnd1
         {
             return buffeR;
         }
+
         public ClientData(Socket s)
         {
             //Colocar utilizador como convidado, pq não foi feito o login
@@ -243,16 +238,22 @@ namespace NhamiBackEnd1
             Server.Data_IN(this);
         }
 
-        //public void setUtilizador(Utilizador u)
-        //{
-        //    if (u is Cliente)
-        //    { /*set Utilizador to the Client, deve ser usado depois do login*/
-        //    }
-        //    if (u is Dono) { }
-        //    if (u is Convidado) { }
-        //}
+        public void SetUtilizador(Utilizador u)
+        {
+            if (u is Cliente)
+            {
+                this.u = u as Cliente;
+            }
+            else
+            {
+                if (u is Proprietario)
+                {
+                    this.u = u as Proprietario;
+                }
+            }  
+        }
 
-        public void StopConnection()
+    public void StopConnection()
         {
             clientSocket.Shutdown(SocketShutdown.Both);
         }

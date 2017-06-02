@@ -7,6 +7,7 @@ using ClassesPartilhadas;
 
 namespace ClassesPartilhadas
 {
+    [SerializableAttribute]
     public class Restaurante
     {
         String designacao, localizacao;

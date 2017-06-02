@@ -13,6 +13,7 @@ using Xamarin.Android;
 using System.Net.Sockets;
 using System.Net;
 using ClassesPartilhadas;
+using ClassesPartilhadas.Classes;
 
 namespace Nhamalicious.Resources.Code
 {
@@ -23,6 +24,12 @@ namespace Nhamalicious.Resources.Code
         public PedidoCli()
         {
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+        }
+
+        public void ConnectToServer()
+        {
+            clientSocket.Connect(IPAddress.Parse("188.37.222.50"), 3333);
         }
 
         public PacoteLogin LoginAtempt(string username, string password)
@@ -31,14 +38,12 @@ namespace Nhamalicious.Resources.Code
 
             try
             {
-                clientSocket.Connect(IPAddress.Parse("94.61.37.44"), 3333);
                 if (clientSocket.Connected)
                 {
                     Utilizador u = new Utilizador(username, password);
                     ret = new PacoteLogin(u, "login");
-                    Envelope env = new Envelope(PacoteType.Login, ret);
-                    byte[] enviar = env.ToByteArray();
-                    clientSocket.Send(enviar);
+                    AMessage sending = Serializer.Serialize(ret);
+                    clientSocket.Send(sending.Data);
                 }
             }
             catch (SocketException ex)
