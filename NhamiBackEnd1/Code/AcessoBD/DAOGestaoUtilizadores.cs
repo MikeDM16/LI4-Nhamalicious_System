@@ -24,6 +24,51 @@ namespace NhamiBackEnd1.Code.AcessoBD
         }
 
         /*--------------------------------------------------------------------
+         * Método que realiza o registo de um proprietário, consuante o seu 
+         * perfil de utilização : Cliente ou Proprietário
+         --------------------------------------------------------------------*/
+         public int RegistaUtilizador(Utilizador u)
+        {
+            int r = 1;
+            if(u is Proprietario){  r = RegistaProprietario(u); }
+            else if(u is Cliente){  r = RegistaCliente(u);      }
+
+            return r;
+        }
+        private int RegistaProprietario(Utilizador u)
+        {
+
+            return 0;
+        }
+
+        private int RegistaCliente(Utilizador u)
+        {
+            int idade, ordem;       string nome, usr, psw, email;
+            nome = u.GetNome();
+            idade = u.GetIdade();          usr = u.GetUsername();
+            psw = u.GetPassword();         email = u.GetEmail();
+            ordem = ((Cliente) u).GetPreferencia().GetOrdemPreferencia();
+            try
+            {
+                myConnection.Open();
+                SqlDataReader myReader = null;
+                SqlCommand myCommand = new SqlCommand("INSERT INTO [dbo].[Cliente] " +
+                    "([Nome], [Idade], [Username], [Password], [FotoPerfil], " +
+                    "[Email],[OrdemPreferencia]) " +
+                    "VALUES " +
+                    "('" + nome +  "', " + idade + ", '" + usr + "', '" + psw + "', " + 
+                    " NULL, '" + email + "', " + ordem +") ", myConnection);
+
+                myReader = myCommand.ExecuteReader();
+                myReader.Close();
+                myConnection.Close();  //Evitar conflitos com proximas conexões 
+
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+            return 0;
+        }
+
+        /*--------------------------------------------------------------------
          * Método que determina se a credênciais de login de um utilizador
          * (cliente ou proprietário) são válidas.
          * retorna um  Utilizador se login validado, null caso contrário
@@ -82,6 +127,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
          * Metodo auxiliar no processo de Login. Se os dados de acesso forem 
          * corretos para um proprietario, devolve as informações relativas ao 
          * utilizador Proprietario
+         * TESTADO E FUNCIONAL
         --------------------------------------------------------------------*/
         private Utilizador GetDadosProprietario(string username, string password)
         {
@@ -122,6 +168,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
         /*--------------------------------------------------------------------
          * Metodo que retorna os dados relativos às preferencias de um 
          * determinado cliente
+         * TESTADO E FUNCIONAL
          --------------------------------------------------------------------*/
         public Preferencia GetDadosPreferencia(string usernameCli)
         {
@@ -132,7 +179,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
             {
                 myConnection.Open();
                 SqlDataReader myReader = null;
-                SqlCommand myCommand = new SqlCommand("SELECT Cliente.OrdemPreferencia FROM Cliente" +
+                SqlCommand myCommand = new SqlCommand("SELECT Cliente.OrdemPreferencia FROM Cliente " +
                                                       "WHERE Cliente.Username = '" + usernameCli + "';", myConnection);
 
                 int ordem = (-1);
@@ -154,6 +201,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
         /*--------------------------------------------------------------------
          * Metodo que retorna os dados relativos aos tipos de cozinha preferidos 
          * por um determinado cliente
+         * TESTADO E FUNCIONAL
          --------------------------------------------------------------------*/
         public List<int> GetDadosTipoCozinha(string usernameCli)
         {
@@ -164,9 +212,9 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand(
-                    "SELECT Cozinha.Designacao, Cozinha.idCozinha FROM Cliente AS C" +
-                    "JOIN Cliente_Preferencia_Cozinha AS PrefsC ON PrefsC.idClientePref = C.idCliente" +
-                    "JOIN Cozinha ON Cozinha.idCozinha = PrefsC.idCozinhaPref" +
+                    "SELECT Cozinha.Designacao, Cozinha.idCozinha FROM Cliente AS C " +
+                    "JOIN Cliente_Preferencia_Cozinha AS PrefsC ON PrefsC.idClientePref = C.idCliente " +
+                    "JOIN Cozinha ON Cozinha.idCozinha = PrefsC.idCozinhaPref " +
                     "WHERE C.Username = '" + usernameCli + "';", myConnection);
 
                 int valor; string designacao;
@@ -189,6 +237,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
         /*--------------------------------------------------------------------
          * Metodo que retorna a lista dos ingredientes que nao são desejados  
          * por um determinado cliente
+         * TESTADO E FUNCIONAL!
          --------------------------------------------------------------------*/
         public List<Ingrediente> GetDadosListaIngredientes(string usernameCli)
         {
@@ -199,7 +248,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand(
                     "SELECT Ingrediente.Designação FROM Cliente " +
-                    "JOIN Cliente_Preferencia_Ingredientes AS Ingrs ON Ingrs.idCliente = Cliente.idCliente" +
+                    "JOIN Cliente_Preferencia_Ingredientes AS Ingrs ON Ingrs.idCliente = Cliente.idCliente " +
                     "JOIN Ingrediente ON Ingrediente.idIngrediente = Ingrs.idIngrediente " +
                     "WHERE Cliente.Username = '" + usernameCli + "';", myConnection);
 
