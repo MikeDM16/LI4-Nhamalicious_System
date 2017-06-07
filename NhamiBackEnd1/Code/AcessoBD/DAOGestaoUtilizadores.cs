@@ -35,15 +35,123 @@ namespace NhamiBackEnd1.Code.AcessoBD
 
             return r;
         }
+
+        /*-----------------------------------------------------------------------
+         * Método que realiza o registo de um Proprietário na base de dados, 
+         * assim como o seu(s) restaurante(s) e pratos do respectivo restaurante
+         ------------------------------------------------------------------------*/
         private int RegistaProprietario(Utilizador u)
         {
+            int idade, r = 1; ; string nome, usr, psw, email;
+            nome = u.GetNome();
+            idade = u.GetIdade(); usr = u.GetUsername();
+            psw = u.GetPassword(); email = u.GetEmail();
+            List<Restaurante> lista = ((Proprietario)u).GetRestaurantesProprietario();
+            try
+            {
+                myConnection.Open();
+                SqlDataReader myReader = null;
 
-            return 0;
+                //Inserir o proprietario na base de dados
+                SqlCommand myCommand = new SqlCommand("INSERT INTO [dbo].[Proprietario] " +
+                    "([Nome], [Idade], [Username], [Password], [FotoPerfil], [Email] " +
+                    "VALUES " +
+                    "('" + nome + "', " + idade + ", '" + usr + "', '" + psw + "', " +
+                    " NULL, '" + email + "' );" , myConnection);
+                myReader = myCommand.ExecuteReader();
+                myReader.Close();
+                myConnection.Close();  //Evitar conflitos com proximas conexões
+
+                RegistaRestaurantes(u);    
+                 
+                r = 0;
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+            return r;
         }
 
+        /*-----------------------------------------------------------------------
+         * Método que realiza o registo do(s) restaurante(s) e pratos do 
+         * respectivo restaurante de um determinado utilizador Proprietário
+         ------------------------------------------------------------------------*/
+        public void RegistaRestaurantes(Utilizador u)
+        {
+            try
+            {
+                myConnection.Open();
+
+                SqlDataReader myReader = null;
+                string usr = u.GetUsername(), psw = u.GetPassword();
+                List<Restaurante> listaRest = ((Proprietario)u).GetRestaurantesProprietario();
+
+                //Determinar o id atribuido ao proprietario acabado de inserir
+                SqlCommand myCommand = new SqlCommand("SELECT P.idProprietario FROM Proprietario AS P " +
+                                            "WHERE P.Username = '" + usr + "' " +
+                                            "AND P.Password = '" + psw + "'; ", myConnection);
+                int idProp = (-1);
+                myReader = myCommand.ExecuteReader();
+                if (myReader.Read())
+                {
+                    idProp = Convert.ToInt32(myReader["idProprietario"].ToString());
+                }
+                myReader.Close();
+
+                int idTipoCozinha, contacto;
+                string desig, local; double pontos;
+                //Inserir os restaurantes do proprietário (pelo menos existe 1 estabelecimento)
+                foreach (Restaurante rest in listaRest)
+                {
+                    desig = rest.GetDesignacao(); pontos = rest.GetPontuacao();
+                    local = rest.GetLocalizacao(); contacto = rest.GetContacto();
+                    idTipoCozinha = rest.GetIdTipoCozinha();
+                    List<Prato> listaPratos = rest.GetPratos();
+
+                    //Inserir o restaurante, associado ao seu proprietário
+                    myCommand = new SqlCommand("INSERT INTO [dbo].[Restaurante] " +
+                        "([Designacao], [Pontuacao], [Localizacao], [Contacto], [idproprietario],[idTipoCozinha]) " +
+                        "VALUES " +
+                        "( '" + desig + "', " + pontos + ", '" + local + "', " + contacto + ", " + idProp + ", " + idTipoCozinha + ";", myConnection);
+                    myReader = myCommand.ExecuteReader();
+                    myReader.Close();
+
+                    //Determinar o id atribuido ao restaurante acabado de adicionar
+                    myCommand = new SqlCommand("SELECT R.idRestaurante FROM Restaurante AS R " +
+                           "WHERE R.idproprietario = " + idProp + " AND R.Designacao = '" + desig + "';", myConnection);
+                    int idRest = (-1);
+                    myReader = myCommand.ExecuteReader();
+                    if (myReader.Read())
+                    {
+                        idRest = Convert.ToInt32(myReader["idRestaurante"].ToString());
+                    }
+                    myReader.Close();
+
+                    //Para cada restaurante insirir a sua lista de restaurantes
+                    string desc; double preco;
+                    foreach (Prato p in listaPratos)
+                    {
+                        desig = p.GetDesignacao();
+                        desc = p.GetDescricao();
+                        preco = p.GetPreco();
+
+                        myCommand = new SqlCommand("INSERT INTO [dbo].[Prato] " +
+                            "([Designacao], [Descricao], [Preco], [idRestaurante]) " +
+                            "VALUES " +
+                            "( '" + desig + "', '" + desc + "', " + preco + ", " + idRest + "); ", myConnection);
+                        myReader = myCommand.ExecuteReader();
+                        myReader.Close();
+                    }
+                }
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+        }    
+
+
+        /*--------------------------------------------------------------------
+         * Método que realiza o registo de um cliente na base de dados
+         ---------------------------------------------------------------------*/
         private int RegistaCliente(Utilizador u)
         {
-            int idade, ordem;       string nome, usr, psw, email;
+            int idade, ordem, r = 1; ;       string nome, usr, psw, email;
             nome = u.GetNome();
             idade = u.GetIdade();          usr = u.GetUsername();
             psw = u.GetPassword();         email = u.GetEmail();
@@ -53,8 +161,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 myConnection.Open();
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand("INSERT INTO [dbo].[Cliente] " +
-                    "([Nome], [Idade], [Username], [Password], [FotoPerfil], " +
-                    "[Email],[OrdemPreferencia]) " +
+                    "([Nome], [Idade], [Username], [Password], [FotoPerfil], [Email], [OrdemPreferencia]) " +
                     "VALUES " +
                     "('" + nome +  "', " + idade + ", '" + usr + "', '" + psw + "', " + 
                     " NULL, '" + email + "', " + ordem +") ", myConnection);
@@ -62,16 +169,18 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 myReader = myCommand.ExecuteReader();
                 myReader.Close();
                 myConnection.Close();  //Evitar conflitos com proximas conexões 
+                r = 0;
 
             }
             catch (Exception e) { Console.WriteLine(e); }
-            return 0;
+            return r;
         }
 
         /*--------------------------------------------------------------------
          * Método que determina se a credênciais de login de um utilizador
          * (cliente ou proprietário) são válidas.
          * retorna um  Utilizador se login validado, null caso contrário
+         * TESTATO E FUNCIONAL
          ---------------------------------------------------------------------*/
         public Utilizador LoginUtilizador(string username, string password)
         {
@@ -85,6 +194,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
          * Metodo auxiliar no processo de Login. Se os dados de acesso/login 
          * forem corretos para um cliente, devolve as informações relativas ao 
          * utilizador Cliente 
+         * TESTADO E FUNCIONAL
          --------------------------------------------------------------------*/
         private Utilizador GetDadosCliente(string username, string password)
         {
