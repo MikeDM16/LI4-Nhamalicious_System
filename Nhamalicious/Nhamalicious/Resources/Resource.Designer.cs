@@ -78,10 +78,13 @@ namespace Nhamalicious
 			public const int LogInStyle = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int ProgressBarStyle = 2130837508;
+			public const int pesquisaIcon = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int SignUpStyle = 2130837509;
+			public const int ProgressBarStyle = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int SignUpStyle = 2130837510;
 			
 			static Drawable()
 			{
@@ -137,6 +140,9 @@ namespace Nhamalicious
 			
 			// aapt resource value: 0x7f070008
 			public const int txtEmail = 2131165192;
+			
+			// aapt resource value: 0x7f070014
+			public const int txtEscolherCozinha = 2131165204;
 			
 			// aapt resource value: 0x7f070007
 			public const int txtIdade = 2131165191;
