@@ -45,6 +45,7 @@ namespace NhamiBackEnd1
                 serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
                 serverSocket.Listen(10);
                 serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), serverSocket);
+                TurnOn.SetActivityText("Setup complete...\n");
             }
             catch (SocketException ex)
             {
@@ -207,6 +208,7 @@ namespace NhamiBackEnd1
     {
         Socket clientSocket;
         byte[] buffeR;
+        Thread t;
         Utilizador u ; //-> aqui vamos guardar se está login, ou convidado 
         //Classe abstracta Utilizador que possamos depois dividir por Cliente, Convidado e Dono
 

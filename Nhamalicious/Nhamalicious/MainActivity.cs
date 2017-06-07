@@ -23,7 +23,15 @@ namespace Nhamalicious
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-            c.ConnectToServer();
+            try
+            {
+                c.ConnectToServer();
+            }
+            catch(Exception e)
+            {
+                AlertDialog.Builder adb = new AlertDialog.Builder(this);
+
+            }
 
             mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);
             mBtnRegisto = FindViewById<Button>(Resource.Id.botaoSignUp);
@@ -62,6 +70,8 @@ namespace Nhamalicious
             // e.Username já é o que o cliente escreve, falta fazer a ligação com o servidor e com os métodos correspondentes
             // e.Password igual ao username
         }
+
+        
     }
 }
 
