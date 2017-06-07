@@ -23,13 +23,17 @@ namespace NhamiBackEnd1.Code.AcessoBD
                                                   "connection timeout=30");
         }
 
+        /*---------------------------------------------------------------------
+         * Método para realizar a pesquisa através da designação do nome, 
+         * completo ou não, de um prato 
+         ----------------------------------------------------------------------*/
 
         /*---------------------------------------------------------------------
          * Método para determinar o conjunto de pratos associados 
          * a um tipo de cozinha especifico pré definido.
-         * arg tipo: 1 - Chinesa; 2 - Indiana; 3 - Japonesa; 4 - Vegetariana
+         * arg tipo: Chinesa; Indiana; Japonesa; Vegetariana
          ----------------------------------------------------------------------*/
-        public List<Restaurante> PesquisaTipoCozinha(int tipo)
+        public List<Restaurante> PesquisaTipoCozinha(string tipo)
         {
             List<Restaurante> ListRest = null;
             
@@ -37,9 +41,10 @@ namespace NhamiBackEnd1.Code.AcessoBD
             {
                 this.myConnection.Open();
                 SqlDataReader myReader = null;
-                SqlCommand myCommand = new SqlCommand("SELECT * FROM Prato " +
-                                                        "JOIN Restaurante ON Restaurante.idRestaurante = Prato.idRestaurante " +
-                                                        "WHERE  Restaurante.idTipoCozinha = " + tipo, this.myConnection);
+                SqlCommand myCommand = new SqlCommand("SELECT * FROM Prato AS P " +
+                    "JOIN Restaurante AS R  ON R.idRestaurante = P.idRestaurante " +
+                    "JOIN Cozinha AS C ON C.idCozinha = R.idTipoCozinha " +
+                    "WHERE C.Designacao = '" + tipo + "';", this.myConnection);
                 
                 List<Prato> Pratos = new List<Prato>();
                 int idP, idRest; double p;  string desig, desc;
@@ -57,10 +62,11 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 }
                 
                 myReader.Close();
-                myCommand = new SqlCommand("SELECT * FROM Restaurante " +
-                                                  "WHERE  Restaurante.idTipoCozinha = " + tipo,
-                                                   this.myConnection);
-                
+                myCommand = new SqlCommand("SELECT * FROM Restaurante AS R " +
+                                           "JOIN Cozinha AS C ON C.idCozinha = R.idTipoCozinha " +
+                                           "WHERE C.Designacao = '" + tipo + "';", myConnection);
+
+
                 Dictionary<int, Restaurante> Restaurantes = new Dictionary<int, Restaurante>();
                 int idProp, idTipoCozinha, contacto; string local;
                 myReader = myCommand.ExecuteReader();

@@ -11,12 +11,12 @@ namespace ClassesPartilhadas
     public class Preferencia
     {
         int ordemPreferencia;
-        List<int> preferenciaTiposCozinha;
+        List<string> preferenciaTiposCozinha;
         List<Ingrediente> preferenciaIngrediente;
         
         public Preferencia() { }
 
-        public Preferencia(int ordemPreferencia, List<int> TiposCozinha, List<Ingrediente> ingrs)
+        public Preferencia(int ordemPreferencia, List<string> TiposCozinha, List<Ingrediente> ingrs)
         {
             this.ordemPreferencia = ordemPreferencia;
             this.preferenciaTiposCozinha = TiposCozinha;
@@ -24,7 +24,7 @@ namespace ClassesPartilhadas
         }
 
         public int GetOrdemPreferencia() { return this.ordemPreferencia; }
-        public List<int> GetPreferenciaTiposCozinha() { return this.preferenciaTiposCozinha; }
+        public List<string> GetPreferenciaTiposCozinha() { return this.preferenciaTiposCozinha; }
         public List<Ingrediente> GetPreferenciaIngredientes() { return this.preferenciaIngrediente;  }
 
     }
