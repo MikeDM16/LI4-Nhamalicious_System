@@ -22,6 +22,8 @@ namespace NhamiBackEnd1.Code.AcessoBD
                                                   "database=Nhamalicious; " +
                                                   "connection timeout=30");
         }
+
+
         /*---------------------------------------------------------------------
          * Método para determinar o conjunto de pratos associados 
          * a um tipo de cozinha especifico pré definido.
