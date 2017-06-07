@@ -15,6 +15,7 @@ namespace Nhamalicious
     public class OnRegistoEventArgs : EventArgs
     {
         private string mNome;
+        private string mIdade;
         private string mUsername;
         private string mEmail;
         private string mPassword;
@@ -24,6 +25,11 @@ namespace Nhamalicious
         {
             get { return mNome; }
             set { mNome = value; }
+        }
+        public string Idade
+        {
+            get { return mIdade; }
+            set { mIdade = value; }
         }
         public string Username
         {
@@ -47,9 +53,10 @@ namespace Nhamalicious
             set { mConfirmPassword = value; }
         }
 
-        public OnRegistoEventArgs(string nome, string username, string email, string password, string confirmPassword) : base()
+        public OnRegistoEventArgs(string nome, string idade, string username, string email, string password, string confirmPassword) : base()
         {
             Nome = nome;
+            Idade = idade;
             Username = username;
             Email = email;
             Password = password;
@@ -59,6 +66,7 @@ namespace Nhamalicious
     class DialogRegistoClass : DialogFragment
     {
         private EditText mTxtNome;
+        private EditText mTxtIdade;
         private EditText mTxtUsername;
         private EditText mTxtEmail;
         private EditText mTxtPassword;
@@ -74,6 +82,7 @@ namespace Nhamalicious
             var view = inflater.Inflate(Resource.Layout.DialogPagRegisto, container, false);
 
             mTxtNome = view.FindViewById<EditText>(Resource.Id.txtNome);
+            mTxtIdade = view.FindViewById<EditText>(Resource.Id.txtIdade);
             mTxtUsername = view.FindViewById<EditText>(Resource.Id.txtUsername);
             mTxtEmail = view.FindViewById<EditText>(Resource.Id.txtEmail);
             mTxtPassword = view.FindViewById<EditText>(Resource.Id.txtPassword);
@@ -86,7 +95,7 @@ namespace Nhamalicious
 
         private void MBtnRegisto_Click(object sender, EventArgs e)
         {
-            RegistoEfetuado.Invoke(this, new OnRegistoEventArgs(mTxtNome.Text, mTxtUsername.Text, mTxtEmail.Text, mTxtPassword.Text, mTxtConfirmPassword.Text));
+            RegistoEfetuado.Invoke(this, new OnRegistoEventArgs(mTxtNome.Text, mTxtIdade.Text, mTxtUsername.Text, mTxtEmail.Text, mTxtPassword.Text, mTxtConfirmPassword.Text));
             this.Dismiss();
         }
 

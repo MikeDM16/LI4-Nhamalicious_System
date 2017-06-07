@@ -24,7 +24,6 @@ namespace Nhamalicious
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             c.ConnectToServer();
-            c.LoginAtempt("John", "123");
 
             mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);
             mBtnRegisto = FindViewById<Button>(Resource.Id.botaoSignUp);
@@ -59,8 +58,7 @@ namespace Nhamalicious
 
         private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
         {
-            TcpClient tcp = new TcpClient();
-            tcp.Connect(IPAddress.Parse("192.168.1.92"), 80);
+            c.LoginAtempt(e.Username, e.Password);
             // e.Username já é o que o cliente escreve, falta fazer a ligação com o servidor e com os métodos correspondentes
             // e.Password igual ao username
         }
