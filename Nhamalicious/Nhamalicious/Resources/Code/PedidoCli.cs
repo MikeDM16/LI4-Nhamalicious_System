@@ -29,9 +29,20 @@ namespace Nhamalicious.Resources.Code
 
         public void ConnectToServer()
         {
-            clientSocket.Connect(IPAddress.Parse("188.37.222.50"), 3333);
+            clientSocket.Connect(IPAddress.Parse(GetLocalIPAddress()), 3333);
         }
-
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("Local IP Address Not Found!");
+        }
         public PacoteLogin LoginAtempt(string username, string password)
         {
             PacoteLogin ret = null;
