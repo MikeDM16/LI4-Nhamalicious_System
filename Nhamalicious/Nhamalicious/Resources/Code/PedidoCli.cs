@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -29,8 +28,24 @@ namespace Nhamalicious.Resources.Code
 
         public void ConnectToServer()
         {
-            clientSocket.Connect(IPAddress.Parse(GetLocalIPAddress()), 3333);
+            int attempts = 0;
+
+            while (!clientSocket.Connected)
+            {
+                try
+                {
+                    attempts++;
+                    // Change IPAddress.Loopback to a remote IP to connect to a remote host.
+                    clientSocket.Connect(IPAddress.Loopback, 3333);
+                }
+                catch (SocketException)
+                {
+                    return;
+                }
+            }
+            
         }
+
         public static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -43,6 +58,7 @@ namespace Nhamalicious.Resources.Code
             }
             throw new Exception("Local IP Address Not Found!");
         }
+
         public PacoteLogin LoginAtempt(string username, string password)
         {
             PacoteLogin ret = null;
