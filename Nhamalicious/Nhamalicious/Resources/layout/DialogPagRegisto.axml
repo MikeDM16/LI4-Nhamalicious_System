@@ -5,13 +5,24 @@
     android:minHeight="25px"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/relativeLayout1">
+    android:id="@+id/pagregisto">
     <EditText
         android:id="@+id/txtNome"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="#F8EFF8F3"
         android:hint="Nome"
+        android:textColor="#333639"
+        android:textColorHint="#333639"
+        android:padding="16dp" />
+    <EditText
+        android:id="@+id/txtIdade"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/txtNome"
+        android:background="#F8EFF8F3"
+        android:hint="Idade"
         android:textColor="#333639"
         android:textColorHint="#333639"
         android:padding="16dp" />
@@ -61,21 +72,50 @@
         android:textColorHint="#333639"
         android:padding="16dp"
         android:layout_below="@+id/txtPassword" />
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtConfirmPassword">
-        <Button
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:id="@+id/layoutBotoes"
+        android:layout_below="@+id/txtConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="25px"
+        android:minHeight="25px">
+        <RadioGroup
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_marginLeft="100dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/radioGroup1">
+            <RadioButton
+                android:onClick="radioButton_OnClick"
+                android:checked="true"
+                android:text="Registo como Cliente"
+                android:id="@+id/rbCliente"
+                android:textColor="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#ff000000" />
+            <RadioButton
+                android:onClick="radioButton_OnClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:text="Registo como Proprietário"
+                android:id="@+id/rbProp"
+                android:buttonTint="#ff000000" />
+        </RadioGroup>
+        <Button
             android:textSize="20dp"
             android:textColor="#fff"
             android:textStyle="bold"
             android:id="@+id/btnRegisto"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
             android:padding="16dp"
+            android:layout_marginTop="35dp"
             android:text="Registe-se!"
-            android:background="@drawable/LogInStyle" />
-    </RelativeLayout>
+            android:background="@drawable/LogInStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </RelativeLayout>
