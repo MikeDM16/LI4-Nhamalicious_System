@@ -113,9 +113,10 @@
             android:id="@+id/btnRegisto"
             android:padding="16dp"
             android:layout_marginTop="35dp"
+            android:layout_marginLeft="90dp"
             android:text="Registe-se!"
             android:background="@drawable/LogInStyle"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>

@@ -5,77 +5,47 @@
     android:minHeight="25px"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/paginainicial">
+    android:id="@+id/paglogin">
     <EditText
-        android:id="@+id/txtIndicaPrato"
+        android:id="@+id/txtInserePrato"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp"
         android:background="#F8EFF8F3"
-        android:hint="O que lhe apatece comer neste momento?"
+        android:hint="Insira um prato"
         android:textColor="#333639"
         android:textColorHint="#333639"
-        android:padding="16dp" />
-    <TextView
-        android:text="Ou escolha um tipo de cozinha:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_weigth="10"
-        android:layout_height="0dp"
-        android:textColor="#006400"
-        android:id="@+id/tipoCozinha"
-        android:gravity="center"
-        android:textStyle="bold" />
+        android:padding="25dp" />
+    <Button
+        android:textSize="15dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:id="@+id/btnPesquisa"
+        android:text="Pesquisar"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/txtInserePrato"
+        android:layout_width="140dp"
+        android:background="@drawable/LogInStyle"
+        android:layout_height="wrap_content" />
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/txtInserePrato"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tipoCozinha">
+        android:minWidth="25px"
+        android:minHeight="25px">
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textColor="#fff"
             android:textStyle="bold"
-            android:id="@+id/btnCozinhaVegan"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
+            android:id="@+id/btnLogin"
             android:padding="16dp"
-            android:text="Cozinha Vegan"
-            android:background="@drawable/LogInStyle" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:id="@+id/btnCozinhaIndiana"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:padding="16dp"
-            android:text="Cozinha Indiana"
-            android:background="@drawable/LogInStyle" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:id="@+id/btnCozinhaJaponesa"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:padding="16dp"
-            android:text="Cozinha Japonesa"
-            android:background="@drawable/LogInStyle" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:id="@+id/btnCozinhaChinesa"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:padding="16dp"
-            android:text="Cozinha Chinesa"
-            android:background="@drawable/LogInStyle" />
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="90dp"
+            android:text="Faça o Login!"
+            android:background="@drawable/LogInStyle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </RelativeLayout>
