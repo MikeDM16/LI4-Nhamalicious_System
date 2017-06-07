@@ -29,8 +29,8 @@ namespace NhamiBackEnd1.Code.AcessoBD
          --------------------------------------------------------------------*/
          public int RegistaUtilizador(Utilizador u)
         {
-            int r = 1;
-            if(u is Proprietario){  r = RegistaProprietario(u); }
+            int r = (-1);
+            if (u is Proprietario){  r = RegistaProprietario(u); }
             else if(u is Cliente){  r = RegistaCliente(u);      }
 
             return r;
@@ -41,7 +41,8 @@ namespace NhamiBackEnd1.Code.AcessoBD
          * assim como o seu(s) restaurante(s) e pratos do respectivo restaurante
          ------------------------------------------------------------------------*/
         private int RegistaProprietario(Utilizador u)
-        {
+        {           
+
             int idade, r = 1; ; string nome, usr, psw, email;
             nome = u.GetNome();
             idade = u.GetIdade(); usr = u.GetUsername();
@@ -52,8 +53,21 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 myConnection.Open();
                 SqlDataReader myReader = null;
 
+                string username = u.GetUsername();
+                //Verificar se já existe um username igual ao introduzido
+                SqlCommand myCommand = new SqlCommand("SELECT P.Username FROM Proprietario AS P" +
+                                "WHERE P.Username = '" + username + "'; ", myConnection);
+                myReader = myCommand.ExecuteReader();
+                if( myReader.Read())
+                {
+                    myReader.Close();
+                    return (-2);
+                }
+                myReader.Close();
+
+
                 //Inserir o proprietario na base de dados
-                SqlCommand myCommand = new SqlCommand("INSERT INTO [dbo].[Proprietario] " +
+                myCommand = new SqlCommand("INSERT INTO [dbo].[Proprietario] " +
                     "([Nome], [Idade], [Username], [Password], [FotoPerfil], [Email] " +
                     "VALUES " +
                     "('" + nome + "', " + idade + ", '" + usr + "', '" + psw + "', " +
@@ -160,7 +174,21 @@ namespace NhamiBackEnd1.Code.AcessoBD
             {
                 myConnection.Open();
                 SqlDataReader myReader = null;
-                SqlCommand myCommand = new SqlCommand("INSERT INTO [dbo].[Cliente] " +
+
+                string username = u.GetUsername();
+
+                //Verificar se já existe um username igual ao introduzido
+                SqlCommand myCommand = new SqlCommand("SELECT C.Username FROM Cliente AS C" +
+                                "WHERE C.Username = '" + username + "'; ", myConnection);
+                myReader = myCommand.ExecuteReader();
+                if (myReader.Read())
+                {
+                    myReader.Close();
+                    return (-2);
+                }
+                myReader.Close();
+
+                myCommand = new SqlCommand("INSERT INTO [dbo].[Cliente] " +
                     "([Nome], [Idade], [Username], [Password], [FotoPerfil], [Email], [OrdemPreferencia]) " +
                     "VALUES " +
                     "('" + nome +  "', " + idade + ", '" + usr + "', '" + psw + "', " + 
@@ -284,7 +312,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
         {
             Preferencia p = null;
             List<Ingrediente> ingrs = GetDadosListaIngredientes(usernameCli);
-            List<int> prefsCozinha = GetDadosTipoCozinha(usernameCli);
+            List<string> prefsCozinha = GetDadosTipoCozinha(usernameCli);
             try
             {
                 myConnection.Open();
@@ -313,7 +341,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
          * por um determinado cliente
          * TESTADO E FUNCIONAL
          --------------------------------------------------------------------*/
-        public List<int> GetDadosTipoCozinha(string usernameCli)
+        public List<string> GetDadosTipoCozinha(string usernameCli)
         {
             List<int> lista = null;
             List<string> nomes = null;
@@ -341,7 +369,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                 myConnection.Close();                
             }
             catch (Exception e) { Console.WriteLine(e); }
-            return lista;
+            return nomes;
         }
 
         /*--------------------------------------------------------------------
@@ -502,6 +530,31 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     rests.Add(restaurante);
                 }
                 myReader.Close();
+                
+                foreach(Restaurante r in rests)
+                {
+                    idRest = r.GetIdRestaurante();
+                    myCommand = new SqlCommand("SELECT * FROM Prato AS P " +
+                            "JOIN Restaurante AS R  ON R.idRestaurante = " + idRest + ";", 
+                            this.myConnection);
+
+                    List<Prato> Pratos = new List<Prato>();
+                    int idP; string desc;
+                    myReader = myCommand.ExecuteReader();
+                    while (myReader.Read())
+                    {
+                        idP = Convert.ToInt32(myReader["idPrato"].ToString());
+                        desig = myReader["Designacao"].ToString();
+                        desc = myReader["Descricao"].ToString();
+                        p = Convert.ToDouble(myReader["Preco"].ToString());
+                        idRest = Convert.ToInt32(myReader["idRestaurante"].ToString());
+
+                        Prato Prato = new Prato(idP, desig, desc, p, idRest);
+                        Pratos.Add(Prato);
+                    }
+                    myReader.Close();
+                    r.SetMenu(Pratos);
+                }
                 myConnection.Close();
             }
             catch (Exception e) { Console.WriteLine(e); }

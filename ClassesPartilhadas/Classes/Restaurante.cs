@@ -33,7 +33,9 @@ namespace ClassesPartilhadas
         public void SetIdTipoCozinha(int idTipoCozinha){    this.idTipoCozinha = idTipoCozinha; }
         public void SetContacto(int contacto){  this.contacto = contacto;   }
         public void SetPontuacao(double pontuacao){ this.pontuacao = pontuacao; }
-   
+        public void SetMenu(List<Prato> p) { this.menu = p;  }
+
+        public List<Prato> GetMenu() { return this.menu;  }
         public String GetDesignacao(){  return designacao;  }
         public String GetLocalizacao(){ return localizacao; }
         public int GetIdRestaurante(){  return idRestaurante;   }

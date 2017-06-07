@@ -37,8 +37,8 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     
 
             //---------------------------------------------------------------//
-            List<Restaurante> rests =  restaurantes.PesquisaTipoCozinha(2);
-            if (rests != null){ s.Append("Nr de Restaurantes = " + rests.Count + "| "); }
+            List<Restaurante> rests =  restaurantes.PesquisaTipoCozinha("Indiana");
+            if (rests != null){ s.Append("Nr de pratos = " + rests[0].GetPratos().Count + " | "); }
                 else { s.Append("Sem restaurantes | "); }
             //---------------------------------------------------------------/
 
