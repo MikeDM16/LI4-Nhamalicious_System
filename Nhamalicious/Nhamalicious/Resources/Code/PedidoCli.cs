@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -29,7 +28,35 @@ namespace Nhamalicious.Resources.Code
 
         public void ConnectToServer()
         {
-            clientSocket.Connect(IPAddress.Parse("188.37.222.50"), 3333);
+            int attempts = 0;
+
+            while (!clientSocket.Connected)
+            {
+                try
+                {
+                    attempts++;
+                    // Change IPAddress.Loopback to a remote IP to connect to a remote host.
+                    clientSocket.Connect(IPAddress.Loopback, 3333);
+                }
+                catch (SocketException)
+                {
+                    return;
+                }
+            }
+            
+        }
+
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("Local IP Address Not Found!");
         }
 
         public PacoteLogin LoginAtempt(string username, string password)
