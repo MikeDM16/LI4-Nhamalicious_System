@@ -51,7 +51,7 @@ namespace Nhamalicious
 
             mTxtUsername = view.FindViewById<EditText>(Resource.Id.txtUsername);
             mTxtPassword = view.FindViewById<EditText>(Resource.Id.txtPassword);
-            mBtnLogInReal = view.FindViewById<Button>(Resource.Id.btnLogInReal);
+            mBtnLogInReal = view.FindViewById<Button>(Resource.Id.btnLogin);
 
             mBtnLogInReal.Click += MBtnLogInReal_Click;
             return view;

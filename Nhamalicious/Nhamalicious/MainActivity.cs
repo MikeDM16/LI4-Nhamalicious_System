@@ -23,7 +23,7 @@ namespace Nhamalicious
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-            try
+             try
             {
                 c.ConnectToServer();
             }

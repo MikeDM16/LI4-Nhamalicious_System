@@ -105,11 +105,23 @@ namespace Nhamalicious
 			// aapt resource value: 0x7f07000f
 			public const int botaoSignUp = 2131165199;
 			
+			// aapt resource value: 0x7f070018
+			public const int btnCozinhaChinesa = 2131165208;
+			
+			// aapt resource value: 0x7f070016
+			public const int btnCozinhaIndiana = 2131165206;
+			
+			// aapt resource value: 0x7f070017
+			public const int btnCozinhaJaponesa = 2131165207;
+			
+			// aapt resource value: 0x7f070015
+			public const int btnCozinhaVegan = 2131165205;
+			
 			// aapt resource value: 0x7f070004
 			public const int btnLogin = 2131165188;
 			
-			// aapt resource value: 0x7f070013
-			public const int btnPesquisa = 2131165203;
+			// aapt resource value: 0x7f070014
+			public const int btnPesquisa = 2131165204;
 			
 			// aapt resource value: 0x7f07000d
 			public const int btnRegisto = 2131165197;
@@ -141,8 +153,8 @@ namespace Nhamalicious
 			// aapt resource value: 0x7f070008
 			public const int txtEmail = 2131165192;
 			
-			// aapt resource value: 0x7f070014
-			public const int txtEscolherCozinha = 2131165204;
+			// aapt resource value: 0x7f070013
+			public const int txtEscolherCozinha = 2131165203;
 			
 			// aapt resource value: 0x7f070007
 			public const int txtIdade = 2131165191;
@@ -182,13 +194,10 @@ namespace Nhamalicious
 			public const int DialogPagRegisto = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int layout1 = 2130903042;
+			public const int Main = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Main = 2130903043;
-			
-			// aapt resource value: 0x7f030004
-			public const int PagInicial = 2130903044;
+			public const int PagInicial = 2130903043;
 			
 			static Layout()
 			{
