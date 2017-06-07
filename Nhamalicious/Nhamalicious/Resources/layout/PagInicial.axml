@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#DEDEDC"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/paginainicial">
+    <EditText
+        android:id="@+id/txtIndicaPrato"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="#F8EFF8F3"
+        android:hint="O que lhe apatece comer neste momento?"
+        android:textColor="#333639"
+        android:textColorHint="#333639"
+        android:padding="16dp" />
+    <TextView
+        android:text="Ou escolha um tipo de cozinha:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_weigth="10"
+        android:layout_height="0dp"
+        android:textColor="#006400"
+        android:id="@+id/tipoCozinha"
+        android:gravity="center"
+        android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tipoCozinha">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:id="@+id/btnCozinhaVegan"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:text="Cozinha Vegan"
+            android:background="@drawable/LogInStyle" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:id="@+id/btnCozinhaIndiana"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:text="Cozinha Indiana"
+            android:background="@drawable/LogInStyle" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:id="@+id/btnCozinhaJaponesa"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:text="Cozinha Japonesa"
+            android:background="@drawable/LogInStyle" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:id="@+id/btnCozinhaChinesa"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:text="Cozinha Chinesa"
+            android:background="@drawable/LogInStyle" />
+    </RelativeLayout>
+</RelativeLayout>
