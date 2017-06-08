@@ -30,7 +30,7 @@
         android:id="@+id/btnPesquisa"
         android:src="@drawable/pesquisaIcon" />
     <RelativeLayout
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/txtInserePrato"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:text="Ou escolha um tipo de cozinha:"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:textColor="#006400"
             android:id="@+id/txtEscolherCozinha"
@@ -103,8 +103,8 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content" />
             <Button
-                android:layout_marginTop="40dp"
-                android:textSize="20dp"
+                android:layout_marginTop="30dp"
+                android:textSize="15dp"
                 android:textColor="#fff"
                 android:textStyle="bold"
                 android:id="@+id/btnParaRegOuLog"
@@ -113,7 +113,7 @@
                 android:padding="16dp"
                 android:text="Registo/Login"
                 android:background="@drawable/LogInStyle"
-                android:layout_width="200dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>

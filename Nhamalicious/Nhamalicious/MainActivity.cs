@@ -15,7 +15,7 @@ namespace Nhamalicious
     [Activity(Label = "Nhamalicious", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        private Button mBtnPesquisa;
+        private ImageButton mBtnPesquisa;
         private Button mBtnCozinhaIndiana;
         private Button mBtnCozinhaVegan;
         private Button mBtnCozinhaJaponesa;
@@ -35,10 +35,10 @@ namespace Nhamalicious
             catch (Exception e)
             {
                 AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            }
-            */
-            mBtnPesquisa = FindViewById<Button>(Resource.Id.btnPesquisa);
-            mBtnCozinhaIndiana = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
+            }*/
+            
+            mBtnPesquisa = FindViewById<ImageButton>(Resource.Id.btnPesquisa);
+            mBtnCozinhaIndiana = FindViewById<Button>(Resource.Id.btnCozinhaIndiana);
             mBtnCozinhaVegan = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
             mBtnCozinhaJaponesa = FindViewById<Button>(Resource.Id.btnCozinhaJaponesa);
             mBtnCozinhaChinesa = FindViewById<Button>(Resource.Id.btnCozinhaChinesa);

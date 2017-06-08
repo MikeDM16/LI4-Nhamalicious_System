@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using ClassesPartilhadas; 
 
 namespace Nhamalicious
 {
@@ -99,9 +100,20 @@ namespace Nhamalicious
         private void MBtnRegisto_Click(object sender, EventArgs e)
         {
             RadioButton checkedRD = View.FindViewById<RadioButton>(mRadioGroup.CheckedRadioButtonId);
-            if (checkedRD.Text == "Registo como Cliente") {
-                Toast.MakeText(Context, "Selecionou registo como Cliente", ToastLength.Short).Show();
+            if(mTxtPassword != mTxtConfirmPassword)
+            {
+                //Aparecer pop up a dizer que as passwords sao diferentes
             }
+            if (checkedRD.Text == "Registo como Cliente") {
+                string nome, username, password, email;
+                int idade;
+                nome = mTxtNome.Text; username = mTxtUsername.Text;
+                password = mTxtPassword.Text; email = mTxtEmail.Text;
+                idade = Convert.ToInt32(mTxtIdade.Text);
+                Utilizador u = new Cliente((-1), nome, idade, username, password, email, null, null, null);
+                
+
+
             RegistoEfetuado.Invoke(this, new OnRegistoEventArgs(mTxtNome.Text, mTxtIdade.Text, mTxtUsername.Text, mTxtEmail.Text, mTxtPassword.Text, mTxtConfirmPassword.Text));
             this.Dismiss();
         }
