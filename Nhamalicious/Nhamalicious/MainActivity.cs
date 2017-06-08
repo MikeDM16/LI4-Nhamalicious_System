@@ -30,7 +30,6 @@ namespace Nhamalicious
             catch(Exception e)
             {
                 AlertDialog.Builder adb = new AlertDialog.Builder(this);
-
             }
 
             mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);

