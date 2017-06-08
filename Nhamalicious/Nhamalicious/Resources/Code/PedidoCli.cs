@@ -23,66 +23,112 @@ namespace Nhamalicious.Resources.Code
         public PedidoCli()
         {
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
+   
         }
 
-        public void ConnectToServer()
-        {
-            int attempts = 0;
+        //    public void ConnectToServer()
+        //    {
+        //        while (!clientSocket.Connected)
+        //        {
+        //            try
+        //            {
+        //                clientSocket.BeginConnect(endPoint, ConnectCallback, null);
+        //            }
+        //            catch (SocketException)
+        //            {
+        //                return;
+        //            }
+        //        }
+        //    }
+        //    private void ReceiveCallback(IAsyncResult AR)
+        //    {
+        //        try
+        //        {
+        //            int received = clientSocket.EndReceive(AR);
 
-            while (!clientSocket.Connected)
-            {
-                try
-                {
-                    attempts++;
-                    // Change IPAddress.Loopback to a remote IP to connect to a remote host.
-                    clientSocket.Connect(IPAddress.Loopback, 3333);
-                }
-                catch (SocketException)
-                {
-                    return;
-                }
-            }
-            
-        }
+        //            if (received == 0)
+        //            {
+        //                return;
+        //            }
 
-        public static string GetLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-            throw new Exception("Local IP Address Not Found!");
-        }
 
-        public PacoteLogin LoginAtempt(string username, string password)
-        {
-            PacoteLogin ret = null;
+        //            string message = Encoding.ASCII.GetString(buffer);
 
-            try
-            {
-                if (clientSocket.Connected)
-                {
-                    Utilizador u = new Utilizador(username, password);
-                    ret = new PacoteLogin(u, "login");
-                    AMessage sending = Serializer.Serialize(ret);
-                    clientSocket.Send(sending.Data);
-                }
-            }
-            catch (SocketException ex)
-            {
+        //            Invoke((Action)delegate
+        //            {
+        //                Text = "Server says: " + message;
+        //            });
 
-            }
-            catch (ObjectDisposedException ex)
-            {
+        //            Start receiving data again.
+        //            clientSocket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReceiveCallback, null);
+        //        }
+        //         Avoid Pokemon exception handling in cases like these.
+        //        catch (SocketException ex)
+        //        {
+        //            ShowErrorDialog(ex.Message);
+        //        }
+        //        catch (ObjectDisposedException ex)
+        //        {
+        //            ShowErrorDialog(ex.Message);
+        //        }
+        //    }
 
-            }
+        //    private void ConnectCallback(IAsyncResult AR)
+        //    {
+        //        try
+        //        {
+        //            clientSocket.EndConnect(AR);
+        //        }
+        //        catch (SocketException ex)
+        //        {
+        //            ShowErrorDialog(ex.Message);
+        //        }
+        //        catch (ObjectDisposedException ex)
+        //        {
+        //            ShowErrorDialog(ex.Message);
+        //        }
+        //    }
 
-            return ret;
-        }
+        //    private void SendCallback(IAsyncResult AR)
+        //    {
+        //        try
+        //        {
+        //            clientSocket.EndSend(AR);
+        //        }
+        //        catch (SocketException ex)
+        //        {
+        //            ShowErrorDialog(ex.Message);
+        //        }
+        //        catch (ObjectDisposedException ex)
+        //        {
+        //            ShowErrorDialog(ex.Message);
+        //        }
+        //    }
+
+        //    public PacoteLogin LoginAtempt(string username, string password)
+        //    {
+        //        PacoteLogin ret = null;
+
+        //        try
+        //        {
+        //            if (clientSocket.Connected)
+        //            {
+        //                Utilizador u = new Utilizador(username, password);
+        //                ret = new PacoteLogin(u, "login");
+        //                AMessage sending = Serializer.Serialize(ret);
+        //                clientSocket.Send(sending.Data);
+        //            }
+        //        }
+        //        catch (SocketException ex)
+        //        {
+
+        //        }
+        //        catch (ObjectDisposedException ex)
+        //        {
+
+        //        }
+
+        //        return ret;
+        //    }
     }
 }

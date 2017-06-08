@@ -17,21 +17,13 @@ namespace Nhamalicious
     {
         private Button mBtnLogin;
         private Button mBtnRegisto;
-        PedidoCli c = new PedidoCli();
+        //PedidoCli c = new PedidoCli();
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-             try
-            {
-                c.ConnectToServer();
-            }
-            catch(Exception e)
-            {
-                AlertDialog.Builder adb = new AlertDialog.Builder(this);
-
-            }
+            
 
             mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);
             mBtnRegisto = FindViewById<Button>(Resource.Id.botaoSignUp);
@@ -66,7 +58,7 @@ namespace Nhamalicious
 
         private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
         {
-            c.LoginAtempt(e.Username, e.Password);
+            //c.LoginAtempt(e.Username, e.Password);
             // e.Username já é o que o cliente escreve, falta fazer a ligação com o servidor e com os métodos correspondentes
             // e.Password igual ao username
         }

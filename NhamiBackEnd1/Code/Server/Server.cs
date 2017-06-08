@@ -132,7 +132,7 @@ namespace NhamiBackEnd1
                 if (obj is PacoteLogin)
                 {
                     TurnOn.SetActivityText("Login Attempt...");
-                    processLogin(obj as PacoteLogin, cd);
+                    ProcessLogin(obj as PacoteLogin, cd);
                 }
                 cd.GetSocket().BeginReceive(cd.GetBuffer(), 0, cd.GetBuffer().Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), cd);
             }
@@ -150,7 +150,7 @@ namespace NhamiBackEnd1
             }
         }
 
-        private static void processLogin(PacoteLogin pacoteLogin, ClientData cd)
+        private static void ProcessLogin(PacoteLogin pacoteLogin, ClientData cd)
         {
             Utilizador u_pacote = pacoteLogin.GetUtilizador();
             Utilizador u = dao_gestUtil.LoginUtilizador(u_pacote.GetUsername(), u_pacote.GetPassword());
