@@ -60,6 +60,7 @@
     <Compile Include="DialogRegistoClass.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Code\PedidoCli.cs" />
+    <Compile Include="RegLoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

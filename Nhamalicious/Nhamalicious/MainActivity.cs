@@ -15,63 +15,63 @@ namespace Nhamalicious
     [Activity(Label = "Nhamalicious", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        private Button mBtnLogin;
-        private Button mBtnRegisto;
+        private Button mBtnPesquisa;
+        private Button mBtnCozinhaIndiana;
+        private Button mBtnCozinhaVegan;
+        private Button mBtnCozinhaJaponesa;
+        private Button mBtnCozinhaChinesa;
+        private Button mBtnRegLogin;
+
         PedidoCli c = new PedidoCli();
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Main);
-             try
+            SetContentView(Resource.Layout.PagInicial);
+            try
             {
                 c.ConnectToServer();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 AlertDialog.Builder adb = new AlertDialog.Builder(this);
 
             }
 
-            mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);
-            mBtnRegisto = FindViewById<Button>(Resource.Id.botaoSignUp);
+            mBtnPesquisa = FindViewById<Button>(Resource.Id.btnPesquisa);
+            mBtnCozinhaIndiana = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
+            mBtnCozinhaVegan = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
+            mBtnCozinhaJaponesa = FindViewById<Button>(Resource.Id.btnCozinhaJaponesa);
+            mBtnCozinhaChinesa = FindViewById<Button>(Resource.Id.btnCozinhaChinesa);
+            mBtnRegLogin = FindViewById<Button>(Resource.Id.btnParaRegOuLog);
 
-            mBtnLogin.Click += (object sender, EventArgs args) =>
+
+
+            mBtnPesquisa.Click += delegate
             {
-                //Pulls up the Dialog Window
-                FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                DialogLoginClass d1 = new DialogLoginClass();
-                d1.Show(transaction, "dialog fragment");
-                d1.LoginEfetuado += D1_LoginEfetuado;
+                StartActivity(typeof(RegLoginActivity));
             };
-
-
-            mBtnRegisto.Click += (object sender, EventArgs args) =>
+            mBtnCozinhaIndiana.Click += delegate
             {
-                //Carrega a página de popup do registo
-                FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                DialogRegistoClass d2 = new DialogRegistoClass();
-                d2.Show(transaction, "dialog fragment");
-                d2.RegistoEfetuado += D2_RegistoEfetuado;
+                StartActivity(typeof(RegLoginActivity));
+            };
+            mBtnCozinhaVegan.Click += delegate
+            {
+                StartActivity(typeof(RegLoginActivity));
+            };
+            mBtnCozinhaJaponesa.Click += delegate
+            {
+                StartActivity(typeof(RegLoginActivity));
+            };
+            mBtnCozinhaChinesa.Click += delegate
+            {
+                StartActivity(typeof(RegLoginActivity));
+            };
+            mBtnRegLogin.Click += delegate
+            {
+                StartActivity(typeof(RegLoginActivity));
             };
         }
-        private void D2_RegistoEfetuado(object sender, OnRegistoEventArgs e)
-        {
-            TcpClient tcp = new TcpClient();
-            tcp.Connect(IPAddress.Parse("192.168.1.92"), 80);
-            // e.Username já é o que o cliente escreve, falta fazer a ligação com o servidor e com os métodos correspondentes
-            // e.Password igual ao username
-            //para os restantes também se faz igual (email, nome...)
-        }
-
-        private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
-        {
-            c.LoginAtempt(e.Username, e.Password);
-            // e.Username já é o que o cliente escreve, falta fazer a ligação com o servidor e com os métodos correspondentes
-            // e.Password igual ao username
-        }
-
-        
     }
 }
 
