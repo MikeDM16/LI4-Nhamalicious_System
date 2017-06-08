@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NhamiBackEnd1.Code.AcessoBD;
+using NhamiBackEnd1;
 using ClassesPartilhadas;
+using API_Acesso_BD;
 
 namespace NhamiBackEnd1
 {
