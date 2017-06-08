@@ -28,14 +28,7 @@ namespace Nhamalicious
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.PagInicial);
-            /*try
-            {
-                c.ConnectToServer();
-            }
-            catch (Exception e)
-            {
-                AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            }*/
+           
             
             mBtnPesquisa = FindViewById<ImageButton>(Resource.Id.btnPesquisa);
             mBtnCozinhaIndiana = FindViewById<Button>(Resource.Id.btnCozinhaIndiana);

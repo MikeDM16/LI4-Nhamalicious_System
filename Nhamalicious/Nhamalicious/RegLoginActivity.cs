@@ -99,7 +99,7 @@ namespace Nhamalicious
                     else
                     {
                         AlertDialog.Builder ad = new AlertDialog.Builder(this);
-                        ad.SetTitle("Erro mudou ??");
+                        ad.SetTitle("Oopps");
                         ad.SetMessage("A tua password ou username devem estar erradas !");
                         ad.SetNeutralButton("Ok", delegate
                         {
