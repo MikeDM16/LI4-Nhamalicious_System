@@ -94,29 +94,23 @@
         android:minWidth="25px"
         android:minHeight="25px">
         <RadioGroup
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_marginLeft="60dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
             android:id="@+id/radioGroup1">
             <RadioButton
-                android:onClick="radioButton_OnClick"
-                android:checked="true"
-                android:text="Registo como Cliente"
-                android:id="@+id/rbCliente"
-                android:textColor="#FFFFFF"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="#ff000000" />
-            <RadioButton
-                android:onClick="radioButton_OnClick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#fff"
-                android:text="Registo como Proprietário"
-                android:id="@+id/rbProp"
-                android:buttonTint="#ff000000" />
+                android:textColor="@android:color/black"
+                android:checked="true"
+                android:text="Registar como Cliente"
+                android:id="@+id/rbCliente" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Registar como Proprietário"
+                android:id="@+id/rdProp" />
         </RadioGroup>
         <Button
             android:textSize="20dp"

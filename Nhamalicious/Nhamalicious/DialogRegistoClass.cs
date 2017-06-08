@@ -9,7 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using ClassesPartilhadas; 
+using ClassesPartilhadas;
+using Java.Interop;
 
 namespace Nhamalicious
 {
@@ -92,6 +93,7 @@ namespace Nhamalicious
             mTxtConfirmPassword = view.FindViewById<EditText>(Resource.Id.txtConfirmPassword);
             mRadioGroup = view.FindViewById<RadioGroup>(Resource.Id.radioGroup1);
             mBtnRegisto = view.FindViewById<Button>(Resource.Id.btnRegisto);
+          
 
             mBtnRegisto.Click += MBtnRegisto_Click;
             return view;

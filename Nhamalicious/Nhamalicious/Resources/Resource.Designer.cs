@@ -161,7 +161,7 @@ namespace Nhamalicious
 			public const int rbCliente = 2131230731;
 			
 			// aapt resource value: 0x7f08000c
-			public const int rbProp = 2131230732;
+			public const int rdProp = 2131230732;
 			
 			// aapt resource value: 0x7f080010
 			public const int textOR = 2131230736;
