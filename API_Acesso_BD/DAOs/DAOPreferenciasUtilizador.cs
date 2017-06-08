@@ -9,7 +9,7 @@ using ClassesPartilhadas;
 
 namespace NhamiBackEnd1.Code.AcessoBD
 {
-    class DAOPreferenciasUtilizador
+    public class DAOPreferenciasUtilizador
     {
         private SqlConnection myConnection;
 
