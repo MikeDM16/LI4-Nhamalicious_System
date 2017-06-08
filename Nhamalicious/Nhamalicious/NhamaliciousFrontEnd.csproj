@@ -60,6 +60,7 @@
     <Compile Include="DialogLoginClass.cs" />
     <Compile Include="DialogRegistoClass.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Code\Facade.cs" />
     <Compile Include="Resources\Code\PedidoCli.cs" />
     <Compile Include="RegLoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -118,6 +119,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\API_Acesso_BD\API_Acesso_BD.csproj">
+      <Project>{3965D1DE-01D2-43CE-88C0-4C63EEBA5969}</Project>
+      <Name>API_Acesso_BD</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ClassesPartilhadas\ClassesPartilhadas.csproj">
       <Project>{a1e77695-9d11-4f66-9396-cc55ef6dba79}</Project>
       <Name>ClassesPartilhadas</Name>

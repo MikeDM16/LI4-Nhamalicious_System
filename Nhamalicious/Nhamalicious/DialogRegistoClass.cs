@@ -22,6 +22,7 @@ namespace Nhamalicious
         private string mEmail;
         private string mPassword;
         private string mConfirmPassword;
+        private Utilizador u;
 
         public string Nome
         {
@@ -55,15 +56,16 @@ namespace Nhamalicious
             set { mConfirmPassword = value; }
         }
 
-
-        public OnRegistoEventArgs(string nome, string idade, string username, string email, string password, string confirmPassword) : base()
+        public Utilizador Utilizador
         {
-            Nome = nome;
-            Idade = idade;
-            Username = username;
-            Email = email;
-            Password = password;
-            ConfirmPassword = confirmPassword;
+            get { return u; }
+            set { u = value; }
+        }
+
+
+        public OnRegistoEventArgs(Utilizador u) : base()
+        {
+            Utilizador = u;
         }
     }
     class DialogRegistoClass : DialogFragment
@@ -117,7 +119,7 @@ namespace Nhamalicious
 
 
 
-                RegistoEfetuado.Invoke(this, new OnRegistoEventArgs(mTxtNome.Text, mTxtIdade.Text, mTxtUsername.Text, mTxtEmail.Text, mTxtPassword.Text, mTxtConfirmPassword.Text));
+                RegistoEfetuado.Invoke(this, new OnRegistoEventArgs(u));
                 this.Dismiss();
             }
         }

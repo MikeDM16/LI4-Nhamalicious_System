@@ -92,6 +92,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
          ------------------------------------------------------------------------*/
         public void RegistaRestaurantes(Utilizador u)
         {
+            
             try
             {
                 myConnection.Open();
@@ -157,8 +158,10 @@ namespace NhamiBackEnd1.Code.AcessoBD
                         myReader.Close();
                     }
                 }
+                
             }
             catch (Exception e) { Console.WriteLine(e); }
+
         }    
 
 

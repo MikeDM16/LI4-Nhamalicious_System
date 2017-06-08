@@ -47,19 +47,41 @@ namespace Nhamalicious
             }
             private void D2_RegistoEfetuado(object sender, OnRegistoEventArgs e)
             {
-                TcpClient tcp = new TcpClient();
-                tcp.Connect(IPAddress.Parse("192.168.1.92"), 80);
-                // e.Username já é o que o cliente escreve, falta fazer a ligação com o servidor e com os métodos correspondentes
-                // e.Password igual ao username
-                //para os restantes também se faz igual (email, nome...)
-            }
+                
+                
+                int u = Facade.RegistaUtilizador(ut);
+                if (u == -2)
+                {
+                    //-2 se já existir
+                    //0 sucesso
+                    //1 nop
+                    AlertDialog.Builder ad = new AlertDialog.Builder(this);
+                    ad.SetTitle("Ooops!");
+                    ad.SetMessage("O utilizador já existe!");
+                    ad.SetNeutralButton("Ok", delegate
+                    {
+                        ad.Dispose();
+                    });
+                    ad.Show();
+                }
+        }
 
             private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
             {
-                //c.LoginAtempt(e.Username, e.Password);
-                // e.Username já é o que o cliente escreve, falta fazer a ligação com o servidor e com os métodos correspondentes
-                // e.Password igual ao username
+                Utilizador u = Facade.ConnectLogin(e.Username, e.Password);
+                if (u == null)
+                {
+                    AlertDialog.Builder ad = new AlertDialog.Builder(this);
+                    ad.SetTitle("Ooops!");
+                    ad.SetMessage("A tua password ou username devem estar erradas!");
+                    ad.SetNeutralButton("Ok", delegate
+                    {
+                        ad.Dispose();
+                    });
+                    ad.Show();
+                }
             }
+        
 
 
         }
