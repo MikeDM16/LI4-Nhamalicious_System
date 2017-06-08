@@ -23,15 +23,6 @@ namespace Nhamalicious
             {
                 base.OnCreate(bundle);
                 SetContentView(Resource.Layout.Main);
-                try
-                {
-                    c.ConnectToServer();
-                }
-                catch (Exception e)
-                {
-                    AlertDialog.Builder adb = new AlertDialog.Builder(this);
-
-                }
 
                 mBtnLogin = FindViewById<Button>(Resource.Id.botaoLogin);
                 mBtnRegisto = FindViewById<Button>(Resource.Id.botaoSignUp);

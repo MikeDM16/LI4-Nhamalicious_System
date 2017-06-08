@@ -22,13 +22,13 @@ namespace Nhamalicious
         private Button mBtnCozinhaChinesa;
         private Button mBtnRegLogin;
 
-        PedidoCli c = new PedidoCli();
+        //PedidoCli c = new PedidoCli();
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.PagInicial);
-            try
+            /*try
             {
                 c.ConnectToServer();
             }
@@ -36,15 +36,13 @@ namespace Nhamalicious
             {
                 AlertDialog.Builder adb = new AlertDialog.Builder(this);
             }
-
+            */
             mBtnPesquisa = FindViewById<Button>(Resource.Id.btnPesquisa);
             mBtnCozinhaIndiana = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
             mBtnCozinhaVegan = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
             mBtnCozinhaJaponesa = FindViewById<Button>(Resource.Id.btnCozinhaJaponesa);
             mBtnCozinhaChinesa = FindViewById<Button>(Resource.Id.btnCozinhaChinesa);
             mBtnRegLogin = FindViewById<Button>(Resource.Id.btnParaRegOuLog);
-
-
 
             mBtnPesquisa.Click += delegate
             {
