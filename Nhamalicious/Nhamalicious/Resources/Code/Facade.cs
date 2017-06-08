@@ -14,16 +14,22 @@ using ClassesPartilhadas;
 
 namespace Nhamalicious.Resources.Code
 {
-    class Facade
+    public class Facade
     {
         static DAOGestaoUtilizadores DGU = new DAOGestaoUtilizadores();
         static DAORestaurante DR = new DAORestaurante();
         static DAOPreferenciasUtilizador DPU = new DAOPreferenciasUtilizador();
 
+       /* public Facade()
+        {
+            this.DGU = new DAOGestaoUtilizadores();
+            this.DR = new DAORestaurante();
+            this.DPU = new DAOPreferenciasUtilizador();
+        }*/
 
         public static Utilizador ConnectLogin(String id, String password)
         {
-            Utilizador u;
+            Utilizador u = null;
 
             u = DGU.LoginUtilizador(id, password);
 

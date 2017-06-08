@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using Nhamalicious.Resources.Code;
 using ClassesPartilhadas;
+using API_Acesso_BD;
 
 namespace Nhamalicious
 {
@@ -17,6 +18,7 @@ namespace Nhamalicious
         {
             private Button mBtnLogin;
             private Button mBtnRegisto;
+            //private Facade facade = new Facade();
 
             protected override void OnCreate(Bundle bundle)
             {
@@ -49,7 +51,7 @@ namespace Nhamalicious
             {
                 
                 
-                int u = Facade.RegistaUtilizador(ut);
+                int u = Facade.RegistaUtilizador(e.Utilizador);
                 if (u == -2)
                 {
                     //-2 se já existir
@@ -65,24 +67,47 @@ namespace Nhamalicious
                     ad.Show();
                 }
         }
-
+        
             private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
-            {
+            {                               
                 Utilizador u = Facade.ConnectLogin(e.Username, e.Password);
-                if (u == null)
+                
+                if (u is Proprietario)
                 {
                     AlertDialog.Builder ad = new AlertDialog.Builder(this);
-                    ad.SetTitle("Ooops!");
-                    ad.SetMessage("A tua password ou username devem estar erradas!");
+                    ad.SetTitle("Proprietario");
+                    ad.SetMessage("Bem vindo Proprietario ! " + u.GetNome());
                     ad.SetNeutralButton("Ok", delegate
                     {
                         ad.Dispose();
                     });
                     ad.Show();
                 }
+                else
+                {
+                    if (u is Cliente)
+                    {
+                        AlertDialog.Builder ad = new AlertDialog.Builder(this);
+                        ad.SetTitle("Cliente");
+                        ad.SetMessage("Bem vindo cliente !");
+                        ad.SetNeutralButton("Ok", delegate
+                        {
+                            ad.Dispose();
+                        });
+                        ad.Show();
+                    }
+                    else
+                    {
+                        AlertDialog.Builder ad = new AlertDialog.Builder(this);
+                        ad.SetTitle("Erro mudou ??");
+                        ad.SetMessage("A tua password ou username devem estar erradas !");
+                        ad.SetNeutralButton("Ok", delegate
+                        {
+                            ad.Dispose();
+                        });
+                        ad.Show();
+                    }
+                }
             }
-        
-
-
-        }
     }
+}

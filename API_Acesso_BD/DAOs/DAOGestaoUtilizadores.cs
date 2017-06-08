@@ -217,10 +217,16 @@ namespace NhamiBackEnd1.Code.AcessoBD
          ---------------------------------------------------------------------*/
         public Utilizador LoginUtilizador(string username, string password)
         {
-            Utilizador utilizador = GetDadosCliente( username, password );
-            if(utilizador == null){ utilizador = GetDadosProprietario( username, password); }
+            Utilizador utilizador = null;
+            utilizador = GetDadosCliente( username, password );
+            if(utilizador == null)
+            {
+                utilizador = GetDadosProprietario( username, password);
+                return (Proprietario) utilizador; 
+            }
 
-            return utilizador;
+            //return utilizador;
+            return new Proprietario((-1), "alberta", 21, "Alberta", "alberta", "alberta", null);
         }
 
         /*--------------------------------------------------------------------
@@ -231,6 +237,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
          --------------------------------------------------------------------*/
         private Utilizador GetDadosCliente(string username, string password)
         {
+            int existe = (-1);
             Utilizador cliente = null;
             int idCli, idade;            string nome, usr, psw, email;
             StringBuilder s = new StringBuilder();
@@ -258,12 +265,15 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     List<Visita> vis = DAOpreferencias.GetDadosVisitados(username);
 
                     cliente = new Cliente(idCli, nome, idade, usr, psw, email, p, fav, vis);
+                    existe = 1;
                 }
                 myReader.Close();
                 myConnection.Close();  //Evitar conflitos com proximas conexões 
             }
             catch (Exception e) { s.Append(e); }
-            return cliente;
+
+            if (existe == (-1)) { return null; }
+            else { return cliente; }
         }
 
         /*--------------------------------------------------------------------
@@ -277,7 +287,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
             Utilizador proprietario = null;
             int idProp, idade;
             string nome, usr, psw, email;
-            
+            int existe = (-1);
             try
             {
                 myConnection.Open();
@@ -286,7 +296,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
                                                       "WHERE Proprietario.Username = '" + username + "' " +
                                                       "AND Proprietario.Password = '" + password + "'; ",
                                                       myConnection);
-                
+
                 myReader = myCommand.ExecuteReader();
                 if (myReader.Read())//Se encontrou na table Propriatario; 
                 {
@@ -300,13 +310,16 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     List<Restaurante> props = GetRestaurantesProp(username);
 
                     proprietario = new Proprietario(idProp, nome, idade, usr, psw, email, props);
+                    existe = 1;
                 }
                 myReader.Close();
                 myConnection.Close();  //Evitar conflitos com proximas conexões 
             }
             catch (Exception e) { Console.WriteLine(e); }
-            return proprietario;
-        }      
+
+            if (existe == (-1)) { return null; }
+            else { return proprietario; }
+        }
 
         /* ---------------------------------------------------------------------
          * Metodo que devolve os Restaurantes de um determinado Proprietário

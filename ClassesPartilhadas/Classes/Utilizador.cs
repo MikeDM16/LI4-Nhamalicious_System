@@ -13,7 +13,7 @@ namespace ClassesPartilhadas
         int idUtilizador, idade;
         string nome, username, password, email;
 
-        public Utilizador() { }
+        public Utilizador() { this.idUtilizador = (-1);  }
         public Utilizador(string usrname, string pass)
         {
             this.password = pass;       this.username = usrname;
