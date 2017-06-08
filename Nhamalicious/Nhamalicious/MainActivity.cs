@@ -21,22 +21,12 @@ namespace Nhamalicious
         private Button mBtnCozinhaJaponesa;
         private Button mBtnCozinhaChinesa;
         private Button mBtnRegLogin;
-
-        //PedidoCli c = new PedidoCli();
-
+        
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.PagInicial);
-            /*try
-            {
-                c.ConnectToServer();
-            }
-            catch (Exception e)
-            {
-                AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            }
-            */
+            
             mBtnPesquisa = FindViewById<Button>(Resource.Id.btnPesquisa);
             mBtnCozinhaIndiana = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
             mBtnCozinhaVegan = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
