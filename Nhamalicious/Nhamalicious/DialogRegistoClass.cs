@@ -53,6 +53,7 @@ namespace Nhamalicious
             set { mConfirmPassword = value; }
         }
 
+
         public OnRegistoEventArgs(string nome, string idade, string username, string email, string password, string confirmPassword) : base()
         {
             Nome = nome;
@@ -71,6 +72,7 @@ namespace Nhamalicious
         private EditText mTxtEmail;
         private EditText mTxtPassword;
         private EditText mTxtConfirmPassword;
+        private RadioGroup mRadioGroup;
         private Button mBtnRegisto;
 
         public event EventHandler<OnRegistoEventArgs> RegistoEfetuado;
@@ -87,6 +89,7 @@ namespace Nhamalicious
             mTxtEmail = view.FindViewById<EditText>(Resource.Id.txtEmail);
             mTxtPassword = view.FindViewById<EditText>(Resource.Id.txtPassword);
             mTxtConfirmPassword = view.FindViewById<EditText>(Resource.Id.txtConfirmPassword);
+            mRadioGroup = view.FindViewById<RadioGroup>(Resource.Id.radioGroup1);
             mBtnRegisto = view.FindViewById<Button>(Resource.Id.btnRegisto);
 
             mBtnRegisto.Click += MBtnRegisto_Click;
@@ -95,9 +98,14 @@ namespace Nhamalicious
 
         private void MBtnRegisto_Click(object sender, EventArgs e)
         {
+            RadioButton checkedRD = View.FindViewById<RadioButton>(mRadioGroup.CheckedRadioButtonId);
+            if (checkedRD.Text == "Registo como Cliente") {
+                Toast.MakeText(Context, "Selecionou registo como Cliente", ToastLength.Short).Show();
+            }
             RegistoEfetuado.Invoke(this, new OnRegistoEventArgs(mTxtNome.Text, mTxtIdade.Text, mTxtUsername.Text, mTxtEmail.Text, mTxtPassword.Text, mTxtConfirmPassword.Text));
             this.Dismiss();
         }
+
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
