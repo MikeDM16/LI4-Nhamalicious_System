@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NhamaliciousFrontEnd", "Nha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassesPartilhadas", "ClassesPartilhadas\ClassesPartilhadas.csproj", "{A1E77695-9D11-4F66-9396-CC55EF6DBA79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Acesso_BD", "API_Acesso_BD\API_Acesso_BD.csproj", "{3965D1DE-01D2-43CE-88C0-4C63EEBA5969}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{A1E77695-9D11-4F66-9396-CC55EF6DBA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1E77695-9D11-4F66-9396-CC55EF6DBA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1E77695-9D11-4F66-9396-CC55EF6DBA79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3965D1DE-01D2-43CE-88C0-4C63EEBA5969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3965D1DE-01D2-43CE-88C0-4C63EEBA5969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3965D1DE-01D2-43CE-88C0-4C63EEBA5969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3965D1DE-01D2-43CE-88C0-4C63EEBA5969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
