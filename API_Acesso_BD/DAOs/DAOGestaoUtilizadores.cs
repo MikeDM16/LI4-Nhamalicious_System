@@ -226,7 +226,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
             }
 
             //return utilizador;
-            return new Proprietario((-1), "alberta", 21, "Alberta", "alberta", "alberta", null);
+            return new Proprietario((-1), "Maria", 21, "Maria", "Maria", "Maria", null);
         }
 
         /*--------------------------------------------------------------------

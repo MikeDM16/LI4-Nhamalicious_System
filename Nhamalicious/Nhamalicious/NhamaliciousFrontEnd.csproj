@@ -60,6 +60,8 @@
     <Compile Include="DialogLoginClass.cs" />
     <Compile Include="DialogRegistoClass.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MyListViewAdapter.cs" />
+    <Compile Include="PagInicialActivity.cs" />
     <Compile Include="Resources\Code\Facade.cs" />
     <Compile Include="Resources\Code\PedidoCli.cs" />
     <Compile Include="RegLoginActivity.cs" />
@@ -75,6 +77,11 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DialogPagRegisto.axml" />
     <AndroidResource Include="Resources\layout\PagInicial.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PagPesquisa.axml" />
+    <AndroidResource Include="Resources\layout\PagLoutOut.axml" />
+    <AndroidResource Include="Resources\layout\listview_row.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

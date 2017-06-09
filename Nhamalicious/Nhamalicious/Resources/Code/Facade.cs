@@ -30,9 +30,10 @@ namespace Nhamalicious.Resources.Code
         public static Utilizador ConnectLogin(String id, String password)
         {
             Utilizador u = null;
+            DAOGestaoUtilizadores aux = new DAOGestaoUtilizadores();
 
-            u = DGU.LoginUtilizador(id, password);
-
+            u = aux.LoginUtilizador(id, password);
+            /*
             if (u is Proprietario)
             {
                 return u as Proprietario;
@@ -44,7 +45,7 @@ namespace Nhamalicious.Resources.Code
                     return u as Cliente;
                 }
             }
-            
+            */
             return u;
         }
 

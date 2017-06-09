@@ -115,38 +115,47 @@ namespace Nhamalicious
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080011
-			public const int botaoLogin = 2131230737;
+			// aapt resource value: 0x7f08000e
+			public const int NomePrato = 2131230734;
 			
-			// aapt resource value: 0x7f08000f
-			public const int botaoSignUp = 2131230735;
+			// aapt resource value: 0x7f080012
+			public const int botaoLogin = 2131230738;
 			
-			// aapt resource value: 0x7f080018
-			public const int btnCozinhaChinesa = 2131230744;
+			// aapt resource value: 0x7f080010
+			public const int botaoSignUp = 2131230736;
 			
-			// aapt resource value: 0x7f080016
-			public const int btnCozinhaIndiana = 2131230742;
+			// aapt resource value: 0x7f080019
+			public const int btnCozinhaChinesa = 2131230745;
 			
 			// aapt resource value: 0x7f080017
-			public const int btnCozinhaJaponesa = 2131230743;
+			public const int btnCozinhaIndiana = 2131230743;
 			
-			// aapt resource value: 0x7f080015
-			public const int btnCozinhaVegan = 2131230741;
+			// aapt resource value: 0x7f080018
+			public const int btnCozinhaJaponesa = 2131230744;
+			
+			// aapt resource value: 0x7f080016
+			public const int btnCozinhaVegan = 2131230742;
 			
 			// aapt resource value: 0x7f080004
 			public const int btnLogin = 2131230724;
 			
-			// aapt resource value: 0x7f080019
-			public const int btnParaRegOuLog = 2131230745;
+			// aapt resource value: 0x7f08001c
+			public const int btnLogout = 2131230748;
 			
-			// aapt resource value: 0x7f080014
-			public const int btnPesquisa = 2131230740;
+			// aapt resource value: 0x7f08001a
+			public const int btnParaRegOuLog = 2131230746;
+			
+			// aapt resource value: 0x7f080015
+			public const int btnPesquisa = 2131230741;
 			
 			// aapt resource value: 0x7f08000d
 			public const int btnRegisto = 2131230733;
 			
 			// aapt resource value: 0x7f080003
 			public const int layoutBotoes = 2131230723;
+			
+			// aapt resource value: 0x7f08001d
+			public const int myListView = 2131230749;
 			
 			// aapt resource value: 0x7f080000
 			public const int paglogin = 2131230720;
@@ -163,8 +172,11 @@ namespace Nhamalicious
 			// aapt resource value: 0x7f08000c
 			public const int rdProp = 2131230732;
 			
-			// aapt resource value: 0x7f080010
-			public const int textOR = 2131230736;
+			// aapt resource value: 0x7f08001b
+			public const int saudacao = 2131230747;
+			
+			// aapt resource value: 0x7f080011
+			public const int textOR = 2131230737;
 			
 			// aapt resource value: 0x7f080009
 			public const int txtConfirmPassword = 2131230729;
@@ -172,14 +184,14 @@ namespace Nhamalicious
 			// aapt resource value: 0x7f080008
 			public const int txtEmail = 2131230728;
 			
-			// aapt resource value: 0x7f080013
-			public const int txtEscolherCozinha = 2131230739;
+			// aapt resource value: 0x7f080014
+			public const int txtEscolherCozinha = 2131230740;
 			
 			// aapt resource value: 0x7f080007
 			public const int txtIdade = 2131230727;
 			
-			// aapt resource value: 0x7f080012
-			public const int txtInserePrato = 2131230738;
+			// aapt resource value: 0x7f080013
+			public const int txtInserePrato = 2131230739;
 			
 			// aapt resource value: 0x7f080006
 			public const int txtNome = 2131230726;
@@ -187,8 +199,8 @@ namespace Nhamalicious
 			// aapt resource value: 0x7f080002
 			public const int txtPassword = 2131230722;
 			
-			// aapt resource value: 0x7f08000e
-			public const int txtRegisto = 2131230734;
+			// aapt resource value: 0x7f08000f
+			public const int txtRegisto = 2131230735;
 			
 			// aapt resource value: 0x7f080001
 			public const int txtUsername = 2131230721;
@@ -213,10 +225,19 @@ namespace Nhamalicious
 			public const int DialogPagRegisto = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Main = 2130903042;
+			public const int listview_row = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int PagInicial = 2130903043;
+			public const int Main = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int PagInicial = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int PagLoutOut = 2130903045;
+			
+			// aapt resource value: 0x7f030006
+			public const int PagPesquisa = 2130903046;
 			
 			static Layout()
 			{
