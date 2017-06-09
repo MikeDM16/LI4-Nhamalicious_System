@@ -61,12 +61,13 @@
     <Compile Include="DialogRegistoClass.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MyListViewAdapter.cs" />
-    <Compile Include="PagInicialActivity.cs" />
+    <Compile Include="PagPesquisaActivity.cs" />
     <Compile Include="Resources\Code\Facade.cs" />
     <Compile Include="Resources\Code\PedidoCli.cs" />
     <Compile Include="RegLoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resultado.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />

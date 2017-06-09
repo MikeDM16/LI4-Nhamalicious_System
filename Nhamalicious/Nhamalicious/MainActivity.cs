@@ -15,6 +15,7 @@ namespace Nhamalicious
     [Activity(Label = "Nhamalicious", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
+        private EditText mPratoPesquisa;
         private ImageButton mBtnPesquisa;
         private Button mBtnCozinhaIndiana;
         private Button mBtnCozinhaVegan;
@@ -28,8 +29,8 @@ namespace Nhamalicious
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.PagInicial);
-           
-            
+
+            mPratoPesquisa = FindViewById<EditText>(Resource.Id.txtInserePrato);
             mBtnPesquisa = FindViewById<ImageButton>(Resource.Id.btnPesquisa);
             mBtnCozinhaIndiana = FindViewById<Button>(Resource.Id.btnCozinhaIndiana);
             mBtnCozinhaVegan = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
@@ -37,25 +38,33 @@ namespace Nhamalicious
             mBtnCozinhaChinesa = FindViewById<Button>(Resource.Id.btnCozinhaChinesa);
             mBtnRegLogin = FindViewById<Button>(Resource.Id.btnParaRegOuLog);
 
+
             mBtnPesquisa.Click += delegate
             {
-                StartActivity(typeof(RegLoginActivity));
+                if( mPratoPesquisa.Text !=  null)
+                {
+                    //List<Restaurante> rest = null;
+                    //chamar método FACADE rest = método
+                    //PagPesquisaActivity pag = new PagPesquisaActivity();
+                    StartActivity(typeof(PagPesquisaActivity));
+                } 
+                
             };
             mBtnCozinhaIndiana.Click += delegate
             {
-                StartActivity(typeof(RegLoginActivity));
+                StartActivity(typeof(PagPesquisaActivity));
             };
             mBtnCozinhaVegan.Click += delegate
             {
-                StartActivity(typeof(RegLoginActivity));
+                StartActivity(typeof(PagPesquisaActivity));
             };
             mBtnCozinhaJaponesa.Click += delegate
             {
-                StartActivity(typeof(RegLoginActivity));
+                StartActivity(typeof(PagPesquisaActivity));
             };
             mBtnCozinhaChinesa.Click += delegate
             {
-                StartActivity(typeof(RegLoginActivity));
+                StartActivity(typeof(PagPesquisaActivity));
             };
             mBtnRegLogin.Click += delegate
             {
