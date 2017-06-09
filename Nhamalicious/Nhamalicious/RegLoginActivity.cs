@@ -69,54 +69,45 @@ namespace Nhamalicious
         }
         
             private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
-            {
-            Utilizador u = Facade.ConnectLogin(e.Username, e.Password);
-            Proprietario p = u as Proprietario;
-            AlertDialog.Builder ad = new AlertDialog.Builder(this);
-            ad.SetTitle("Proprietario");
-            ad.SetMessage("Bem vindo Proprietario ! " + p.GetNome());
-            ad.SetNeutralButton("Ok", delegate
-            {
-                ad.Dispose();
-            });
-            ad.Show();
-
-            //if (u is Proprietario)
-            //    {
-            //        AlertDialog.Builder ad = new AlertDialog.Builder(this);
-            //        ad.SetTitle("Proprietario");
-            //        ad.SetMessage("Bem vindo Proprietario ! " + u.GetNome());
-            //        ad.SetNeutralButton("Ok", delegate
-            //        {
-            //            ad.Dispose();
-            //        });
-            //        ad.Show();
-            //    }
-            //    else
-            //    {
-            //        if (u is Cliente)
-            //        {
-            //            AlertDialog.Builder ad = new AlertDialog.Builder(this);
-            //            ad.SetTitle("Cliente");
-            //            ad.SetMessage("Bem vindo cliente !");
-            //            ad.SetNeutralButton("Ok", delegate
-            //            {
-            //                ad.Dispose();
-            //            });
-            //            ad.Show();
-            //        }
-            //        else
-            //        {
-            //            AlertDialog.Builder ad = new AlertDialog.Builder(this);
-            //            ad.SetTitle("Oopps");
-            //            ad.SetMessage("Wtf is this");
-            //            ad.SetNeutralButton("Ok", delegate
-            //            {
-            //                ad.Dispose();
-            //            });
-            //            ad.Show();
-            //        }
-            //    }
+            {                               
+                Utilizador u = Facade.ConnectLogin(e.Username, e.Password);
+                
+                if (u is Proprietario)
+                {
+                    AlertDialog.Builder ad = new AlertDialog.Builder(this);
+                    ad.SetTitle("Proprietario");
+                    ad.SetMessage("Bem vindo Proprietario ! " + u.GetNome());
+                    ad.SetNeutralButton("Ok", delegate
+                    {
+                        ad.Dispose();
+                    });
+                    ad.Show();
+                }
+                else
+                {
+                    if (u is Cliente)
+                    {
+                        AlertDialog.Builder ad = new AlertDialog.Builder(this);
+                        ad.SetTitle("Cliente");
+                        ad.SetMessage("Bem vindo cliente !");
+                        ad.SetNeutralButton("Ok", delegate
+                        {
+                            ad.Dispose();
+                        });
+                        ad.Show();
+                    }
+                    else
+                    {
+                        AlertDialog.Builder ad = new AlertDialog.Builder(this);
+                        ad.SetTitle("Erro buddy");
+                        ad.SetMessage("A tua password ou username devem estar erradas !");
+                        ad.SetNeutralButton("Ok", delegate
+                        {
+                            ad.Dispose();
+                        });
+                        ad.Show();
+                    }
+                }
             }
     }
 }

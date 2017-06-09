@@ -12,8 +12,8 @@ using ClassesPartilhadas;
 
 namespace Nhamalicious
 {
-    [Activity(Label = "Nhamalicious", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    [Activity(Label = "Nhamalicious", Icon = "@drawable/icon")]
+    public class PagLogoutActivity : Activity
     {
         private EditText mPratoPesquisa;
         private ImageButton mBtnPesquisa;
@@ -21,7 +21,7 @@ namespace Nhamalicious
         private Button mBtnCozinhaVegan;
         private Button mBtnCozinhaJaponesa;
         private Button mBtnCozinhaChinesa;
-        private Button mBtnRegLogin;
+        private Button mBtnLogout;
 
         //PedidoCli c = new PedidoCli();
 
@@ -36,19 +36,19 @@ namespace Nhamalicious
             mBtnCozinhaVegan = FindViewById<Button>(Resource.Id.btnCozinhaVegan);
             mBtnCozinhaJaponesa = FindViewById<Button>(Resource.Id.btnCozinhaJaponesa);
             mBtnCozinhaChinesa = FindViewById<Button>(Resource.Id.btnCozinhaChinesa);
-            mBtnRegLogin = FindViewById<Button>(Resource.Id.btnParaRegOuLog);
+            mBtnLogout = FindViewById<Button>(Resource.Id.btnLogout);
 
 
             mBtnPesquisa.Click += delegate
             {
-                if( mPratoPesquisa.Text !=  null)
+                if (mPratoPesquisa.Text != null)
                 {
                     //List<Restaurante> rest = null;
                     //chamar método FACADE rest = método
                     //PagPesquisaActivity pag = new PagPesquisaActivity();
                     StartActivity(typeof(PagPesquisaActivity));
-                } 
-                
+                }
+
             };
             mBtnCozinhaIndiana.Click += delegate
             {
@@ -66,9 +66,9 @@ namespace Nhamalicious
             {
                 StartActivity(typeof(PagPesquisaActivity));
             };
-            mBtnRegLogin.Click += delegate
+            mBtnLogout.Click += delegate
             {
-                StartActivity(typeof(RegLoginActivity));
+                StartActivity(typeof(MainActivity));
             };
         }
     }

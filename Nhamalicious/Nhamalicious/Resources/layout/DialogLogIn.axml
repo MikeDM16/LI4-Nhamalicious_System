@@ -26,6 +26,7 @@
         android:layout_below="@+id/txtUsername"
         android:background="#F8EFF8F3"
         android:hint="Password"
+        android:inputType="textPassword"
         android:textColor="#333639"
         android:textColorHint="#333639"
         android:padding="25dp" />

@@ -60,11 +60,15 @@
     <Compile Include="DialogLoginClass.cs" />
     <Compile Include="DialogRegistoClass.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MyListViewAdapter.cs" />
+    <Compile Include="PagLogoutActivity.cs" />
+    <Compile Include="PagPesquisaActivity.cs" />
     <Compile Include="Resources\Code\Facade.cs" />
     <Compile Include="Resources\Code\PedidoCli.cs" />
     <Compile Include="RegLoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resultado.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -75,6 +79,11 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DialogPagRegisto.axml" />
     <AndroidResource Include="Resources\layout\PagInicial.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PagPesquisa.axml" />
+    <AndroidResource Include="Resources\layout\PagLoutOut.axml" />
+    <AndroidResource Include="Resources\layout\listview_row.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
