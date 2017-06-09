@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NhamiBackEnd1.Code.AcessoBD;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace API_Acesso_BD
 {
     public class Class1
     {
+     
     }
 }

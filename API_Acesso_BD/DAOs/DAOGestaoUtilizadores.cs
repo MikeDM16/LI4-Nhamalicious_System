@@ -218,15 +218,11 @@ namespace NhamiBackEnd1.Code.AcessoBD
         public Utilizador LoginUtilizador(string username, string password)
         {
             Utilizador utilizador = null;
-            utilizador = GetDadosCliente( username, password );
-            if(utilizador == null)
-            {
-                utilizador = GetDadosProprietario( username, password);
-                return (Proprietario) utilizador; 
-            }
-
-            //return utilizador;
-            return new Proprietario((-1), "alberta", 21, "Alberta", "alberta", "alberta", null);
+            utilizador = GetDadosProprietario(username, password);
+            if (utilizador != null) return utilizador;
+            //utilizador = GetDadosCliente(username, password);
+            //if (utilizador != null) return utilizador;
+            return utilizador;
         }
 
         /*--------------------------------------------------------------------
@@ -237,14 +233,13 @@ namespace NhamiBackEnd1.Code.AcessoBD
          --------------------------------------------------------------------*/
         private Utilizador GetDadosCliente(string username, string password)
         {
-            int existe = (-1);
-            Utilizador cliente = null;
             int idCli, idade;            string nome, usr, psw, email;
             StringBuilder s = new StringBuilder();
+            SqlDataReader myReader = null;
             try
             {
                 myConnection.Open();
-                SqlDataReader myReader = null;
+                
                 SqlCommand myCommand = new SqlCommand("SELECT * FROM Cliente " +
                                                       "WHERE Cliente.Username = '" + username + "' " +
                                                       "AND Cliente.Password = '" + password + "'; ",
@@ -264,16 +259,20 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     List<Restaurante> fav = DAOpreferencias.GetDadosFavoritos(username);
                     List<Visita> vis = DAOpreferencias.GetDadosVisitados(username);
 
-                    cliente = new Cliente(idCli, nome, idade, usr, psw, email, p, fav, vis);
-                    existe = 1;
+                    return new Cliente(idCli, nome, idade, usr, psw, email, p, fav, vis);
+                
                 }
-                myReader.Close();
-                myConnection.Close();  //Evitar conflitos com proximas conexões 
+                 
             }
             catch (Exception e) { s.Append(e); }
+            finally
+            {
+                //Evitar conflitos com proximas conexões 
+                myReader.Close();
+                myConnection.Close();
+            }
 
-            if (existe == (-1)) { return null; }
-            else { return cliente; }
+            return null;
         }
 
         /*--------------------------------------------------------------------
@@ -284,14 +283,13 @@ namespace NhamiBackEnd1.Code.AcessoBD
         --------------------------------------------------------------------*/
         private Utilizador GetDadosProprietario(string username, string password)
         {
-            Utilizador proprietario = null;
+            
             int idProp, idade;
             string nome, usr, psw, email;
-            int existe = (-1);
+            SqlDataReader myReader = null;
             try
             {
                 myConnection.Open();
-                SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand("SELECT * FROM Proprietario " +
                                                       "WHERE Proprietario.Username = '" + username + "' " +
                                                       "AND Proprietario.Password = '" + password + "'; ",
@@ -309,16 +307,18 @@ namespace NhamiBackEnd1.Code.AcessoBD
                     myConnection.Close();  //Evitar conflitos com proximas conexões                                     
                     List<Restaurante> props = GetRestaurantesProp(username);
 
-                    proprietario = new Proprietario(idProp, nome, idade, usr, psw, email, props);
-                    existe = 1;
+                    return new Proprietario(idProp, nome, idade, usr, psw, email, props);
                 }
+               
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+            finally
+            {
                 myReader.Close();
                 myConnection.Close();  //Evitar conflitos com proximas conexões 
             }
-            catch (Exception e) { Console.WriteLine(e); }
 
-            if (existe == (-1)) { return null; }
-            else { return proprietario; }
+            return null;
         }
 
         /* ---------------------------------------------------------------------
@@ -388,5 +388,30 @@ namespace NhamiBackEnd1.Code.AcessoBD
 
         }
 
+    }
+
+    public class RespostaU
+    {
+        public int codigoErro;
+        public Utilizador u;
+        public string tipo;
+
+        public RespostaU(int i, Utilizador p)
+        {
+            codigoErro = i;
+            u = p;
+            if (u is Cliente)
+            {
+                tipo = "Sou um cliente";
+            }
+            else
+            {
+                if (u is Proprietario)
+                {
+                    tipo = "Sou um proprietario";
+                }
+                else tipo = "Não sou nada";
+            }
+        }
     }
 }

@@ -27,24 +27,24 @@ namespace Nhamalicious.Resources.Code
             this.DPU = new DAOPreferenciasUtilizador();
         }*/
 
-        public static Utilizador ConnectLogin(String id, String password)
+        public static Utilizador ConnectLogin(string id, string password)
         {
             Utilizador u = null;
 
             u = DGU.LoginUtilizador(id, password);
 
-            if (u is Proprietario)
-            {
-                return u as Proprietario;
-            }
-            else
-            {
-                if (u is Cliente)
-                {
-                    return u as Cliente;
-                }
-            }
-            
+            //if (u is Proprietario)
+            //{
+            //    return u;
+            //}
+            //else
+            //{
+            //    if (u is Cliente)
+            //    {
+            //        return u;
+            //    }
+            //}
+            if (u == null) return new Cliente(-1, "M", 22, "asd", "asd", "asd", null, null, null);
             return u;
         }
 
