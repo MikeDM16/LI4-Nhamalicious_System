@@ -67,12 +67,12 @@ namespace Nhamalicious
             mListView = FindViewById<ListView>(Resource.Id.myListView);
             mItems = new List<Resultado>();
 
-            mItems.Add(new Resultado { NomePrato = "Arroz de Frango", NomeRestaurante = "Wok to Wok", Preco = "10€", TipoCozinha = "Cozinha Indiana" });
-            mItems.Add(new Resultado { NomePrato = "Sushi", NomeRestaurante = "Napas", Preco = "22,5€", TipoCozinha = "Cozinha Japonesa"});
-            mItems.Add(new Resultado { NomePrato = "Paneer Pakora", NomeRestaurante = "Restaurante Tandoori", Preco = "15€", TipoCozinha = "Cozinha Indiana" });
-            mItems.Add(new Resultado { NomePrato = "Frango", NomeRestaurante = "Wok to Wok", Preco = "10€", TipoCozinha = "Cozinha Chinesa" });
+            mItems.Add(new Resultado { NomePrato = "Saag de Frango", NomeRestaurante = "Restaurante Tandoori", Preco = "10.60€", TipoCozinha = "Cozinha Indiana" });
+            mItems.Add(new Resultado { NomePrato = "Combo 8 peças", NomeRestaurante = "Hanami Sushi Braga", Preco = "10.30€", TipoCozinha = "Cozinha Japonesa"});
+            mItems.Add(new Resultado { NomePrato = "Ravioli Chines", NomeRestaurante = "Wok to Walk", Preco = "5.40€", TipoCozinha = "Cozinha Chinesa" });
+            mItems.Add(new Resultado { NomePrato = "Lasanha de Espinafres", NomeRestaurante = "Pausa Útil II", Preco = "7.5€", TipoCozinha = "Cozinha Vegetariana" });
             mItems.Add(new Resultado { NomePrato = "Sushi", NomeRestaurante = "Napas", Preco = "22,5€",TipoCozinha = "Cozinha Japonesa" });
-            mItems.Add(new Resultado { NomePrato = "Frango", NomeRestaurante = "Ola", Preco = "12€", TipoCozinha = "Cozinha Chinesa" });
+            mItems.Add(new Resultado { NomePrato = "Frango", NomeRestaurante = "Ola", Preco = "12€", TipoCozinha = "Cozinha Indiano" });
             MyListViewAdapter adapter = new MyListViewAdapter(this, mItems);
 
 

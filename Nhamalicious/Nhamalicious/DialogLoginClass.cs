@@ -60,8 +60,8 @@ namespace Nhamalicious
         private void MBtnLogInReal_Click(object sender, EventArgs e)
         {
             LoginEfetuado.Invoke(this, new OnLoginEventArgs(mTxtUsername.Text, mTxtPassword.Text));
-            this.Dismiss();
         }
+
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {

@@ -61,6 +61,7 @@
     <Compile Include="DialogRegistoClass.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MyListViewAdapter.cs" />
+    <Compile Include="PagLogoutActivity.cs" />
     <Compile Include="PagPesquisaActivity.cs" />
     <Compile Include="Resources\Code\Facade.cs" />
     <Compile Include="Resources\Code\PedidoCli.cs" />
