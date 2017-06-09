@@ -9,7 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using ClassesPartilhadas;
+using SharedClasses;
 using Java.Interop;
 
 namespace Nhamalicious

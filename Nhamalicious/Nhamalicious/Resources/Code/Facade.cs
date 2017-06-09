@@ -9,8 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using NhamiBackEnd1.Code.AcessoBD;
-using ClassesPartilhadas;
+using API_Acesso_BD;
+using SharedClasses;
 
 namespace Nhamalicious.Resources.Code
 {
@@ -19,7 +19,6 @@ namespace Nhamalicious.Resources.Code
         static DAOGestaoUtilizadores DGU = new DAOGestaoUtilizadores();
         static DAORestaurante DR = new DAORestaurante();
         static DAOPreferenciasUtilizador DPU = new DAOPreferenciasUtilizador();
-
        /* public Facade()
         {
             this.DGU = new DAOGestaoUtilizadores();

@@ -8,7 +8,6 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using Nhamalicious.Resources.Code;
-using ClassesPartilhadas;
 
 namespace Nhamalicious
 {
@@ -22,13 +21,14 @@ namespace Nhamalicious
         private Button mBtnCozinhaChinesa;
         private Button mBtnRegLogin;
 
-        //PedidoCli c = new PedidoCli();
+        PedidoCli c = new PedidoCli();
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.PagInicial);
-           
+            c.ConnectToServer();
+
             
             mBtnPesquisa = FindViewById<ImageButton>(Resource.Id.btnPesquisa);
             mBtnCozinhaIndiana = FindViewById<Button>(Resource.Id.btnCozinhaIndiana);

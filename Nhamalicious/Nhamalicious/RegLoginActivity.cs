@@ -7,9 +7,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using Nhamalicious.Resources.Code;
-using ClassesPartilhadas;
+using SharedClasses;
 using API_Acesso_BD;
+using System.Text;
+using Nhamalicious.Resources.Code;
 
 namespace Nhamalicious
 {
@@ -19,6 +20,7 @@ namespace Nhamalicious
             private Button mBtnLogin;
             private Button mBtnRegisto;
             //private Facade facade = new Facade();
+            PedidoCli pc = new PedidoCli();
 
             protected override void OnCreate(Bundle bundle)
             {
@@ -67,14 +69,15 @@ namespace Nhamalicious
                     ad.Show();
                 }
         }
-        
-            private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
-            {
-            Utilizador u = Facade.ConnectLogin(e.Username, e.Password);
-            Proprietario p = u as Proprietario;
+
+        private void D1_LoginEfetuado(object sender, OnLoginEventArgs e)
+        {
+            PacoteLogin pl =  pc.LoginAtempt(e.Username, e.Password);
+            Utilizador u = pl.GetUtilizador();
+            string s = pl.GetResponse();
             AlertDialog.Builder ad = new AlertDialog.Builder(this);
             ad.SetTitle("Proprietario");
-            ad.SetMessage("Bem vindo Proprietario ! " + p.GetNome());
+            ad.SetMessage(s);
             ad.SetNeutralButton("Ok", delegate
             {
                 ad.Dispose();

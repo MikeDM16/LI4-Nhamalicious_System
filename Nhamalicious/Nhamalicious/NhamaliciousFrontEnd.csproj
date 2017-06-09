@@ -49,10 +49,12 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WinHttpHandler" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -123,9 +125,9 @@
       <Project>{3965D1DE-01D2-43CE-88C0-4C63EEBA5969}</Project>
       <Name>API_Acesso_BD</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ClassesPartilhadas\ClassesPartilhadas.csproj">
-      <Project>{a1e77695-9d11-4f66-9396-cc55ef6dba79}</Project>
-      <Name>ClassesPartilhadas</Name>
+    <ProjectReference Include="..\..\SharedClasses\SharedClasses.csproj">
+      <Project>{95efb861-a23f-4ec7-85be-ade0454c3468}</Project>
+      <Name>SharedClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

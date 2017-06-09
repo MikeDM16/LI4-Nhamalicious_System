@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NhamiBackEnd1.Code.AcessoBD;
-using ClassesPartilhadas;
+using SharedClasses;
 
-namespace NhamiBackEnd1.Code.AcessoBD
+namespace API_Acesso_BD
 {
     public class Testar
     {

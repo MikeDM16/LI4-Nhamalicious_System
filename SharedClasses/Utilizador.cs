@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClassesPartilhadas;
+using SharedClasses;
 
-namespace ClassesPartilhadas
+namespace SharedClasses
 {
     [SerializableAttribute]
     public class Utilizador

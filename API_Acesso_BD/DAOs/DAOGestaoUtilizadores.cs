@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using NhamiBackEnd1.Code.AcessoBD;
-using ClassesPartilhadas;
+using SharedClasses;
 
-namespace NhamiBackEnd1.Code.AcessoBD
+namespace API_Acesso_BD
 {
     public class DAOGestaoUtilizadores
     {
@@ -18,7 +17,7 @@ namespace NhamiBackEnd1.Code.AcessoBD
         public DAOGestaoUtilizadores()
         {
             this.myConnection = new SqlConnection("user id=username;" +
-                                                  "password=password;server=localhost;" +
+                                                  "password=password;server=10.0.2.2;" +
                                                   "Trusted_Connection=yes;" +
                                                   "database=Nhamalicious; " +
                                                   "connection timeout=30");
